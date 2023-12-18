@@ -1,0 +1,133 @@
+.hero {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.heroSearch {
+    height: 60px;
+    background-color: white;
+    border: 3px solid #e5a905;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 10px;
+    border-radius: 10px;
+    position: absolute;
+    bottom: -25px;
+    width: 90%;
+    max-width: 1100px;
+}
+
+.heroIcon {
+    color: #6f6c6c;
+}
+
+.heroSearchItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.heroSearchInput {
+    border: none;
+    outline: none;
+    color: black;
+    font-size: 1rem;
+    width: 100%;
+}
+
+.heroSearchText {
+    font-size: 1rem;
+    color: black;
+    cursor: pointer;
+}
+
+.heroSearchButton {
+    background-color: var(--secondary-color);
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.heroSearchButton:hover {
+    background-color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .heroSearch {
+        flex-direction: column;
+        padding: 10px;
+        bottom: -100px;
+        height: 180px;
+    }
+
+    .heroSearchItem {
+        width: 100%;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    .heroSearchButton {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .heroSearch {
+        bottom: -140px;
+        height: 180px;
+    }
+
+    .heroSearchInput,
+    .heroSearchText,
+    .heroSearchButton {
+        font-size: 0.8rem;
+    }
+}
+
+.searchContainer {
+    height: 30px;
+    background-color: white;
+    border: 3px solid #febb02;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px 0px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: -25px;
+    width: 100%;
+    max-width: 1024px;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+}
+
+.searchBar {
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.datePicker {
+    margin-bottom: 10px;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 500px;
+}
+
+.controlItem {
+    margin: 5px;
+}
