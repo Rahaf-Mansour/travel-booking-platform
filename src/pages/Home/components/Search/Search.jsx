@@ -4,7 +4,7 @@ import SingleBedIcon from "@mui/icons-material/SingleBed";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import SearchItem from "../SearchItem";
-import DateRange from "../DateCheck";
+import DateCheck from "../DateCheck";
 
 const Search = () => {
   return (
@@ -20,7 +20,7 @@ const Search = () => {
         </SearchItem>
         <SearchItem>
           <DateRangeIcon className={styles.heroIcon} />
-          <DateRange />
+          <DateCheck />
         </SearchItem>
         <SearchItem>
           <PersonOutlineIcon className={styles.heroIcon} />
