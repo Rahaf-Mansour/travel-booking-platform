@@ -4,7 +4,7 @@ import SingleBedIcon from "@mui/icons-material/SingleBed";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import SearchItem from "../SearchItem";
-import DateRange from "../DateRange";
+import DateRange from "../DateCheck";
 
 const Search = () => {
   return (
