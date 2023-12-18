@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 
@@ -18,6 +19,13 @@ const GenericSnackbar = ({ open, message, onClose, severity = "info" }) => {
       </Alert>
     </Snackbar>
   );
+};
+
+GenericSnackbar.propTypes = {
+  open: PropTypes.bool,
+  message: PropTypes.string.isRequired,
+  onClose: PropTypes.func,
+  severity: PropTypes.oneOf(["error", "warning", "info", "success"]),
 };
 
 export default GenericSnackbar;
