@@ -1,5 +1,5 @@
 import React from "react";
-import pageError from "../../assets/pageError.jpg";
+import pageError from "../../assets/images/pageError.jpg";
 import NavBar from "../../components/NavBar/NavBar";
 import styles from "./PageNotFound.module.css";
 
