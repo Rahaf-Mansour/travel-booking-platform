@@ -23,12 +23,6 @@
     color: #6f6c6c;
 }
 
-.heroSearchItem {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
 .heroSearchInput {
     border: none;
     outline: none;
