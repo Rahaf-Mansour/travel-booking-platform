@@ -119,8 +119,7 @@ const Login = () => {
                 open={snackbar.open}
                 message={snackbar.message}
                 onClose={handleCloseSnackbar}
-                // severity={snackbar.severity}
-                severity="success"
+                severity={snackbar.severity}
               />
             </div>
           );
