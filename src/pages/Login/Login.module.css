@@ -1,0 +1,100 @@
+.loginPage {
+    background: linear-gradient(90deg, #b9c0d2 0%, #243b69 100%);
+    font-family: "Comfortaa", cursive;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginForm {
+    background: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    max-width: 360px;
+    text-align: center;
+    width: 90%;
+}
+
+.loginForm h1 {
+    font-size: 40px;
+    color: var(--primary-color);
+    margin-bottom: 25px;
+}
+
+.loginForm input {
+    background: #f2f2f2;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    margin: 0 0 15px;
+    padding: 15px;
+    font-size: 14px;
+}
+
+.loginForm input:focus {
+    background: #dbdbdb;
+}
+
+.errorMessage {
+    margin: -10px 0px 15px 2px;
+    text-align: left;
+    font-size: 14px;
+    color: red;
+    font-weight: 600;
+    font-family: Source Sans Pro, sans-serif;
+}
+
+.loginForm button {
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    padding: 15px;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+:global(.defaultBtn) {
+    background-color: var(--tertiary-color);
+}
+
+:global(.activeBtn) {
+    background-color: var(--secondary-color);
+    cursor: pointer;
+}
+
+:global(.activeBtn:hover) {
+    background-color: var(--primary-color);
+}
+
+@media (max-width: 600px) {
+
+    .loginForm {
+        width: 85%;
+        padding: 20px;
+        margin: 30% auto;
+    }
+
+    .loginForm h1 {
+        font-size: 32px;
+    }
+
+    .loginForm input,
+    .loginForm button {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 400px) {
+    .loginForm {
+        width: 75%;
+        padding: 20px;
+    }
+
+    .loginForm h1 {
+        font-size: 28px;
+    }
+}
