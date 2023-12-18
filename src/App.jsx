@@ -2,7 +2,7 @@ import React from "react";
 // import { useState } from "react";
 import Login from "./pages/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import PageNotFound from "./pages/PageNotFound/PageNotFound";
+import PageNotFound from "./pages/PageNotFound";
 import Home from "./pages/Home";
 
 function App() {
