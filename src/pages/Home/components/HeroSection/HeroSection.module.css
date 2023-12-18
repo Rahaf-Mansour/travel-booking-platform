@@ -1,0 +1,42 @@
+.imageContainer {
+    position: relative;
+    max-height: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.homeBackground {
+    object-fit: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+}
+
+.overlayText {
+    position: absolute;
+    left: 0;
+    top: 40%;
+    transform: translateY(-50%);
+    background-color: rgba(11, 25, 102, 0.5);
+    margin-left: 7rem;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+@media (max-width: 768px) {
+    .overlayText {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .overlayText {
+        margin-left: 2rem;
+    }
+}
