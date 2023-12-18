@@ -1,0 +1,30 @@
+.errorImage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.pageNotFoundImage {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+
+.errorMessage {
+    color: #000;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+@media screen and (max-width: 400px) {
+    .errorImage {
+        padding: 2rem;
+    }
+
+    .errorMessage {
+        font-size: 1.2rem;
+        margin-top: 8%;
+    }
+}
