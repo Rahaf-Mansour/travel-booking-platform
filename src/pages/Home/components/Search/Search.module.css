@@ -20,7 +20,8 @@
 }
 
 .heroIcon {
-    color: #6f6c6c;
+    color: var(--main-color);
+    margin-right: 5px;
 }
 
 .heroSearchInput {
@@ -35,6 +36,21 @@
     font-size: 1rem;
     color: black;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+
+.options {
+    z-index: 9;
+    position: absolute;
+    top: 60px;
+    background-color: white;
+    color: var(--main-color);
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px -3px rgba(19, 16, 16, 0.808);
 }
 
 .heroSearchButton {
@@ -68,6 +84,10 @@
 
     .heroSearchButton {
         width: 100%;
+    }
+
+    .options {
+        top: 120px;
     }
 }
 
