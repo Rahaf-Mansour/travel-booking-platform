@@ -2,6 +2,16 @@
     font-size: 1rem;
     color: black;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+
+.heroIcon {
+    color: var(--main-color);
+    margin-right: 5px;
 }
 
 .datePicker {

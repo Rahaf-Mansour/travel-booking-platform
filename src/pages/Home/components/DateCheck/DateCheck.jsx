@@ -1,9 +1,9 @@
 import React from "react";
 import { DateRange } from "react-date-range";
 import { useState } from "react";
-// import PropTypes from "prop-types";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
+import DateRangeIcon from "@mui/icons-material/DateRange";
 import styles from "./DateCheck.module.css";
 
 function DateCheck() {
@@ -14,22 +14,26 @@ function DateCheck() {
       key: "selection",
     },
   ]);
+  
   const [isDateOpened, setIsDateOpened] = useState(false);
 
   return (
     <>
-      <span
+      <button
         className={styles.heroSearchText}
         onClick={() => setIsDateOpened(!isDateOpened)}
       >
-        {`${date[0].startDate.toLocaleDateString("en-US", {
-          month: "long",
-          day: "numeric",
-        })} - ${date[0].endDate.toLocaleDateString("en-US", {
-          month: "long",
-          day: "numeric",
-        })}`}
-      </span>
+        <DateRangeIcon className={styles.heroIcon} />
+        <span>
+          {`${date[0].startDate.toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+          })} - ${date[0].endDate.toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+          })}`}
+        </span>
+      </button>
       {isDateOpened && (
         <DateRange
           editableDateInputs={true}
@@ -42,15 +46,5 @@ function DateCheck() {
     </>
   );
 }
-
-// DateRange.prototypes = {
-//   startDate: PropTypes.object,
-//   endDate: PropTypes.object,
-//   color: PropTypes.string,
-//   key: PropTypes.string,
-//   autoFocus: PropTypes.bool,
-//   disabled: PropTypes.bool,
-//   showDateDisplay: PropTypes.bool,
-// };
 
 export default DateCheck;
