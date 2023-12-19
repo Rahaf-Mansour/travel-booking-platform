@@ -7,6 +7,8 @@ const Home = () => {
     <div>
       <NavBar />
       <HeroSection />
+      <button className="">Explore Now</button>
+
     </div>
   );
 };

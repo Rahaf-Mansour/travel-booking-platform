@@ -1,7 +1,6 @@
 import React from "react";
 import HomeHeroBackground from "../../../../assets/images/HomeHeroBackground.jpg";
 import styles from "./HeroSection.module.css";
-import Search from "../Search";
 
 const HeroSection = () => {
   return (
@@ -17,7 +16,6 @@ const HeroSection = () => {
           alt="HomeHeroBackground"
         />
       </div>
-      <Search />
     </>
   );
 };

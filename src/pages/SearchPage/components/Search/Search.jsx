@@ -3,8 +3,10 @@ import styles from "./Search.module.css";
 import SingleBedIcon from "@mui/icons-material/SingleBed";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import SearchItem from "../SearchItem";
-import DateCheck from "../DateCheck";
+import DateCheck from "../../../Home/components/DateCheck";
 import OptionItem from "../OptionItem";
+import CustomButton from "../../../../components/CustomButton";
+import { NavLink } from "react-router-dom";
 
 const Search = () => {
   const initialState = {
@@ -45,7 +47,7 @@ const Search = () => {
           <DateCheck />
         </SearchItem>
         <SearchItem>
-          <button
+          <CustomButton
             className={styles.heroSearchText}
             onClick={() => setIsOptionsOpened(!isOptionsOpened)}
           >
@@ -53,7 +55,7 @@ const Search = () => {
             <span>
               {`${options.adults} adult . ${options.children} children . ${options.room} room`}
             </span>
-          </button>
+          </CustomButton>
           {isOptionsOpened && (
             <div className={styles.options}>
               <OptionItem
@@ -80,7 +82,9 @@ const Search = () => {
           )}
         </SearchItem>
         <SearchItem>
-          <button className={styles.heroSearchButton}>Search</button>
+          <CustomButton className={styles.heroSearchButton}>
+            <NavLink to="/hotel">Search</NavLink>
+          </CustomButton>
         </SearchItem>
       </div>
     </div>
