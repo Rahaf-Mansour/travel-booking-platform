@@ -1,15 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const CustomButton = ({ className, onClick, children, style }) => {
+const CustomButton = ({
+  type = "submit",
+  className,
+  onClick,
+  children,
+  style,
+}) => {
   return (
-    <button className={className} onClick={onClick} style={style}>
+    <button type={type} className={className} onClick={onClick} style={style}>
       {children}
     </button>
   );
 };
 
 CustomButton.propTypes = {
+  type: PropTypes.string,
   className: PropTypes.string,
   onClick: PropTypes.func,
   children: PropTypes.node.isRequired,
