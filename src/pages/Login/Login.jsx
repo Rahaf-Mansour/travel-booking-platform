@@ -5,6 +5,8 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../services/authService";
 import GenericSnackbar from "../../components/GenericSnackbar/GenericSnackbar";
+import { AuthContext } from "../../context/authContext";
+import CustomButton from "../../components/CustomButton";
 
 const loginSchema = Yup.object().shape({
   username: Yup.string()
@@ -15,6 +17,7 @@ const loginSchema = Yup.object().shape({
 
 const Login = () => {
   const navigate = useNavigate();
+  const { loginUser } = React.useContext(AuthContext);
   const [snackbar, setSnackbar] = React.useState({
     open: false,
     message: "",
@@ -29,6 +32,7 @@ const Login = () => {
     setSubmitting(true);
     try {
       const response = await login(values);
+      loginUser(response); // loginUser is a function from AuthContext => returns {userType, authentication}
       if (response.userType === "User" || response.userType === "Admin") {
         setSnackbar({
           open: true,
@@ -106,13 +110,12 @@ const Login = () => {
                   {(msg) => <div className={styles.errorMessage}>{msg}</div>}
                 </ErrorMessage>
 
-                <button
-                  type="submit"
+                <CustomButton
                   className={buttonClassName}
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? "Logging in..." : "Log in"}
-                </button>
+                </CustomButton>
               </Form>
 
               <GenericSnackbar
