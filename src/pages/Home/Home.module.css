@@ -1,0 +1,55 @@
+.hero {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.heroSearch {
+    border: 3px solid #e5a905;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    position: absolute;
+    bottom: -25px;
+    max-width: 1160px;
+}
+
+.heroIcon {
+    color: var(--main-color);
+    margin-right: 5px;
+}
+
+.heroSearchButton {
+    background-color: white;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heroSearchButton a {
+    text-decoration: none;
+    color: black;
+}
+
+@media (max-width: 480px) {
+    .heroSearch {
+        bottom: -200px;
+    }
+
+    .heroSearchButton {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .heroSearch {
+        bottom: -100px;
+    }
+}
+
