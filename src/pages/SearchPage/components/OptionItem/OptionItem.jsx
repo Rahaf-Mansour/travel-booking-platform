@@ -8,6 +8,7 @@ const OptionItem = ({ count, label, onDecrement, onIncrement, min = 0 }) => (
       <span className={styles.optionText}>{label}</span>
       <div className={styles.optionCounter}>
         <button
+          type="button"
           disabled={count <= min}
           className={styles.optionCounterButton}
           aria-label={`Remove one ${label}`}
@@ -17,6 +18,7 @@ const OptionItem = ({ count, label, onDecrement, onIncrement, min = 0 }) => (
         </button>
         <span className={styles.optionCounterNumber}>{count}</span>
         <button
+          type="button"
           className={styles.optionCounterButton}
           aria-label={`Add one ${label}`}
           onClick={onIncrement}
