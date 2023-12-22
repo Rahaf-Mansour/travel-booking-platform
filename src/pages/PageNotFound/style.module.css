@@ -9,22 +9,26 @@
     max-width: 100%;
     height: auto;
     vertical-align: middle;
+    margin-top: 6rem;
 }
 
 .errorMessage {
     color: #000;
     font-size: 1.5rem;
     text-align: center;
-    margin-bottom: 5%;
+}
+
+
+@media screen and (max-width: 625px) {
+    .errorMessage {
+        font-size: 1.4rem;
+        margin: 0 4rem;
+    }
 }
 
 @media screen and (max-width: 400px) {
-    .errorImage {
-        padding: 2rem;
-    }
-
     .errorMessage {
-        font-size: 1.2rem;
-        margin-top: 8%;
+        font-size: 1.3rem;
+        margin: 1rem;
     }
 }
