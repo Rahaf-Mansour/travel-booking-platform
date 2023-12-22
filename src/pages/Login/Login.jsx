@@ -3,7 +3,7 @@ import styles from "./Login.module.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../services/authService";
+import { loginAPI } from "../../services/authService";
 import GenericSnackbar from "../../components/GenericSnackbar/GenericSnackbar";
 import { AuthContext } from "../../context/authContext";
 import CustomButton from "../../components/CustomButton";
@@ -31,7 +31,7 @@ const Login = () => {
   const handleLogin = async (values, { setSubmitting }) => {
     setSubmitting(true);
     try {
-      const response = await login(values);
+      const response = await loginAPI(values);
       loginUser(response); // loginUser is a function from AuthContext => returns {userType, authentication}
       if (response.userType === "User" || response.userType === "Admin") {
         setSnackbar({
