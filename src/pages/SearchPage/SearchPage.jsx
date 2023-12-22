@@ -6,7 +6,7 @@ const SearchPage = () => {
   return (
     <div>
       <NavBar />
-      <Search />
+      <Search position="fixed" topXs="80px" />
     </div>
   );
 };
