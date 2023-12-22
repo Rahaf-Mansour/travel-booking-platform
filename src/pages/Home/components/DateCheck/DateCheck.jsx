@@ -4,7 +4,7 @@ import { useState } from "react";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import DateRangeIcon from "@mui/icons-material/DateRange";
-import styles from "./DateCheck.module.css";
+import styles from "./style.module.css";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
 import CustomButton from "../../../../components/CustomButton";

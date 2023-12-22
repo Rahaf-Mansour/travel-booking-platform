@@ -1,6 +1,6 @@
 import React from "react";
 import HomeHeroBackground from "../../../../assets/images/HomeHeroBackground.jpg";
-import styles from "./HeroSection.module.css";
+import styles from "./style.module.css";
 
 const HeroSection = () => {
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 import pageError from "../../assets/images/pageError.jpg";
 import NavBar from "../../components/NavBar";
-import styles from "./PageNotFound.module.css";
+import styles from "./style.module.css";
 
 const PageNotFound = () => {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styles from "./SearchItem.module.css";
+import styles from "./style.module.css";
 
 const SearchItem = ({ children }) => {
   return <div className={styles.heroSearchItem}>{children}</div>;

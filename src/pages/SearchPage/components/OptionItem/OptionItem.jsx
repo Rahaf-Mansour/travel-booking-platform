@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styles from "./OptionItem.module.css";
+import styles from "./style.module.css";
 import CustomButton from "../../../../components/CustomButton";
 
 const OptionItem = ({ count, label, onDecrement, onIncrement, min = 0 }) => (
