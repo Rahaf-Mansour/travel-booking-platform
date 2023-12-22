@@ -7,9 +7,16 @@ const CustomButton = ({
   onClick,
   children,
   style,
+  disabled = false,
 }) => {
   return (
-    <button type={type} className={className} onClick={onClick} style={style}>
+    <button
+      type={type}
+      className={className}
+      onClick={onClick}
+      style={style}
+      disabled={disabled}
+    >
       {children}
     </button>
   );
@@ -21,6 +28,7 @@ CustomButton.propTypes = {
   onClick: PropTypes.func,
   children: PropTypes.node.isRequired,
   style: PropTypes.object,
+  disabled: PropTypes.bool,
 };
 
 export default CustomButton;
