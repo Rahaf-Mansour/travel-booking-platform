@@ -17,6 +17,8 @@ export const SearchContextProvider = ({ children }) => {
   );
 };
 
+export default SearchContextProvider;
+
 SearchContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
