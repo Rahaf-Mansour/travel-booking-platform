@@ -5,39 +5,49 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import styles from "./DateCheck.module.css";
+import dayjs from "dayjs";
+import PropTypes from "prop-types";
+import CustomButton from "../../../../components/CustomButton";
 
-function DateCheck() {
+function DateCheck({ handleSetDate }) {
+  const [isDateOpened, setIsDateOpened] = useState(false);
   const [date, setDate] = useState([
     {
-      startDate: new Date(),
-      endDate: new Date(new Date().valueOf() + 1000 * 3600 * 24),
+      startDate: dayjs().toDate(),
+      endDate: dayjs().add(1, "day").toDate(),
       key: "selection",
     },
   ]);
-  
-  const [isDateOpened, setIsDateOpened] = useState(false);
+
+  const handleChangeDate = (newDate) => {
+    console.log(newDate);
+    try {
+      setDate([newDate.selection]);
+      handleSetDate(newDate.selection);
+    } catch (error) {
+      console.error("Error updating date:", error);
+    }
+  };
 
   return (
     <>
-      <button
+      <CustomButton
+        type="button"
         className={styles.heroSearchText}
         onClick={() => setIsDateOpened(!isDateOpened)}
       >
         <DateRangeIcon className={styles.heroIcon} />
         <span>
-          {`${date[0].startDate.toLocaleDateString("en-US", {
-            month: "long",
-            day: "numeric",
-          })} - ${date[0].endDate.toLocaleDateString("en-US", {
-            month: "long",
-            day: "numeric",
-          })}`}
+          {`${dayjs(date[0].startDate).format("YYYY-MM-DD")} - ${dayjs(
+            date[0].endDate
+          ).format("YYYY-MM-DD")}`}
         </span>
-      </button>
+      </CustomButton>
+
       {isDateOpened && (
         <DateRange
           editableDateInputs={true}
-          onChange={(item) => setDate([item.selection])}
+          onChange={(newDate) => handleChangeDate(newDate)}
           moveRangeOnFirstSelection={false}
           ranges={date}
           className={styles.datePicker}
@@ -48,3 +58,7 @@ function DateCheck() {
 }
 
 export default DateCheck;
+
+DateCheck.propTypes = {
+  handleSetDate: PropTypes.func,
+};
