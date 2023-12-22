@@ -8,7 +8,7 @@ const Home = () => {
     <div>
       <NavBar />
       <HeroSection />
-      <Search />
+      <Search topXs="30px" topLg="-33px" />
     </div>
   );
 };
