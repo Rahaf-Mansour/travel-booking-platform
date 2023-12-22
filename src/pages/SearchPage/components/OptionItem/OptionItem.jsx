@@ -1,30 +1,29 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styles from "./OptionItem.module.css";
+import CustomButton from "../../../../components/CustomButton";
 
 const OptionItem = ({ count, label, onDecrement, onIncrement, min = 0 }) => (
   <>
     <div className={styles.optionItem}>
       <span className={styles.optionText}>{label}</span>
       <div className={styles.optionCounter}>
-        <button
+        <CustomButton
           type="button"
           disabled={count <= min}
           className={styles.optionCounterButton}
-          aria-label={`Remove one ${label}`}
           onClick={onDecrement}
         >
           <span className={styles.sign}>&#x2212;</span>
-        </button>
+        </CustomButton>
         <span className={styles.optionCounterNumber}>{count}</span>
-        <button
+        <CustomButton
           type="button"
           className={styles.optionCounterButton}
-          aria-label={`Add one ${label}`}
           onClick={onIncrement}
         >
           <span className={styles.sign}>&#43;</span>
-        </button>
+        </CustomButton>
       </div>
     </div>
   </>
