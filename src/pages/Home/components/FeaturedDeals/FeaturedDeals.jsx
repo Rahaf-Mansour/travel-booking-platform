@@ -70,30 +70,32 @@ const FeaturedDeals = () => {
                   src={deal.roomPhotoUrl}
                   alt={deal.hotelName}
                 />
-                <h3 className={styles.hotelName}>{deal.hotelName}</h3>
-                <p className={styles.cityName}>{deal.cityName}</p>
-                <div>
-                  {Array(deal.hotelStarRating)
-                    .fill()
-                    .map((_, i) => (
-                      <span key={i} role="img" aria-label="star">
-                        ⭐
-                      </span>
-                    ))}
-                </div>
-                <div
-                  className={styles.priceInfo}
-                  style={{
-                    display: "flex",
-                    justifyContent: "start",
-                    marginTop: "1rem",
-                    alignItems: "center",
-                  }}
-                >
-                  <p className={styles.originalPrice}>
-                    ${deal.originalRoomPrice}
-                  </p>
-                  <p className={styles.finalPrice}>${deal.finalPrice}</p>
+                <div className={styles.bottomContainer}>
+                  <h3 className={styles.hotelName}>{deal.hotelName}</h3>
+                  <p className={styles.cityName}>{deal.cityName}</p>
+                  <div>
+                    {Array(deal.hotelStarRating)
+                      .fill()
+                      .map((_, i) => (
+                        <span key={i} role="img" aria-label="star">
+                          ⭐
+                        </span>
+                      ))}
+                  </div>
+                  <div
+                    className={styles.priceInfo}
+                    style={{
+                      display: "flex",
+                      justifyContent: "start",
+                      marginTop: "1rem",
+                      alignItems: "center",
+                    }}
+                  >
+                    <p className={styles.originalPrice}>
+                      ${deal.originalRoomPrice}
+                    </p>
+                    <p className={styles.finalPrice}>${deal.finalPrice}</p>
+                  </div>
                 </div>
               </div>
             </div>
