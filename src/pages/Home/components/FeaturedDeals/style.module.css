@@ -1,0 +1,58 @@
+.featuredDealsContainer {
+    margin-top: 7rem;
+}
+
+.dealCard {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+.lastDealCard {
+    margin-right: 0;
+}
+
+.roomPhoto {
+    margin-top: 2rem;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+}
+
+.hotelName {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+.cityName {
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0.2rem 0;
+}
+
+.originalPrice {
+    font-size: 0.9rem;
+    font-weight: 400;
+    text-decoration: line-through;
+    color: #757575;
+}
+
+.finalPrice {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ff5a5f;
+    margin-left: 1.2rem;
+}
+
+@media screen and (min-width: 768px) {
+    .featuredDealsContainer {
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+        cursor: pointer;
+    }
+}
