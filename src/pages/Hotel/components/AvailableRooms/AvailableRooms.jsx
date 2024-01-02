@@ -9,6 +9,10 @@ import TvIcon from "@mui/icons-material/Tv";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
 
 const AvailableRooms = ({ hotelAvailableRooms }) => {
+  if (hotelAvailableRooms.length === 0) {
+    return <p>No rooms available.</p>;
+  }
+
   return (
     <>
       <h3 className={styles.header}>Available Rooms</h3>
