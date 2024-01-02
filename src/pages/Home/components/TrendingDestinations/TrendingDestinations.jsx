@@ -1,13 +1,11 @@
-import * as React from "react";
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
-import ImageListItemBar from "@mui/material/ImageListItemBar";
+import React, { useState, useEffect } from "react";
 import { trendingDestinationsAPI } from "../../../../services/homePageServices";
+import { Grid, Card, CardContent, Typography } from "@mui/material";
 
 export function TrendingDestinations() {
-  const [trendingDestinations, setTrendingDestinations] = React.useState([]);
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [error, setError] = React.useState(null);
+  const [trendingDestinations, setTrendingDestinations] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const handleFetchTrendingDestinations = async () => {
     try {
@@ -21,7 +19,7 @@ export function TrendingDestinations() {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     handleFetchTrendingDestinations();
   }, []);
 
@@ -39,30 +37,37 @@ export function TrendingDestinations() {
       ) : error ? (
         <p>Error: {error.message}</p>
       ) : (
-        <ImageList sx={{ width: "100%", height: "auto" }} cols={2}>
+        <Grid container spacing={2}>
           {trendingDestinations.map((item) => (
-            <ImageListItem
-              key={item.cityId}
-              onClick={() => handleNavigation(item.cityId)}
-              style={{ cursor: "pointer" }}
-            >
-              <img
-                srcSet={`${item.thumbnailUrl}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                src={`${item.thumbnailUrl}?w=248&fit=crop&auto=format`}
-                alt={item.cityName}
-                loading="lazy"
-              />
-              <ImageListItemBar
-                title={
-                  <span style={{ fontWeight: "bold", fontSize: "1.2rem" }}>
+            <Grid item key={item.cityId} xs={12} sm={6} md={4}>
+              <Card
+                onClick={() => handleNavigation(item.cityId)}
+                style={{
+                  cursor: "pointer",
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <img
+                  src={`${item.thumbnailUrl}`}
+                  alt={item.cityName}
+                  loading="lazy"
+                  style={{ width: "100%", height: "250px", objectFit: "cover" }}
+                />
+                <CardContent style={{ flexGrow: 1 }}>
+                  <Typography
+                    variant="subtitle1"
+                    component="div"
+                    sx={{ fontWeight: "bold", fontSize: "1.2rem" }}
+                  >
                     {item.cityName}
-                  </span>
-                }
-                position="above"
-              />
-            </ImageListItem>
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
           ))}
-        </ImageList>
+        </Grid>
       )}
     </>
   );
