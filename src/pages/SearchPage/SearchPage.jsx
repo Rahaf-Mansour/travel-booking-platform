@@ -10,7 +10,7 @@ const SearchPage = () => {
   return (
     <div>
       <NavBar />
-      <SearchBar topXs="80px" />
+      <SearchBar topXs="30px" topLg="30px" />
       <SearchContextProvider>
         <div className={styles.container}>
           <div className={styles.wrapper}>
