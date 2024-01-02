@@ -1,0 +1,62 @@
+.hotelReviews {
+    margin-top: 20px;
+}
+
+.hotelReviews h3 {
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+    color: #333;
+}
+
+.hotelReview {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hotelReview p {
+    margin: 4px 0;
+}
+
+.reviewHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.customerName {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.rating {
+    font-size: 1rem;
+    color: #f39c12;
+    font-weight: bold;
+}
+
+.description {
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.loadMore {
+    background-color: var(--secondary-color);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s ease-in-out;
+    margin-left: 50%;
+    transform: translateX(-50%)
+}
+
+.loadMore:hover {
+    background-color: var(--primary-color);
+}
