@@ -79,8 +79,15 @@
     padding: 8px 12px;
     border: none;
     cursor: pointer;
-    font-size: 14px;
     margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-radius: 5px;
+    gap: 8px;
+    font-size: 1rem;
+    font-weight: bold;
 }
 
 .addCartButton:hover {

@@ -7,11 +7,17 @@ import ChildFriendlyIcon from "@mui/icons-material/ChildFriendly";
 import WifiIcon from "@mui/icons-material/Wifi";
 import TvIcon from "@mui/icons-material/Tv";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
+import IconButton from "@mui/material/IconButton";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 const AvailableRooms = ({ hotelAvailableRooms }) => {
   if (hotelAvailableRooms.length === 0) {
     return <p>No rooms available.</p>;
   }
+
+  const handleAddToCart = () => {
+    console.log("Added to cart");
+  };
 
   return (
     <>
@@ -57,8 +63,13 @@ const AvailableRooms = ({ hotelAvailableRooms }) => {
                 ))}
               </ul>
             </div>
-            <CustomButton className={styles.addCartButton}>
+
+            <CustomButton
+              className={styles.addCartButton}
+              onClick={handleAddToCart}
+            >
               Add to Cart
+              <AddShoppingCartIcon sx={{ fontSize: "1.3rem" }} />
             </CustomButton>
           </div>
         ))}
