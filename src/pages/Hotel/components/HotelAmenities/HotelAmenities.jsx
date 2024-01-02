@@ -11,7 +11,7 @@ const HotelAmenities = ({ amenities }) => {
         {amenities.map((amenity, index) => (
           <li key={index} className={styles.amenityItem}>
             <CheckCircleIcon sx={{ color: "green" }} />
-            <strong>{amenity.name}</strong>
+            {amenity.name}
           </li>
         ))}
       </ul>
