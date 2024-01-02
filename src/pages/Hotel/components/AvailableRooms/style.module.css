@@ -25,10 +25,16 @@
     margin-bottom: 10px;
 }
 
+.roomHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
 .roomType {
     font-size: 1.1rem;
     font-weight: bold;
-    margin-bottom: 1rem;
 }
 
 .price {
@@ -38,10 +44,6 @@
 
 .availabilityAvailable {
     color: green;
-}
-
-.availabilityNotAvailable {
-    color: red;
 }
 
 .capacityInfo {
@@ -66,11 +68,11 @@
 .amenities li {
     display: flex;
     align-items: center;
-    margin-bottom: 4px;
+    margin-bottom: 10px;
 }
 
 .amenities li svg {
-    margin-right: 4px;
+    margin-right: 1rem;
 }
 
 .addCartButton {
@@ -79,7 +81,7 @@
     padding: 8px 12px;
     border: none;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -87,11 +89,11 @@
     border-radius: 5px;
     gap: 8px;
     font-size: 1rem;
-    font-weight: bold;
 }
 
 .addCartButton:hover {
     background-color: #154a6d;
+    transition: background-color 0.2s ease-in-out;
 }
 
 @media screen and (max-width: 768px) {

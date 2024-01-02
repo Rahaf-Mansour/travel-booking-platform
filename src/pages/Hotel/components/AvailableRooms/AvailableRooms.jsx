@@ -4,11 +4,8 @@ import styles from "./style.module.css";
 import CustomButton from "../../../../components/CustomButton";
 import PersonIcon from "@mui/icons-material/Person";
 import ChildFriendlyIcon from "@mui/icons-material/ChildFriendly";
-import WifiIcon from "@mui/icons-material/Wifi";
-import TvIcon from "@mui/icons-material/Tv";
-import AcUnitIcon from "@mui/icons-material/AcUnit";
-import IconButton from "@mui/material/IconButton";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { renderAmenityIcon } from "./helpers/helpers";
 
 const AvailableRooms = ({ hotelAvailableRooms }) => {
   if (hotelAvailableRooms.length === 0) {
@@ -19,28 +16,28 @@ const AvailableRooms = ({ hotelAvailableRooms }) => {
     console.log("Added to cart");
   };
 
+  const availableRooms = hotelAvailableRooms.filter(
+    (room) => room.availability
+  );
+
   return (
     <>
       <h3 className={styles.header}>Available Rooms</h3>
+
       <div className={styles.availableRoomsContainer}>
-        {hotelAvailableRooms.map((room, index) => (
+        {availableRooms.map((room, index) => (
           <div key={index} className={styles.roomCard}>
             <img
               src={room.roomPhotoUrl}
               alt={`Photo of ${room.roomType} room`}
               className={styles.roomImage}
             />
-            <p className={styles.roomType}>Room Type: {room.roomType}</p>
+            <div className={styles.roomHeader}>
+              <p className={styles.roomType}>{room.roomType} Room</p>
+              <p className={styles.availabilityAvailable}>Available</p>
+            </div>
+
             <p className={styles.price}>Price: ${room.price}</p>
-            <p
-              className={
-                room.availability
-                  ? styles.availabilityAvailable
-                  : styles.availabilityNotAvailable
-              }
-            >
-              {room.availability ? "Available" : "Not Available"}
-            </p>
             <div className={styles.capacityInfo}>
               <div className={styles.iconContainer}>
                 <PersonIcon fontSize="small" />
@@ -76,19 +73,6 @@ const AvailableRooms = ({ hotelAvailableRooms }) => {
       </div>
     </>
   );
-};
-
-const renderAmenityIcon = (amenityName) => {
-  switch (amenityName.toLowerCase()) {
-    case "free wi-fi":
-      return <WifiIcon fontSize="small" />;
-    case "tv":
-      return <TvIcon fontSize="small" />;
-    case "air conditioning":
-      return <AcUnitIcon fontSize="small" />;
-    default:
-      return null;
-  }
 };
 
 export default AvailableRooms;
