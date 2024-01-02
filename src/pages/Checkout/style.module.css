@@ -1,0 +1,12 @@
+.checkoutContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.checkoutContainer h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
