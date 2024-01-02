@@ -1,7 +1,5 @@
 import * as React from "react";
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
-import ImageListItemBar from "@mui/material/ImageListItemBar";
+import { Grid, Card, CardContent, CardMedia, Typography } from "@mui/material";
 
 const hotelData = [
   {
@@ -80,60 +78,77 @@ const hotelData = [
 
 const lastVisitedHotels = hotelData.slice(0, 5);
 
-const handleNavigation = (hotelId) => {
-  console.log("Clicked item hotelId:", hotelId);
-};
-
 export function RecentlyVisitedHotels() {
+  const [recentHotels, setRecentHotels] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [error, setError] = React.useState(null);
+
+  // const handleFetchRecentlyVisitedHotels = async () => {
+  //   try {
+  //     const recentHotelsData = await recentlyVisitedHotelsAPI();
+  //     setRecentHotels(recentHotelsData);
+  //   } catch (error) {
+  //     console.error("Error fetching recent hotels:", error);
+  //     setError(error);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+
+  // React.useEffect(() => {
+  //   handleFetchRecentlyVisitedHotels();
+  // }, []);
+
+  const handleNavigation = (hotelId) => {
+    console.log("Clicked item hotelId:", hotelId);
+  };
+
   return (
     <>
       <h2 style={{ marginTop: "4rem", marginBottom: "2rem" }}>
         Recently Visited Hotels
       </h2>
-      <ImageList sx={{ width: "100%", height: "auto" }} cols={3}>
-        {lastVisitedHotels.map((hotel) => (
-          <ImageListItem
-            key={hotel.hotelId}
-            onClick={() => handleNavigation(hotel.hotelId)}
-            sx={{ marginRight: "0.5rem", marginTop: "0.5rem" }}
-          >
-            <img
-              srcSet={`${hotel.thumbnailUrl}?w=248&fit=crop&auto=format&dpr=2 2x`}
-              src={`${hotel.thumbnailUrl}?w=248&fit=crop&auto=format`}
-              alt={hotel.hotelName}
-              loading="lazy"
-              style={{
-                objectFit: "cover",
-                width: "100%",
-                height: "100%",
-                cursor: "pointer",
-              }}
-            />
-            <ImageListItemBar
-              sx={{
-                border: "1px solid grey",
-                paddingX: "1rem",
-                paddingY: "0.5rem",
-              }}
-              title={
-                <span style={{ fontWeight: "bold", fontSize: "1.2rem" }}>
-                  {hotel.hotelName}
-                </span>
-              }
-              subtitle={
-                <div
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>Error: {error.message}</p>
+      ) : (
+        <Grid container spacing={2}>
+          {lastVisitedHotels.map((hotel) => (
+            <Grid item key={hotel.hotelId} xs={12} sm={6} md={4}>
+              <Card
+                onClick={() => handleNavigation(hotel.hotelId)}
+                style={{
+                  cursor: "pointer",
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <CardMedia
+                  component="img"
+                  alt={hotel.hotelName}
+                  height="200"
+                  image={`${hotel.thumbnailUrl}?w=248&fit=crop&auto=format`}
                   style={{
-                    marginTop: "1rem",
-                    fontSize: "0.8rem",
-                    fontWeight: "600",
+                    objectFit: "cover",
+                    cursor: "pointer",
+                    height: "100%",
                   }}
-                >{`${hotel.cityName} | Rating: ${hotel.starRating} Stars | Price Range: $${hotel.priceLowerBound} - $${hotel.priceUpperBound}`}</div>
-              }
-              position="below"
-            />
-          </ImageListItem>
-        ))}
-      </ImageList>
+                />
+                <CardContent style={{ flexGrow: 1 }}>
+                  <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
+                    {hotel.hotelName}
+                  </Typography>
+                  <Typography variant="subtitle2" color="textSecondary">
+                    {`${hotel.cityName} | Rating: ${hotel.starRating} Stars | Price Range: $${hotel.priceLowerBound} - $${hotel.priceUpperBound}`}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      )}
     </>
   );
 }
