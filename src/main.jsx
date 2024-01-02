@@ -4,14 +4,14 @@ import App from "./App.jsx";
 import "./index.css";
 import AuthContextProvider from "./context/authContext.jsx";
 import { BrowserRouter } from "react-router-dom";
-import SearchContextProvider from "./context/searchContext.jsx";
+import LoaderContextProvider from "./context/LoaderContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <AuthContextProvider>
-      <SearchContextProvider>
+    <LoaderContextProvider>
+      <AuthContextProvider>
         <App />
-      </SearchContextProvider>
-    </AuthContextProvider>
+      </AuthContextProvider>
+    </LoaderContextProvider>
   </BrowserRouter>
 );
