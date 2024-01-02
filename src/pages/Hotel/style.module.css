@@ -18,14 +18,17 @@
 
 .galleryAndRoomsContainer {
     flex: 3;
-    margin-left: 20px;
+    margin-left: 1rem;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 450px) {
     .container {
         margin-left: 1rem;
         margin-right: 1rem;
         padding: 1rem;
+    }
+    .galleryAndRoomsContainer{
+        margin-left: 0;
     }
 }
 

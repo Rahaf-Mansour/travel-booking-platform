@@ -31,3 +31,16 @@
     max-height: 95%;
     margin-top: 4rem;
 }
+
+@media screen and (max-width: 768px) {
+    .thumbnailContainer {
+        justify-content: center;
+        margin-top: 2rem;
+        
+    }
+    
+    .thumbnailContainer img {
+        max-width: 100%;
+        height: auto;
+    }
+}
