@@ -1,12 +1,24 @@
 import React from "react";
-import Search from "./components/Search";
+import SearchBar from "./components/SearchBar";
 import NavBar from "../../components/NavBar";
+import SearchResult from "./components/SearchResult";
+import SearchContextProvider from "../../context/searchContext";
+import styles from "./style.module.css";
+import SearchFilters from "./components/SearchFilters";
 
 const SearchPage = () => {
   return (
     <div>
       <NavBar />
-      <Search position="fixed" topXs="80px" />
+      <SearchBar topXs="80px" />
+      <SearchContextProvider>
+        <div className={styles.container}>
+          <div className={styles.wrapper}>
+            <SearchFilters />
+            <SearchResult />
+          </div>
+        </div>
+      </SearchContextProvider>
     </div>
   );
 };
