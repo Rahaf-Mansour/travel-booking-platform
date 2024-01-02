@@ -1,0 +1,25 @@
+.hotelDetailsInfo {
+    margin-bottom: 2rem;
+}
+
+.hotelDetailsInfo p {
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.hotelHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    vertical-align: middle;
+    margin-bottom: 0.8rem;
+}
+
+.hotelName {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.starRating {
+    display: flex;
+}
