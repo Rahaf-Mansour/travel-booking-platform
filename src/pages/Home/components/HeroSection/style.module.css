@@ -27,16 +27,20 @@
     font-weight: bold;
     padding: 10px 20px;
     border-radius: 20px;
+    font-family: "Quicksand";
 }
 
 @media (max-width: 768px) {
     .overlayText {
-        font-size: 18px;
+        margin-left: 1rem;
+        font-size: 1.2rem;
     }
 }
 
 @media (max-width: 480px) {
     .overlayText {
-        margin-left: 2rem;
+        margin-left: 1.8rem;
+        font-size: 1.2rem;
+        margin-top: 0.5rem;
     }
 }
