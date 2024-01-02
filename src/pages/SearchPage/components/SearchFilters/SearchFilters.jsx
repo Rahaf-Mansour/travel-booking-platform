@@ -28,7 +28,7 @@ const SearchFilters = () => {
   return (
     <Formik initialValues={initialValues} onSubmit={handleFilter}>
       {({ values, handleChange, handleSubmit }) => (
-        <Form>
+        <Form style={{ flex: 1.2 }}>
           <div className={styles.filterSide}>
             <FormControl
               component="fieldset"
