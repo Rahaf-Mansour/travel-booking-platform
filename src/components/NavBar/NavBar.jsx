@@ -49,7 +49,7 @@ const NavBar = () => {
         sx={{
           display: "flex",
           justifyContent: "space-between",
-          paddingX: { md: "7rem", sm: "2rem" },
+          paddingX: { sm: "2rem", md: "4rem", lg: "6rem" },
         }}
       >
         <Typography
@@ -146,6 +146,7 @@ const NavBar = () => {
           {renderDrawer()}
           <AppBar
             position="static"
+            component="nav"
             sx={{
               backgroundColor: colors.primaryColor,
 
