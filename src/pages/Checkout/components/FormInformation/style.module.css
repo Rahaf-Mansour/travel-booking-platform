@@ -1,0 +1,59 @@
+.formContainer {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.field {
+    margin-bottom: 20px;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+}
+
+.formHeader {
+    color: #333;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.formContainer p {
+    color: #666;
+    margin: 1rem 0;
+}
+
+@media screen and (max-width: 600px) {
+    .formContainer {
+        max-width: 450px;
+        padding: 10px;
+    }
+
+    .formHeader {
+        font-size: 1.3rem;
+    }
+
+    .field {
+        margin-bottom: 15px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .formContainer {
+        max-width: 300px;
+        padding: 10px;
+    }
+
+    .formHeader {
+        font-size: 1.2rem;
+    }
+
+    .field {
+        margin-bottom: 10px;
+    }
+
+}
