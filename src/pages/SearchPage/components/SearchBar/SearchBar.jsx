@@ -13,7 +13,7 @@ import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../../../../context/searchContext";
 
-const Search = ({ topXs = "80px", topLg = "80px" }) => {
+const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
   const [isOptionsOpened, setIsOptionsOpened] = useState(false);
   const [isDateOpened, setIsDateOpened] = useState(false);
 
@@ -22,12 +22,22 @@ const Search = ({ topXs = "80px", topLg = "80px" }) => {
   const navigateToSearchPage = useNavigate();
 
   const handleSetDate = (newDate) => {
+    const currentDate = dayjs().format("YYYY-MM-DD");
     const formattedCheckInDate = dayjs(newDate.startDate).format("YYYY-MM-DD");
     const formattedCheckOutDate = dayjs(newDate.endDate).format("YYYY-MM-DD");
 
-    formik.setFieldValue("checkInDate", formattedCheckInDate);
-    formik.setFieldValue("checkOutDate", formattedCheckOutDate);
-    console.log("Updated dates:", formattedCheckInDate, formattedCheckOutDate);
+    const newCheckInDate =
+      formattedCheckInDate < currentDate ? currentDate : formattedCheckInDate;
+
+    const newCheckOutDate =
+      formattedCheckOutDate <= currentDate
+        ? dayjs(currentDate).add(1, "day").format("YYYY-MM-DD")
+        : formattedCheckOutDate;
+
+    formik.setFieldValue("checkInDate", newCheckInDate);
+    formik.setFieldValue("checkOutDate", newCheckOutDate);
+
+    console.log("Updated dates:", newCheckInDate, newCheckOutDate);
   };
 
   const handleIncrement = (option) => {
@@ -52,6 +62,7 @@ const Search = ({ topXs = "80px", topLg = "80px" }) => {
     <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
       <div className={styles.parent}>
         <SearchContainer topXs={topXs} topLg={topLg}>
+          {/* <div> */}
           <SearchItem>
             <SingleBedIcon className={styles.searchIcon} />
             <input
@@ -113,7 +124,7 @@ const Search = ({ topXs = "80px", topLg = "80px" }) => {
               </div>
             )}
           </SearchItem>
-
+          {/* </div> */}
           <SearchItem>
             <CustomButton type="submit" className={styles.searchButton}>
               Search
@@ -125,9 +136,9 @@ const Search = ({ topXs = "80px", topLg = "80px" }) => {
   );
 };
 
-export default Search;
+export default SearchBar;
 
-Search.propTypes = {
+SearchBar.propTypes = {
   topXs: PropTypes.string,
   topLg: PropTypes.string,
 };
