@@ -57,10 +57,10 @@ const FormInformation = () => {
   const navigateToConfirmationPage = useNavigate();
 
   const handlePayment = (values) => {
+    // Handle payment processing using a payment gateway
     console.log("Payment submitted:", values);
     setOpenSnackbar(true);
     setTimeout(() => {
-      setOpenSnackbar(false);
       navigateToConfirmationPage("/confirmation");
     }, 2000);
   };
@@ -225,7 +225,7 @@ const FormInformation = () => {
 
       <GenericSnackbar
         open={openSnackbar}
-        message="Thanks for your payment!"
+        message="Completed! Thanks for your order!"
         onClose={() => setOpenSnackbar(false)}
         severity="success"
       />
