@@ -1,0 +1,8 @@
+.TableHeadRow {
+    font-weight: bold;
+    background-color: #d7d3d3a2;
+}
+
+.TableBodyRow:nth-child(odd) {
+    background-color: #f3f3f3;
+}
