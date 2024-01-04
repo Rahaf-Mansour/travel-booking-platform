@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import TextField from "@mui/material/TextField";
@@ -8,6 +8,7 @@ import MenuItem from "@mui/material/MenuItem";
 import styles from "./style.module.css";
 import GenericSnackbar from "../../../../components/GenericSnackbar/GenericSnackbar";
 import { useNavigate } from "react-router-dom";
+import { useFormContext } from "../../../../context/CheckoutFormContext ";
 
 const initialValues = {
   fullName: "",
@@ -55,10 +56,12 @@ const formatCardNumber = (value) => {
 const FormInformation = () => {
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
   const navigateToConfirmationPage = useNavigate();
+  const { setValues } = useFormContext();
 
   const handlePayment = (values) => {
     // Handle payment processing using a payment gateway
     console.log("Payment submitted:", values);
+    setValues(values);
     setOpenSnackbar(true);
     setTimeout(() => {
       navigateToConfirmationPage("/confirmation");
