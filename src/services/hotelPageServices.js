@@ -24,7 +24,7 @@ export const getHotelGuestReviews = async (hotelId) => {
 
 export const getHotelPicturesGallery = async (hotelId) => {
   try {
-    const response = await axiosInstance.get(`$/hotels/${hotelId}/gallery`);
+    const response = await axiosInstance.get(`/hotels/${hotelId}/gallery`);
     return response.data;
   } catch (error) {
     throw new Error(
