@@ -13,7 +13,7 @@ const HotelMapLocation = ({ latitude, longitude, hotelName, location }) => {
       <MapContainer
         center={position}
         zoom={13}
-        scrollWheelZoom={true}
+        scrollWheelZoom={false}
         style={{ width: "100%", height: "300px" }}
       >
         <TileLayer
