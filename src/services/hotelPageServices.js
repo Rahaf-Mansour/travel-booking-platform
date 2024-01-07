@@ -1,12 +1,8 @@
-import axios from "axios";
+import axiosInstance from "../Axios/axiosInstance";
 
-const API_BASE_URL =
-  "https://app-hotel-reservation-webapi-uae-dev-001.azurewebsites.net/api";
-
-//Hotel name, star rating, description
 export const getHotelDetails = async (hotelId) => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/hotels/${hotelId}`);
+    const response = await axiosInstance.get(`/hotels/${hotelId}`);
     return response.data;
   } catch (error) {
     throw new Error(
@@ -17,9 +13,7 @@ export const getHotelDetails = async (hotelId) => {
 
 export const getHotelGuestReviews = async (hotelId) => {
   try {
-    const response = await axios.get(
-      `${API_BASE_URL}/hotels/${hotelId}/reviews`
-    );
+    const response = await axiosInstance.get(`/hotels/${hotelId}/reviews`);
     return response.data;
   } catch (error) {
     throw new Error(
@@ -28,12 +22,9 @@ export const getHotelGuestReviews = async (hotelId) => {
   }
 };
 
-//Hotel's pictures gallery
 export const getHotelPicturesGallery = async (hotelId) => {
   try {
-    const response = await axios.get(
-      `${API_BASE_URL}/hotels/${hotelId}/gallery`
-    );
+    const response = await axiosInstance.get(`$/hotels/${hotelId}/gallery`);
     return response.data;
   } catch (error) {
     throw new Error(
@@ -42,15 +33,14 @@ export const getHotelPicturesGallery = async (hotelId) => {
   }
 };
 
-// Hotel's available rooms
 export const getHotelAvailableRooms = async (
   hotelId,
   checkInDate,
   checkOutDate
 ) => {
   try {
-    const response = await axios.get(
-      `${API_BASE_URL}/hotels/${hotelId}/available-rooms`,
+    const response = await axiosInstance.get(
+      `/hotels/${hotelId}/available-rooms`,
       {
         params: {
           checkInDate,

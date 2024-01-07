@@ -1,11 +1,8 @@
-import axios from "axios";
-
-const API_BASE_URL =
-  "https://app-hotel-reservation-webapi-uae-dev-001.azurewebsites.net/api";
+import axiosInstance from "../Axios/axiosInstance";
 
 export const featuredDealsAPI = async () => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/home/featured-deals`);
+    const response = await axiosInstance.get(`/home/featured-deals`);
     return response.data;
   } catch (error) {
     throw new Error(
@@ -16,9 +13,7 @@ export const featuredDealsAPI = async () => {
 
 export const trendingDestinationsAPI = async () => {
   try {
-    const response = await axios.get(
-      `${API_BASE_URL}/home/destinations/trending`
-    );
+    const response = await axiosInstance.get(`/home/destinations/trending`);
     return response.data;
   } catch (error) {
     throw new Error(
@@ -30,8 +25,8 @@ export const trendingDestinationsAPI = async () => {
 
 export const recentlyVisitedHotelsAPI = async (userId) => {
   try {
-    const response = await axios.get(
-      `${API_BASE_URL}/home/users/${userId}/recent-hotels`
+    const response = await axiosInstance.get(
+      `/home/users/${userId}/recent-hotels`
     );
     return response.data;
   } catch (error) {
