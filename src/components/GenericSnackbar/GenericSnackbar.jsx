@@ -12,11 +12,7 @@ Alert.displayName = "Alert";
 const GenericSnackbar = ({ open, message, onClose, severity = "info" }) => {
   return (
     <Snackbar open={open} autoHideDuration={6000} onClose={onClose}>
-      <Alert
-        onClose={onClose}
-        severity={severity}
-        sx={{ width: "100%", fontWeight: "550" }}
-      >
+      <Alert onClose={onClose} severity={severity} sx={{ width: "100%" }}>
         {message}
       </Alert>
     </Snackbar>
