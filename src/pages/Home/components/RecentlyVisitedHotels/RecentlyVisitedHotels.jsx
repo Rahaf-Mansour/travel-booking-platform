@@ -1,107 +1,41 @@
 import * as React from "react";
 import { Grid, Card, CardContent, CardMedia, Typography } from "@mui/material";
-
-const hotelData = [
-  {
-    hotelId: 1,
-    hotelName: "Hotel A",
-    starRating: 4,
-    visitDate: "2023-12-25T19:09:56.980Z",
-    cityName: "Ramallah",
-    thumbnailUrl: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    priceLowerBound: 100,
-    priceUpperBound: 200,
-  },
-  {
-    hotelId: 2,
-    hotelName: "Hotel B",
-    starRating: 4,
-    visitDate: "2023-12-25T19:09:56.980Z",
-    cityName: "Tokyo",
-    thumbnailUrl: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-    priceLowerBound: 100,
-    priceUpperBound: 200,
-  },
-  {
-    hotelId: 3,
-    hotelName: "Hotel B",
-    starRating: 4,
-    visitDate: "2023-12-25T19:09:56.980Z",
-    cityName: "Ramallah",
-    thumbnailUrl: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-    priceLowerBound: 100,
-    priceUpperBound: 200,
-  },
-  {
-    hotelId: 4,
-    hotelName: "Hotel B",
-    starRating: 4,
-    visitDate: "2023-12-25T19:09:56.980Z",
-    cityName: "City A",
-    thumbnailUrl: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-    priceLowerBound: 100,
-    priceUpperBound: 200,
-  },
-  {
-    hotelId: 5,
-    hotelName: "Hotel B",
-    starRating: 4,
-    visitDate: "2023-12-25T19:09:56.980Z",
-    cityName: "City A",
-    thumbnailUrl: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-    priceLowerBound: 100,
-    priceUpperBound: 200,
-  },
-  {
-    hotelId: 7,
-    hotelName: "Hotel C",
-    starRating: 4,
-    visitDate: "2023-12-25T19:09:56.980Z",
-    cityName: "City A",
-    thumbnailUrl:
-      "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
-    priceLowerBound: 100,
-    priceUpperBound: 200,
-  },
-  {
-    hotelId: 8,
-    hotelName: "Hotel D",
-    starRating: 4,
-    visitDate: "2023-12-25T19:09:56.980Z",
-    cityName: "City D",
-    thumbnailUrl:
-      "https://images.unsplash.com/photo-1567306301408-9b74779a11af",
-    priceLowerBound: 100,
-    priceUpperBound: 200,
-  },
-];
-
-const lastVisitedHotels = hotelData.slice(0, 5);
+import { recentlyVisitedHotelsAPI } from "../../../../services/homePageServices";
+import useUserIdFromToken from "../../../../hooks/useUserIdFromToken";
+import useSnackbar from "../../../../hooks/useSnackbar";
+import GenericSnackbar from "../../../../components/GenericSnackbar";
 
 export function RecentlyVisitedHotels() {
   const [recentHotels, setRecentHotels] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [error, setError] = React.useState(null);
+  const { snackbar, showErrorSnackbar, handleCloseSnackbar } = useSnackbar();
 
-  // const handleFetchRecentlyVisitedHotels = async () => {
-  //   try {
-  //     const recentHotelsData = await recentlyVisitedHotelsAPI();
-  //     setRecentHotels(recentHotelsData);
-  //   } catch (error) {
-  //     console.error("Error fetching recent hotels:", error);
-  //     setError(error);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
+  const userId = useUserIdFromToken();
 
-  // React.useEffect(() => {
-  //   handleFetchRecentlyVisitedHotels();
-  // }, []);
+  const handleFetchRecentlyVisitedHotels = async () => {
+    try {
+      if (userId) {
+        const recentHotelsData = await recentlyVisitedHotelsAPI(userId);
+        setRecentHotels(recentHotelsData);
+      }
+    } catch (error) {
+      showErrorSnackbar(
+        "Whoops! Something went wrong when loading recently visited hotels."
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  React.useEffect(() => {
+    handleFetchRecentlyVisitedHotels();
+  }, []);
 
   const handleNavigation = (hotelId) => {
     console.log("Clicked item hotelId:", hotelId);
   };
+
+  const lastVisitedHotels = recentHotels.slice(1, 5);
 
   return (
     <>
@@ -110,12 +44,10 @@ export function RecentlyVisitedHotels() {
       </h2>
       {isLoading ? (
         <p>Loading...</p>
-      ) : error ? (
-        <p>Error: {error.message}</p>
       ) : (
         <Grid container spacing={2}>
           {lastVisitedHotels.map((hotel) => (
-            <Grid item key={hotel.hotelId} xs={12} sm={6} md={4}>
+            <Grid item key={hotel.hotelId} xs={12} sm={6}>
               <Card
                 onClick={() => handleNavigation(hotel.hotelId)}
                 style={{
@@ -123,18 +55,16 @@ export function RecentlyVisitedHotels() {
                   height: "100%",
                   display: "flex",
                   flexDirection: "column",
+                  boxShadow:
+                    "2px 2px 4px rgba(8, 12, 2, 0.2), -2px -2px 4px rgba(8, 12, 2, 0.2)",
                 }}
               >
                 <CardMedia
                   component="img"
                   alt={hotel.hotelName}
                   height="200"
-                  image={`${hotel.thumbnailUrl}?w=248&fit=crop&auto=format`}
-                  style={{
-                    objectFit: "cover",
-                    cursor: "pointer",
-                    height: "100%",
-                  }}
+                  image={`${hotel.thumbnailUrl}`}
+                  style={{ width: "100%", height: "250px", objectFit: "cover" }}
                 />
                 <CardContent style={{ flexGrow: 1 }}>
                   <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
@@ -149,6 +79,7 @@ export function RecentlyVisitedHotels() {
           ))}
         </Grid>
       )}
+      <GenericSnackbar {...snackbar} onClose={handleCloseSnackbar} />
     </>
   );
 }
