@@ -4,7 +4,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { loginAPI } from "../../services/authService";
-import GenericSnackbar from "../../components/GenericSnackbar/GenericSnackbar";
+import GenericSnackbar from "../../components/GenericSnackbar";
+import useSnackbar from "../../hooks/useSnackbar";
 import { AuthContext } from "../../context/authContext";
 import CustomButton from "../../components/CustomButton";
 
@@ -18,15 +19,12 @@ const loginSchema = Yup.object().shape({
 const Login = () => {
   const navigate = useNavigate();
   const { loginUser } = React.useContext(AuthContext);
-  const [snackbar, setSnackbar] = React.useState({
-    open: false,
-    message: "",
-    severity: "info",
-  });
-
-  const handleCloseSnackbar = () => {
-    setSnackbar({ ...snackbar, open: false });
-  };
+  const {
+    snackbar,
+    handleCloseSnackbar,
+    showErrorSnackbar,
+    showSuccessSnackbar,
+  } = useSnackbar();
 
   const handleLogin = async (values, { setSubmitting }) => {
     setSubmitting(true);
@@ -34,21 +32,15 @@ const Login = () => {
       const response = await loginAPI(values);
       loginUser(response); // loginUser is a function from AuthContext => returns {userType, authentication}
       if (response.userType === "User" || response.userType === "Admin") {
-        setSnackbar({
-          open: true,
-          message: "Welcome, you're successfully logged in!",
-          severity: "success",
-        });
+        showSuccessSnackbar("Welcome, you're successfully logged in!");
         setTimeout(() => {
           navigate(response.userType === "User" ? "/home" : "/adminDashboard");
         }, 2000);
       }
     } catch (error) {
-      setSnackbar({
-        open: true,
-        message: "Login failed! Unable to login with provided credentials.",
-        severity: "error",
-      });
+      showErrorSnackbar(
+        "Login failed! Unable to login with provided credentials."
+      );
     }
     setSubmitting(false);
   };
