@@ -1,22 +1,27 @@
 .featuredDealsContainer {
     margin-top: 4rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .dealCard {
     border: none;
     outline: none;
     cursor: pointer;
-    margin-right: 15px;
+    margin-right: 5px;
     transition: box-shadow 0.3s, border-radius 0.3s;
+}
+
+.skeletonDealCard {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 2rem;
 }
 
 .dealCard:hover {
     box-shadow: 2px 2px 10px rgba(77, 75, 75, 0.3);
     border-radius: 10px;
-}
-
-.lastDealCard {
-    margin-right: 0;
 }
 
 .bottomContainer {
@@ -27,7 +32,6 @@
 }
 
 .roomPhoto {
-    margin-top: 2rem;
     width: 100%;
     height: 300px;
     object-fit: cover;
