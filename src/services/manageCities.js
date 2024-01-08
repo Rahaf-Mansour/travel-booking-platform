@@ -31,10 +31,21 @@ export const updateCity = async (cityId, cityName, cityDescription) => {
       name: cityName,
       description: cityDescription,
     });
-    return response.data;
+    return response;
   } catch (error) {
     throw new Error(
       error.response?.data.message || "Error: Can't update the city"
+    );
+  }
+};
+
+export const deleteCity = async (cityId) => {
+  try {
+    const response = await axiosInstance.delete(`/cities/${cityId}`);
+    return response;
+  } catch (error) {
+    throw new Error(
+      error.response?.data.message || "Error: Can't delete the city"
     );
   }
 };
