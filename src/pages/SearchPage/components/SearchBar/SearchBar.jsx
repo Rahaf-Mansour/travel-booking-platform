@@ -12,19 +12,29 @@ import { useFormik } from "formik";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../../../../context/searchContext";
+import useSnackbar from "../../../../hooks/useSnackbar";
+import GenericSnackbar from "../../../../components/GenericSnackbar";
 
 const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
   const [isOptionsOpened, setIsOptionsOpened] = useState(false);
   const [isDateOpened, setIsDateOpened] = useState(false);
-
+  const { snackbar, showErrorSnackbar, handleCloseSnackbar } = useSnackbar();
   const { callSearchAPI, searchProps } = useContext(SearchContext);
-
   const navigateToSearchPage = useNavigate();
 
   const handleSetDate = (newDate) => {
     const currentDate = dayjs().format("YYYY-MM-DD");
     const formattedCheckInDate = dayjs(newDate.startDate).format("YYYY-MM-DD");
     const formattedCheckOutDate = dayjs(newDate.endDate).format("YYYY-MM-DD");
+
+    if (
+      formattedCheckInDate < currentDate ||
+      formattedCheckOutDate <= currentDate
+    ) {
+      showErrorSnackbar(
+        "Whoops! Check-in date or check-out date cannot be in the past."
+      );
+    }
 
     const newCheckInDate =
       formattedCheckInDate < currentDate ? currentDate : formattedCheckInDate;
@@ -62,7 +72,6 @@ const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
     <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
       <div className={styles.parent}>
         <SearchContainer topXs={topXs} topLg={topLg}>
-          {/* <div> */}
           <SearchItem>
             <SingleBedIcon className={styles.searchIcon} />
             <input
@@ -124,7 +133,6 @@ const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
               </div>
             )}
           </SearchItem>
-          {/* </div> */}
           <SearchItem>
             <CustomButton type="submit" className={styles.searchButton}>
               Search
@@ -132,6 +140,7 @@ const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
           </SearchItem>
         </SearchContainer>
       </div>
+      <GenericSnackbar {...snackbar} onClose={handleCloseSnackbar} />
     </form>
   );
 };
