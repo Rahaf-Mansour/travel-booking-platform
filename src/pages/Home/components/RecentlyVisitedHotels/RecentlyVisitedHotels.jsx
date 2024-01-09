@@ -28,6 +28,7 @@ export function RecentlyVisitedHotels() {
   };
 
   React.useEffect(() => {
+    console.log("hotels");
     handleFetchRecentlyVisitedHotels();
   }, []);
 
