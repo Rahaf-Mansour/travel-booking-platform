@@ -82,7 +82,7 @@ const FeaturedDeals = () => {
         <Slider {...settings}>
           {[1, 2, 3].map((_, index) => (
             <div key={index}>
-              <div className={`${styles.dealCard} ${styles.skeletonDealCard}`}>
+              <div className={styles.skeletonDealCard}>
                 <Skeleton variant="rectangular" width="100%" height="300px" />
                 <div className={styles.bottomContainer}>
                   <Skeleton />
@@ -95,7 +95,7 @@ const FeaturedDeals = () => {
         </Slider>
       )}
       {!isLoading && (
-        <div style={{ marginTop: "2rem" }}>
+        <div style={{ marginTop: "2rem", cursor: "pointer" }}>
           <Slider {...settings}>
             {deals.map((deal) => (
               <div key={deal.hotelId}>
