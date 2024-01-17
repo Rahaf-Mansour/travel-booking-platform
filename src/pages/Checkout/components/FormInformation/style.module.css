@@ -7,15 +7,6 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.field {
-    margin-bottom: 20px;
-}
-
-.error {
-    color: red;
-    font-size: 14px;
-}
-
 .formHeader {
     color: #333;
     font-size: 1.5rem;

@@ -1,14 +1,16 @@
-import React, { useContext } from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import TextField from "@mui/material/TextField";
+import React from "react";
+import { Formik, Field, Form } from "formik";
 import Button from "@mui/material/Button";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import styles from "./style.module.css";
-import GenericSnackbar from "../../../../components/GenericSnackbar/GenericSnackbar";
+import GenericSnackbar from "../../../../components/GenericSnackbar";
 import { useNavigate } from "react-router-dom";
 import { useFormContext } from "../../../../context/CheckoutFormContext ";
+import { useCartContext } from "../../../../context/CartContext";
+import { postNewBooking } from "../../../../services/bookingServices";
+import CustomTextField from "../CustomTextField";
+import paymentSchema from "./paymentSchema";
 
 const initialValues = {
   fullName: "",
@@ -24,28 +26,6 @@ const initialValues = {
   specialRequests: "",
 };
 
-const paymentSchema = Yup.object().shape({
-  fullName: Yup.string().required("Full Name is required"),
-  email: Yup.string()
-    .email("Invalid email address")
-    .required("Email is required"),
-  paymentMethod: Yup.string().required("Payment Method is required"),
-  cardNumber: Yup.string()
-    .required("Card Number is required", "Invalid card number")
-    .matches(/^\d{4} \d{4} \d{4} \d{4}$/, "Invalid card number"),
-  expirationDate: Yup.string()
-    .required("Expiration Date is required")
-    .matches(
-      /^([1-9]|0[1-9]|1[0-2])\/?([2-6][3-9])$/,
-      "Invalid expiration date format"
-    ),
-  cvv: Yup.string().required("CVV is required"),
-  billingAddress: Yup.object().shape({
-    state: Yup.string().required("State is required"),
-    city: Yup.string().required("City is required"),
-  }),
-});
-
 const paymentMethods = ["Visa", "MasterCard", "American Express", "Discover"];
 
 const formatCardNumber = (value) => {
@@ -57,15 +37,27 @@ const FormInformation = () => {
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
   const navigateToConfirmationPage = useNavigate();
   const { setValues } = useFormContext();
+  const { cart } = useCartContext();
 
-  const handlePayment = (values) => {
-    // Handle payment processing using a payment gateway
-    console.log("Payment submitted:", values);
-    setValues(values);
-    setOpenSnackbar(true);
-    setTimeout(() => {
+  const handlePayment = async (values) => {
+    try {
+      const bookingRequest = {
+        customerName: values.fullName,
+        paymentMethod: values.paymentMethod,
+        roomNumber: cart[0].roomNumber,
+        roomType: cart[0].roomType,
+        totalCost: cart[0].price,
+      };
+      console.log("Payment submitted:", values);
+      const response = await postNewBooking(bookingRequest);
+      console.log("Booking submitted:", bookingRequest);
+      console.log("Booking response:", response);
+      setValues(values);
+      setOpenSnackbar(true);
       navigateToConfirmationPage("/confirmation");
-    }, 2000);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -82,58 +74,12 @@ const FormInformation = () => {
         validationSchema={paymentSchema}
       >
         <Form>
-          <div className={styles.field}>
-            <Field name="fullName" label="Full Name" as={TextField} fullWidth />
-            <ErrorMessage
-              name="fullName"
-              component="div"
-              className={styles.error}
-            />
-          </div>
+          <CustomTextField name="fullName" label="Full Name" />
+          <CustomTextField name="email" label="Email" type="email" />
+          <CustomTextField name="billingAddress.state" label="State" />
+          <CustomTextField name="billingAddress.city" label="City" />
 
-          <div className={styles.field}>
-            <Field
-              name="email"
-              label="Email"
-              type="email"
-              as={TextField}
-              fullWidth
-            />
-            <ErrorMessage
-              name="email"
-              component="div"
-              className={styles.error}
-            />
-          </div>
-
-          <div className={styles.field}>
-            <Field
-              name="billingAddress.state"
-              label="State"
-              as={TextField}
-              fullWidth
-            />
-            <ErrorMessage
-              name="billingAddress.state"
-              component="div"
-              className={styles.error}
-            />
-          </div>
-          <div className={styles.field}>
-            <Field
-              name="billingAddress.city"
-              label="City"
-              as={TextField}
-              fullWidth
-            />
-            <ErrorMessage
-              name="billingAddress.city"
-              component="div"
-              className={styles.error}
-            />
-          </div>
-
-          <div className={styles.field}>
+          <div style={{ marginBottom: "20px" }}>
             <Field
               name="paymentMethod"
               label="Payment Method"
@@ -146,74 +92,38 @@ const FormInformation = () => {
                 </MenuItem>
               ))}
             </Field>
-            <ErrorMessage
-              name="paymentMethod"
-              component="div"
-              className={styles.error}
-            />
           </div>
 
-          <div className={styles.field}>
-            <Field
-              name="cardNumber"
-              label="Card Number"
-              as={TextField}
-              fullWidth
-              inputProps={{
-                maxLength: 19,
-                onChange: (e) => {
-                  const noSpacesValue = e.target.value.replace(/\s/g, "");
-                  const formattedValue = formatCardNumber(noSpacesValue);
-                  e.target.value = formattedValue;
-                },
-              }}
-            />
-            <ErrorMessage
-              name="cardNumber"
-              component="div"
-              className={styles.error}
-            />
-          </div>
+          <CustomTextField
+            name="cardNumber"
+            label="Card Number"
+            inputProps={{
+              maxLength: 19,
+              onChange: (e) => {
+                const noSpacesValue = e.target.value.replace(/\s/g, "");
+                const formattedValue = formatCardNumber(noSpacesValue);
+                e.target.value = formattedValue;
+              },
+            }}
+          />
 
-          <div className={styles.field}>
-            <Field
-              name="expirationDate"
-              label="Expiration Date MM/YY"
-              as={TextField}
-              fullWidth
-            />
-            <ErrorMessage
-              name="expirationDate"
-              component="div"
-              className={styles.error}
-            />
-          </div>
-          <div className={styles.field}>
-            <Field
-              name="cvv"
-              label="CVV"
-              as={TextField}
-              inputProps={{ maxLength: 4 }}
-              fullWidth
-            />
-            <ErrorMessage name="cvv" component="div" className={styles.error} />
-          </div>
+          <CustomTextField
+            name="expirationDate"
+            label="Expiration Date MM/YY"
+          />
 
-          <div className={styles.field}>
-            <Field
-              name="specialRequests"
-              label="Special Requests or Remarks"
-              multiline
-              rows={4}
-              as={TextField}
-              fullWidth
-            />
-            <ErrorMessage
-              name="specialRequests"
-              component="div"
-              className={styles.error}
-            />
-          </div>
+          <CustomTextField
+            name="cvv"
+            label="CVV"
+            inputProps={{ maxLength: 4 }}
+          />
+
+          <CustomTextField
+            name="specialRequests"
+            label="Special Requests or Remarks"
+            multiline
+            rows={4}
+          />
 
           <Button
             type="submit"
