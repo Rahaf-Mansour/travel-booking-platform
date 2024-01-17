@@ -1,0 +1,55 @@
+import React, { createContext, useState, useContext, useEffect } from "react";
+import PropTypes from "prop-types";
+
+export const CartContext = createContext();
+
+export const useCartContext = () => {
+  return useContext(CartContext);
+};
+
+const CartContextProvider = ({ children }) => {
+  const [cart, setCart] = useState(() => {
+    const localCart = localStorage.getItem("cart");
+    return localCart ? JSON.parse(localCart) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  const addToCart = (room) => {
+    setCart((prevCart) => {
+      const updatedCart = [...prevCart, room];
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      return updatedCart;
+    });
+  };
+
+  const removeFromCart = (roomId) => {
+    setCart((prevCart) => {
+      const updatedCart = prevCart.filter((room) => room.roomId !== roomId);
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      return updatedCart;
+    });
+  };
+
+  const getCartTotalPrice = () => {
+    const totalCost = cart.reduce((total, room) => total + room.price, 0);
+    return {
+      totalCost,
+    };
+  };
+  return (
+    <CartContext.Provider
+      value={{ cart, addToCart, removeFromCart, getCartTotalPrice }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
+};
+
+export default CartContextProvider;
+
+CartContextProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
