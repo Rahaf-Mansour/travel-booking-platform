@@ -43,10 +43,11 @@ export function TrendingDestinations() {
               <Card
                 onClick={() => handleNavigation(item.cityId)}
                 style={{
-                  cursor: "pointer",
                   height: "100%",
                   display: "flex",
                   flexDirection: "column",
+                  backgroundColor: "#ac31",
+                  border: "1px solid rgba(64, 51, 51, 0.549)",
                 }}
               >
                 <img
@@ -55,7 +56,7 @@ export function TrendingDestinations() {
                   loading="lazy"
                   style={{ width: "100%", height: "250px", objectFit: "cover" }}
                 />
-                <CardContent style={{ flexGrow: 1 }}>
+                <CardContent sx={{ paddingBottom: "16px !important" }}>
                   <Typography
                     variant="subtitle1"
                     component="div"
