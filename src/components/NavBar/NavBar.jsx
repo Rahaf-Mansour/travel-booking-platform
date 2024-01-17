@@ -1,31 +1,40 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import AppBar from "@mui/material/AppBar";
-import Drawer from "@mui/material/Drawer";
-import Toolbar from "@mui/material/Toolbar";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import HomeIcon from "@mui/icons-material/Home";
-import SearchIcon from "@mui/icons-material/Search";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import colors from "../../constants/colorConstants";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import {
+  AppBar,
+  Box,
+  Badge,
+  Button,
+  Divider,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+import {
+  ShoppingCart as ShoppingCartIcon,
+  Home as HomeIcon,
+  Search as SearchIcon,
+  Menu as MenuIcon,
+  Logout as LogoutIcon,
+} from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
+import { CartContext } from "../../context/CartContext";
+import { AuthContext } from "../../context/authContext";
+import colors from "../../constants/colorConstants";
 
 const NavBar = () => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme?.breakpoints?.down("sm"));
-
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const { cart } = useContext(CartContext);
+  const { logoutUser } = useContext(AuthContext);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -98,12 +107,18 @@ const NavBar = () => {
           </Button>
 
           <Button component={Link} to="/cart" color="inherit">
-            <ShoppingCartIcon />
+            <Badge badgeContent={cart.length} color="error">
+              <ShoppingCartIcon />
+            </Badge>
+          </Button>
+
+          <Button onClick={logoutUser} sx={{ marginLeft: 1, color: "inherit" }}>
+            <LogoutIcon />
             <Typography
               variant="body1"
               sx={{ marginLeft: 1, display: { xs: "none", md: "block" } }}
             >
-              My Cart
+              Logout
             </Typography>
           </Button>
         </div>
