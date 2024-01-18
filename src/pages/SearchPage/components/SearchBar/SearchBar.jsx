@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import styles from "./style.module.css";
 import SingleBedIcon from "@mui/icons-material/SingleBed";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
@@ -10,17 +10,14 @@ import PropTypes from "prop-types";
 import { SearchContainer } from "./styles";
 import { useFormik } from "formik";
 import dayjs from "dayjs";
-import { useNavigate } from "react-router-dom";
-import { SearchContext } from "../../../../context/searchContext";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import useSnackbar from "../../../../hooks/useSnackbar";
 import GenericSnackbar from "../../../../components/GenericSnackbar";
-import { useSearchParams } from "react-router-dom";
 
 const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
   const [isOptionsOpened, setIsOptionsOpened] = useState(false);
   const [isDateOpened, setIsDateOpened] = useState(false);
   const { snackbar, showErrorSnackbar, handleCloseSnackbar } = useSnackbar();
-  const { updateSearchParams } = useContext(SearchContext);
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
@@ -40,7 +37,6 @@ const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
 
     const newCheckInDate =
       formattedCheckInDate < currentDate ? currentDate : formattedCheckInDate;
-
     const newCheckOutDate =
       formattedCheckOutDate <= currentDate
         ? dayjs(currentDate).add(1, "day").format("YYYY-MM-DD")
@@ -56,13 +52,6 @@ const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
     formik.setFieldValue(option, newValue);
   };
 
-  const handleSearch = (searchData) => {
-    updateSearchParams({
-      checkInDate: searchData.checkInDate,
-      checkOutDate: searchData.checkOutDate,
-    });
-  };
-
   const formik = useFormik({
     initialValues: {
       city: searchParams.get("city") || "",
@@ -73,12 +62,14 @@ const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
         dayjs().add(1, "day").format("YYYY-MM-DD"),
       adults: parseInt(searchParams.get("adults"), 10) || 2,
       children: parseInt(searchParams.get("children"), 10) || 0,
-      room: parseInt(searchParams.get("room"), 10) || 1,
+      numberOfRooms: parseInt(searchParams.get("numberOfRooms"), 10) || 1,
     },
     onSubmit: (values) => {
-      const newSearchParams = new URLSearchParams(values);
+      const newSearchParams = new URLSearchParams({
+        ...values,
+        numberOfRooms: values.numberOfRooms,
+      });
       setSearchParams(newSearchParams);
-      handleSearch(values);
       navigate("/search?" + newSearchParams.toString());
     },
   });
@@ -93,7 +84,7 @@ const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
               id="city"
               name="city"
               onChange={formik.handleChange}
-              value={formik.values?.city}
+              value={formik.values.city}
               type="text"
               placeholder="Where are you going?"
               className={styles.searchInput}
@@ -103,8 +94,8 @@ const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
           <SearchItem>
             <DateCheck
               dateValues={{
-                checkInDate: formik.values?.checkInDate,
-                checkOutDate: formik.values?.checkOutDate,
+                checkInDate: formik.values.checkInDate,
+                checkOutDate: formik.values.checkOutDate,
               }}
               handleSetDate={handleSetDate}
               isDateOpened={isDateOpened}
@@ -119,31 +110,29 @@ const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
               onClick={() => setIsOptionsOpened(!isOptionsOpened)}
             >
               <PersonOutlineIcon className={styles.searchIcon} />
-              <span>
-                {`${formik.values?.adults} adult . ${formik.values?.children} children . ${formik.values?.room} room`}
-              </span>
+              <span>{`${formik.values.adults} adult . ${formik.values.children} children . ${formik.values.numberOfRooms} room`}</span>
             </CustomButton>
             {isOptionsOpened && (
               <div className={styles.options}>
                 <OptionItem
                   label="Adults"
-                  count={formik.values?.adults}
+                  count={formik.values.adults}
                   min={1}
                   onIncrement={() => adjustValue("adults", true)}
                   onDecrement={() => adjustValue("adults", false)}
                 />
                 <OptionItem
                   label="Children"
-                  count={formik.values?.children}
+                  count={formik.values.children}
                   onIncrement={() => adjustValue("children", true)}
                   onDecrement={() => adjustValue("children", false)}
                 />
                 <OptionItem
                   label="Rooms"
-                  count={formik.values?.room}
+                  count={formik.values.numberOfRooms}
                   min={1}
-                  onIncrement={() => adjustValue("room", true)}
-                  onDecrement={() => adjustValue("room", false)}
+                  onIncrement={() => adjustValue("numberOfRooms", true)}
+                  onDecrement={() => adjustValue("numberOfRooms", false)}
                 />
               </div>
             )}
