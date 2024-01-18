@@ -15,16 +15,13 @@ const Confirmation = () => {
   return (
     <>
       <NavBar />
-
       <div className={styles.confirmationContainer} ref={componentRef}>
         <div className={styles.confirmationHeader}>
           <h1>Here is your confirmation details. Hope you enjoy your stay! </h1>
           <CelebrationIcon />
         </div>
-
         <ConfirmationTable />
       </div>
-
       <div style={{ display: "flex", justifyContent: "center" }}>
         <CustomButton className={styles.printButton} onClick={handlePrint}>
           Print Confirmation
