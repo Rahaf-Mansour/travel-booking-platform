@@ -1,5 +1,5 @@
 .formContainer {
-    max-width: 600px;
+    max-width: 720px;
     margin: auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -46,5 +46,4 @@
     .field {
         margin-bottom: 10px;
     }
-
 }
