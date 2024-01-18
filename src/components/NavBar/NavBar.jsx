@@ -64,7 +64,7 @@ const NavBar = () => {
         <Typography
           variant="h6"
           component={Link}
-          to="/"
+          to="/home"
           color="inherit"
           sx={{
             textDecoration: "none",
