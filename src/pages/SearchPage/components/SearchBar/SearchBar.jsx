@@ -14,13 +14,15 @@ import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../../../../context/searchContext";
 import useSnackbar from "../../../../hooks/useSnackbar";
 import GenericSnackbar from "../../../../components/GenericSnackbar";
+import { useSearchParams } from "react-router-dom";
 
 const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
   const [isOptionsOpened, setIsOptionsOpened] = useState(false);
   const [isDateOpened, setIsDateOpened] = useState(false);
   const { snackbar, showErrorSnackbar, handleCloseSnackbar } = useSnackbar();
-  const { callSearchAPI, searchProps } = useContext(SearchContext);
-  const navigateToSearchPage = useNavigate();
+  const { updateSearchParams } = useContext(SearchContext);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const handleSetDate = (newDate) => {
     const currentDate = dayjs().format("YYYY-MM-DD");
@@ -46,25 +48,38 @@ const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
 
     formik.setFieldValue("checkInDate", newCheckInDate);
     formik.setFieldValue("checkOutDate", newCheckOutDate);
-
-    console.log("Updated dates:", newCheckInDate, newCheckOutDate);
   };
 
-  const handleIncrement = (option) => {
+  const adjustValue = (option, increment) => {
     const oldValue = formik.values[option];
-    formik.setFieldValue(option, oldValue + 1);
+    const newValue = increment ? oldValue + 1 : oldValue - 1;
+    formik.setFieldValue(option, newValue);
   };
 
-  const handleDecrement = (option) => {
-    const oldValue = formik.values[option];
-    formik.setFieldValue(option, oldValue - 1);
+  const handleSearch = (searchData) => {
+    updateSearchParams({
+      checkInDate: searchData.checkInDate,
+      checkOutDate: searchData.checkOutDate,
+    });
   };
 
   const formik = useFormik({
-    initialValues: searchProps,
-    onSubmit: async (values) => {
-      await callSearchAPI(values);
-      navigateToSearchPage("/search");
+    initialValues: {
+      city: searchParams.get("city") || "",
+      checkInDate:
+        searchParams.get("checkInDate") || dayjs().format("YYYY-MM-DD"),
+      checkOutDate:
+        searchParams.get("checkOutDate") ||
+        dayjs().add(1, "day").format("YYYY-MM-DD"),
+      adults: parseInt(searchParams.get("adults"), 10) || 2,
+      children: parseInt(searchParams.get("children"), 10) || 0,
+      room: parseInt(searchParams.get("room"), 10) || 1,
+    },
+    onSubmit: (values) => {
+      const newSearchParams = new URLSearchParams(values);
+      setSearchParams(newSearchParams);
+      handleSearch(values);
+      navigate("/search?" + newSearchParams.toString());
     },
   });
 
@@ -114,21 +129,21 @@ const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
                   label="Adults"
                   count={formik.values?.adults}
                   min={1}
-                  onIncrement={() => handleIncrement("adults")}
-                  onDecrement={() => handleDecrement("adults")}
+                  onIncrement={() => adjustValue("adults", true)}
+                  onDecrement={() => adjustValue("adults", false)}
                 />
                 <OptionItem
                   label="Children"
                   count={formik.values?.children}
-                  onIncrement={() => handleIncrement("children")}
-                  onDecrement={() => handleDecrement("children")}
+                  onIncrement={() => adjustValue("children", true)}
+                  onDecrement={() => adjustValue("children", false)}
                 />
                 <OptionItem
                   label="Rooms"
                   count={formik.values?.room}
                   min={1}
-                  onIncrement={() => handleIncrement("room")}
-                  onDecrement={() => handleDecrement("room")}
+                  onIncrement={() => adjustValue("room", true)}
+                  onDecrement={() => adjustValue("room", false)}
                 />
               </div>
             )}

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import {
   Card,
@@ -9,8 +9,6 @@ import {
   Chip,
 } from "@mui/material";
 import StarRating from "../../../../components/StarRating";
-// import SearchResultItemSkeleton from "../SearchResultItemSkeleton/SearchResultItemSkeleton";
-// import { LoaderContext } from "../../../../context/LoaderContext";
 
 const SearchResultItem = ({ hotel }) => {
   const {
@@ -23,11 +21,8 @@ const SearchResultItem = ({ hotel }) => {
     amenities,
   } = hotel;
 
-  // const { isLoading } = useContext(LoaderContext);
-
   return (
     <div>
-      {/* <SearchResultItemSkeleton /> */}
       <Card
         elevation={3}
         sx={{
@@ -113,7 +108,6 @@ const SearchResultItem = ({ hotel }) => {
           </div>
         </CardContent>
       </Card>
-      {/* )} */}
     </div>
   );
 };

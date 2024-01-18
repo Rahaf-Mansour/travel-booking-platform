@@ -9,7 +9,7 @@ const SearchResultItemSkeleton = () => {
         display: "flex",
         flexDirection: {
           xs: "column",
-          // md: "row"
+          md: "row"
         },
         marginBottom: 4,
         borderRadius: 5,
