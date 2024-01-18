@@ -1,14 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import HotelDetailsInfo from "../HotelDetailsInfo/HotelDetailsInfo";
+import HotelDetailsInfo from "../HotelDetailsInfo";
 import HotelReviews from "../HotelReviews";
 import HotelAmenities from "../HotelAmenities";
 
 const HotelDetails = ({ hotelDetails, hotelGuestReviews }) => {
-  if (!hotelDetails) {
+  if (!hotelDetails || !hotelGuestReviews) {
     return <p>Loading...</p>;
   }
-  if (!hotelGuestReviews || hotelGuestReviews.length === 0) {
+
+  if (hotelGuestReviews.length === 0) {
     return <p>No reviews available.</p>;
   }
 
