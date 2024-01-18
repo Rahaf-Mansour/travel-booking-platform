@@ -54,7 +54,9 @@ const FormInformation = () => {
       console.log("Booking response:", response);
       setValues(values);
       setOpenSnackbar(true);
-      navigateToConfirmationPage("/confirmation");
+      setTimeout(() => {
+        navigateToConfirmationPage("/confirmation");
+      }, 2000);
     } catch (error) {
       console.log(error);
     }
