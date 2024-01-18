@@ -18,6 +18,7 @@ const initialValues = {
   starRating: 3,
   amenities: [],
   roomType: "",
+  sort: "none",
 };
 
 const SearchFilters = () => {
@@ -107,6 +108,25 @@ const SearchFilters = () => {
                 onChange={handleChange("roomType")}
               >
                 {["Luxury", "Budget", "Boutique"].map((type) => (
+                  <FormControlLabel
+                    key={type}
+                    value={type}
+                    control={<Radio />}
+                    label={type}
+                  />
+                ))}
+              </RadioGroup>
+            </FormControl>
+
+            <FormControl component="fieldset" sx={{ display: "block", mb: 2 }}>
+              <FormLabel component="legend">Sort By</FormLabel>
+              <RadioGroup
+                aria-label="sort-by"
+                name="sort-by"
+                value={values.sort}
+                onChange={handleChange("sort")}
+              >
+                {["Price", "Star Rating"].map((type) => (
                   <FormControlLabel
                     key={type}
                     value={type}
