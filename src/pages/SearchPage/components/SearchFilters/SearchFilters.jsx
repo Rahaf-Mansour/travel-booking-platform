@@ -12,18 +12,26 @@ import {
   Button,
 } from "@mui/material";
 import styles from "./style.module.css";
+import { useSearchParams } from "react-router-dom";
 
 const initialValues = {
   priceRange: [50, 180],
   starRating: 3,
   amenities: [],
   roomType: "",
-  sort: "none",
+  sort: "Price",
 };
 
 const SearchFilters = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const handleFilter = (values) => {
-    console.log("Filter clicked with values:", values);
+    const newParams = {
+      ...Object.fromEntries(searchParams.entries()),
+      starRate: values.starRating,
+      sort: values.sort,
+    };
+    setSearchParams(newParams);
   };
 
   return (
@@ -126,7 +134,7 @@ const SearchFilters = () => {
                 value={values.sort}
                 onChange={handleChange("sort")}
               >
-                {["Price", "Star Rating"].map((type) => (
+                {["Price", "Rating"].map((type) => (
                   <FormControlLabel
                     key={type}
                     value={type}
