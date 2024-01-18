@@ -33,6 +33,7 @@ const CartItems = () => {
           alignItems: "center",
           justifyContent: "center",
           gap: 1,
+          marginBottom: 2,
         }}
       >
         Your Cart <ShopCartIcon />
@@ -66,6 +67,7 @@ const CartItems = () => {
                       {item.roomType}
                     </Typography>
                   </Box>
+
                   <Box>
                     <Typography variant="body1" color="text.secondary">
                       Room Number: {item.roomNumber}
