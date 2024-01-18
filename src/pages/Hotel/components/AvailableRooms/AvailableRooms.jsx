@@ -5,16 +5,21 @@ import CustomButton from "../../../../components/CustomButton";
 import PersonIcon from "@mui/icons-material/Person";
 import ChildFriendlyIcon from "@mui/icons-material/ChildFriendly";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { renderAmenityIcon } from "./helpers/helpers";
+import { renderAmenityIcon } from "../../../../helpers/helpers";
+import { useCartContext } from "../../../../context/CartContext";
 
-const AvailableRooms = ({ hotelAvailableRooms }) => {
-  if (hotelAvailableRooms.length === 0) {
-    return <p>No rooms available.</p>;
+const AvailableRooms = ({ hotelAvailableRooms, isThereDates }) => {
+  const { addToCart, cart } = useCartContext();
+
+  if (!hotelAvailableRooms) {
+    return <p>Loading...</p>;
   }
 
-  const handleAddToCart = () => {
-    console.log("Added to cart");
+  const handleAddToCart = (room) => {
+    addToCart(room);
+    console.log(`Room ${room.roomId} Added to cart`);
   };
+  console.log("cart", cart);
 
   const availableRooms = hotelAvailableRooms.filter(
     (room) => room.availability
@@ -23,54 +28,57 @@ const AvailableRooms = ({ hotelAvailableRooms }) => {
   return (
     <>
       <h3 className={styles.header}>Available Rooms</h3>
-
-      <div className={styles.availableRoomsContainer}>
-        {availableRooms.map((room, index) => (
-          <div key={index} className={styles.roomCard}>
-            <img
-              src={room.roomPhotoUrl}
-              alt={`Photo of ${room.roomType} room`}
-              className={styles.roomImage}
-            />
-            <div className={styles.roomHeader}>
-              <p className={styles.roomType}>{room.roomType} Room</p>
-              <p className={styles.availabilityAvailable}>Available</p>
-            </div>
-
-            <p className={styles.price}>Price: ${room.price}</p>
-            <div className={styles.capacityInfo}>
-              <div className={styles.iconContainer}>
-                <PersonIcon fontSize="small" />
+      {isThereDates ? (
+        <div className={styles.availableRoomsContainer}>
+          {availableRooms.map((room, index) => (
+            <div key={index} className={styles.roomCard}>
+              <img
+                src={room.roomPhotoUrl}
+                alt={`Photo of ${room.roomType} room`}
+                className={styles.roomImage}
+              />
+              <div className={styles.roomHeader}>
+                <p className={styles.roomType}>{room.roomType} Room</p>
+                <p className={styles.availabilityAvailable}>Available</p>
               </div>
-              <p>Adults: {room.capacityOfAdults}</p>
-            </div>
-            <div className={styles.capacityInfo}>
-              <div className={styles.iconContainer}>
-                <ChildFriendlyIcon fontSize="small" />
-              </div>
-              <p>Children: {room.capacityOfChildren}</p>
-            </div>
-            <div className={styles.amenities}>
-              <ul>
-                {room.roomAmenities.map((amenity, amenityIndex) => (
-                  <li key={amenityIndex}>
-                    {renderAmenityIcon(amenity.name)} {amenity.name}:{" "}
-                    {amenity.description}
-                  </li>
-                ))}
-              </ul>
-            </div>
 
-            <CustomButton
-              className={styles.addCartButton}
-              onClick={handleAddToCart}
-            >
-              Add to Cart
-              <AddShoppingCartIcon sx={{ fontSize: "1.3rem" }} />
-            </CustomButton>
-          </div>
-        ))}
-      </div>
+              <p className={styles.price}>Price: ${room.price}</p>
+              <div className={styles.capacityInfo}>
+                <div className={styles.iconContainer}>
+                  <PersonIcon fontSize="small" />
+                </div>
+                <p>Adults: {room.capacityOfAdults}</p>
+              </div>
+              <div className={styles.capacityInfo}>
+                <div className={styles.iconContainer}>
+                  <ChildFriendlyIcon fontSize="small" />
+                </div>
+                <p>Children: {room.capacityOfChildren}</p>
+              </div>
+              <div className={styles.amenities}>
+                <ul>
+                  {room.roomAmenities.map((amenity, amenityIndex) => (
+                    <li key={amenityIndex}>
+                      {renderAmenityIcon(amenity.name)} {amenity.name}:{" "}
+                      {amenity.description}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <CustomButton
+                className={styles.addCartButton}
+                onClick={() => handleAddToCart(room)}
+              >
+                Add to Cart
+                <AddShoppingCartIcon sx={{ fontSize: "1.3rem" }} />
+              </CustomButton>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p>Please select dates to see available rooms.</p>
+      )}
     </>
   );
 };
@@ -94,4 +102,5 @@ AvailableRooms.propTypes = {
       ).isRequired,
     })
   ),
+  isThereDates: PropTypes.bool,
 };
