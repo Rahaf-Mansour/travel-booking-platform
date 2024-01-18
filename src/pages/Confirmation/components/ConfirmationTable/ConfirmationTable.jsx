@@ -13,8 +13,8 @@ import styles from "./style.module.css";
 import { useCartContext } from "../../../../context/CartContext";
 
 const ConfirmationTable = () => {
-  const { searchProps } = useContext(SearchContext);
-  const { checkInDate, checkOutDate } = searchProps;
+  const { searchParams } = useContext(SearchContext);
+  const { checkInDate, checkOutDate } = searchParams;
   const { formValues } = useContext(FormContext);
   const { cart } = useCartContext();
 
@@ -26,11 +26,11 @@ const ConfirmationTable = () => {
     { label: "Payment Method", value: formValues.paymentMethod },
     {
       label: "Check-in date",
-      value: new Date(checkInDate).toLocaleDateString(),
+      value: checkInDate,
     },
     {
       label: "Check-out date",
-      value: new Date(checkOutDate).toLocaleDateString(),
+      value: checkOutDate,
     },
     { label: "Room Type", value: cart[0].roomType },
     { label: "Room Number", value: cart[0].roomNumber },
