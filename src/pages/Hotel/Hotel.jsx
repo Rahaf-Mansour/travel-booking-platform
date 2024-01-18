@@ -7,6 +7,7 @@ import AvailableRooms from "./components/AvailableRooms";
 import VisualGallery from "./components/VisualGallery";
 import { useParams } from "react-router-dom";
 import { SearchContext } from "../../context/searchContext";
+
 import {
   getHotelDetails,
   getHotelPicturesGallery,
@@ -20,9 +21,9 @@ const Hotel = () => {
   const [hotelGuestReviews, setHotelGuestReviews] = useState([]);
   const [hotelGallery, setHotelGallery] = useState([]);
   const [hotelAvailableRooms, setHotelAvailableRooms] = useState([]);
-  const { searchProps } = useContext(SearchContext);
-
-  const { checkInDate, checkOutDate } = searchProps;
+  const { searchParams } = useContext(SearchContext);
+  const { checkInDate, checkOutDate } = searchParams;
+  const isThereDates = checkInDate !== null && checkOutDate !== null;
 
   useEffect(() => {
     getHotelDetails(hotelId)
@@ -35,7 +36,6 @@ const Hotel = () => {
 
     getHotelGuestReviews(hotelId)
       .then((reviews) => {
-        console.log(reviews);
         setHotelGuestReviews(reviews);
       })
       .catch((error) => {
@@ -50,13 +50,15 @@ const Hotel = () => {
         console.error(error.message);
       });
 
-    getHotelAvailableRooms(hotelId, checkInDate, checkOutDate)
-      .then((rooms) => {
-        setHotelAvailableRooms(rooms);
-      })
-      .catch((error) => {
-        console.error(error.message);
-      });
+    if (isThereDates) {
+      getHotelAvailableRooms(hotelId, checkInDate, checkOutDate)
+        .then((rooms) => {
+          setHotelAvailableRooms(rooms);
+        })
+        .catch((error) => {
+          console.error(error.message);
+        });
+    }
   }, [hotelId, checkInDate, checkOutDate]);
 
   return (
@@ -80,7 +82,10 @@ const Hotel = () => {
 
         <div className={styles.galleryAndRoomsContainer}>
           <VisualGallery hotelGallery={hotelGallery} />
-          <AvailableRooms hotelAvailableRooms={hotelAvailableRooms} />
+          <AvailableRooms
+            hotelAvailableRooms={hotelAvailableRooms}
+            isThereDates={isThereDates}
+          />
         </div>
       </div>
     </>
