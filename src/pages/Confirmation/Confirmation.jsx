@@ -1,16 +1,25 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import NavBar from "../../components/NavBar";
 import { useReactToPrint } from "react-to-print";
 import CustomButton from "../../components/CustomButton";
 import styles from "./style.module.css";
 import ConfirmationTable from "./components/ConfirmationTable";
 import CelebrationIcon from "@mui/icons-material/Celebration";
+import { useCartContext } from "../../context/CartContext";
 
 const Confirmation = () => {
+  const { clearCart } = useCartContext();
   const componentRef = useRef();
+
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
+
+  useEffect(() => {
+    return () => {
+      clearCart();
+    };
+  }, [clearCart]);
 
   return (
     <>
