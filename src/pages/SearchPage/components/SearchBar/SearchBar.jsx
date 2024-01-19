@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from "./style.module.css";
 import SingleBedIcon from "@mui/icons-material/SingleBed";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
@@ -13,6 +13,7 @@ import dayjs from "dayjs";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import useSnackbar from "../../../../hooks/useSnackbar";
 import GenericSnackbar from "../../../../components/GenericSnackbar";
+import { SearchContext } from "../../../../context/searchContext";
 
 const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
   const [isOptionsOpened, setIsOptionsOpened] = useState(false);
@@ -20,6 +21,7 @@ const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
   const { snackbar, showErrorSnackbar, handleCloseSnackbar } = useSnackbar();
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
+  const { updateSearchParams } = useContext(SearchContext);
 
   const handleSetDate = (newDate) => {
     const currentDate = dayjs().format("YYYY-MM-DD");
@@ -65,11 +67,12 @@ const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
       numberOfRooms: parseInt(searchParams.get("numberOfRooms"), 10) || 1,
     },
     onSubmit: (values) => {
-      const newSearchParams = new URLSearchParams({
-        ...values,
-        numberOfRooms: values.numberOfRooms,
-      });
+      const newSearchParams = new URLSearchParams(values);
       setSearchParams(newSearchParams);
+      updateSearchParams({
+        checkInDate: values.checkInDate,
+        checkOutDate: values.checkOutDate,
+      });
       navigate("/search?" + newSearchParams.toString());
     },
   });
