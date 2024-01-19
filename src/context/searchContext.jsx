@@ -10,7 +10,7 @@ export const SearchContextProvider = ({ children }) => {
   });
 
   const updateSearchParams = (newParams) => {
-    setSearchParams({ ...searchParams, ...newParams });
+    setSearchParams((prevState) => ({ ...prevState, ...newParams }));
   };
 
   return (
