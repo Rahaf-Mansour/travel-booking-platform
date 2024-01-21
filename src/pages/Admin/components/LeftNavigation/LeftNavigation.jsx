@@ -8,26 +8,31 @@ import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import CityIcon from "@mui/icons-material/LocationCity";
+import HotelIcon from "@mui/icons-material/Hotel";
+import RoomIcon from "@mui/icons-material/MeetingRoom";
+import { Logout as LogoutIcon } from "@mui/icons-material";
+import { AuthContext } from "../../../../context/authContext";
+import { Button } from "@mui/material";
 
 const LeftNavigation = () => {
-  const navigate = useNavigate();
-
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const { logoutUser } = React.useContext(AuthContext);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  const adminLinks = ["Cities", "Hotels", "Rooms"];
-
-  const handleNavigate = (item) => {
-    navigate(`/adminDashboard/${item.toLowerCase()}`);
-  };
-
   const drawerWidth = 240;
+
+  const adminLinks = [
+    { name: "Cities", icon: <CityIcon />, path: "/adminDashboard/cities" },
+    { name: "Hotels", icon: <HotelIcon />, path: "/adminDashboard/hotels" },
+    { name: "Rooms", icon: <RoomIcon />, path: "/adminDashboard/rooms" },
+  ];
 
   const renderDrawer = () => (
     <Drawer
@@ -45,20 +50,31 @@ const LeftNavigation = () => {
     >
       <Box>
         <Typography variant="h6" sx={{ my: 2, textAlign: "center" }}>
-          Manage
+          Admin Page
         </Typography>
         <Divider />
         <List>
           {adminLinks.map((item) => (
-            <ListItem key={item} disablePadding>
-              <ListItemButton
-                sx={{ textAlign: "center" }}
-                onClick={() => handleNavigate(item)}
-              >
-                <ListItemText primary={item} />
-              </ListItemButton>
-            </ListItem>
+            <NavLink
+              key={item.name}
+              to={item.path}
+              style={{ color: "inherit", textDecoration: "none" }}
+            >
+              <ListItem button>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={`Manage ${item.name}`} />
+              </ListItem>
+            </NavLink>
           ))}
+          <Button
+            onClick={logoutUser}
+            sx={{ color: "inherit", marginLeft: 1.5 }}
+          >
+            <LogoutIcon />
+            <Typography variant="ListItemText" sx={{ marginLeft: 4 }}>
+              Logout
+            </Typography>
+          </Button>
         </List>
       </Box>
     </Drawer>
