@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Paper,
   Table,
@@ -11,16 +11,22 @@ import {
   IconButton,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import UpdateEntityForm from "../UpdateEntityForm";
 import PropTypes from "prop-types";
 
-const DetailedGrid = ({ allCities, onRowClick, onUpdate, onDelete }) => {
-  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
-  const [selectedEntity, setSelectedEntity] = React.useState(null);
+const DetailedGrid = ({
+  data,
+  columns,
+  onRowClick,
+  onUpdate,
+  onDelete,
+  EntityFormComponent,
+}) => {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [selectedEntity, setSelectedEntity] = useState(null);
 
   const handleRowClick = (entity) => {
     setSelectedEntity(entity);
-    onRowClick(entity);
+    onRowClick && onRowClick(entity);
     setIsDrawerOpen(true);
   };
 
@@ -33,10 +39,10 @@ const DetailedGrid = ({ allCities, onRowClick, onUpdate, onDelete }) => {
     closeDrawer();
   };
 
-  const handleDelete = (entity) => {
+  const handleDelete = (entity, event) => {
+    event.stopPropagation();
     onDelete(entity);
   };
-  const rows = allCities || [];
 
   return (
     <>
@@ -45,28 +51,30 @@ const DetailedGrid = ({ allCities, onRowClick, onUpdate, onDelete }) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell>Description</TableCell>
+                {columns.map((column) => (
+                  <TableCell key={column.field}>{column.headerName}</TableCell>
+                ))}
                 <TableCell>Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {data.map((row) => (
                 <TableRow
                   key={row.id}
                   hover
                   onClick={() => handleRowClick(row)}
                 >
-                  <TableCell>{row.name}</TableCell>
-                  <TableCell>{row.description}</TableCell>
+                  {columns.map((column) => (
+                    <TableCell key={column.field}>
+                      {row[column.field]}
+                    </TableCell>
+                  ))}
                   <TableCell>
                     <IconButton
                       color="primary"
-                      onClick={(e) => {
-                        e.stopPropagation(); // Prevent row click when the button is clicked
-                        handleDelete(row);
-                      }}
+                      onClick={(e) => handleDelete(row, e)}
                     >
+                      {columns.renderAction ? columns.renderAction(row) : null}
                       <DeleteIcon />
                     </IconButton>
                   </TableCell>
@@ -76,27 +84,31 @@ const DetailedGrid = ({ allCities, onRowClick, onUpdate, onDelete }) => {
           </Table>
         </TableContainer>
       </Container>
-      <UpdateEntityForm
-        open={isDrawerOpen}
-        onClose={closeDrawer}
-        entityData={selectedEntity}
-        onUpdate={handleUpdate}
-      />
+      {EntityFormComponent && (
+        <EntityFormComponent
+          open={isDrawerOpen}
+          onClose={closeDrawer}
+          entityData={selectedEntity}
+          onUpdate={handleUpdate}
+        />
+      )}
     </>
   );
 };
 
-DetailedGrid.propTypes = {
-  allCities: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string,
-      description: PropTypes.string,
-    })
-  ),
-  onRowClick: PropTypes.func,
-  onUpdate: PropTypes.func,
-  onDelete: PropTypes.func,
-};
-
 export default DetailedGrid;
+
+DetailedGrid.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  columns: PropTypes.arrayOf(
+    PropTypes.shape({
+      field: PropTypes.string.isRequired,
+      headerName: PropTypes.string.isRequired,
+      renderAction: PropTypes.func,
+    })
+  ).isRequired,
+  onRowClick: PropTypes.func,
+  onUpdate: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  EntityFormComponent: PropTypes.elementType,
+};
