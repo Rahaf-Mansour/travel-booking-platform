@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Dialog, DialogTitle } from "@mui/material";
 import { Formik } from "formik";
-import * as Yup from "yup";
 import PropTypes from "prop-types";
 import { postNewCity } from "../../../../../../services/manageCities";
 import CreateEntityDialog from "../../../../components/CreateEntityDialog";
 import CreateButton from "../../../../components/CreateButton/CreateButton";
+import { fields, initialValues, validationSchema } from "../../cityConfig";
 
 const CreateCityDialog = ({ addCity, snackbarProps }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -17,21 +17,6 @@ const CreateCityDialog = ({ addCity, snackbarProps }) => {
   const handleDialogClose = () => {
     setIsDialogOpen(false);
   };
-
-  const fields = [
-    { name: "name", label: "Name", type: "text" },
-    { name: "description", label: "Description", type: "text" },
-  ];
-
-  const initialValues = fields.reduce((values, field) => {
-    values[field.name] = "";
-    return values;
-  }, {});
-
-  const validationSchema = Yup.object().shape({
-    name: Yup.string().required("Name is required"),
-    description: Yup.string().required("Description is required"),
-  });
 
   const handleCreateEntity = async (values, actions) => {
     try {
