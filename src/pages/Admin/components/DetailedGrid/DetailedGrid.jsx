@@ -74,7 +74,6 @@ const DetailedGrid = ({
                       color="primary"
                       onClick={(e) => handleDelete(row, e)}
                     >
-                      {columns.renderAction ? columns.renderAction(row) : null}
                       <DeleteIcon />
                     </IconButton>
                   </TableCell>
