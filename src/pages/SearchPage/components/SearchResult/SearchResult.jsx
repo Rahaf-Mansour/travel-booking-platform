@@ -4,9 +4,9 @@ import SearchResultItem from "../SearchResultItem/SearchResultItem";
 import { Link } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import { searchAPI } from "../../../../services/searchService";
-import { CircularProgress } from "@mui/material";
 import GenericSnackbar from "../../../../components/GenericSnackbar";
 import useSnackbar from "../../../../hooks/useSnackbar";
+import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
 
 const SearchResult = () => {
   const [searchParams] = useSearchParams();
@@ -39,9 +39,7 @@ const SearchResult = () => {
   return (
     <div className={styles.resultList}>
       {isLoading ? (
-        <div className={styles.centered}>
-          <CircularProgress />
-        </div>
+        <CircularProgressIndicator />
       ) : (
         hotelData.map((hotel) => (
           <Link
