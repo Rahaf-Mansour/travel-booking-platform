@@ -11,6 +11,21 @@ export const getAllCities = async () => {
   }
 };
 
+export const searchCities = async (values) => {
+  try {
+    const response = await axiosInstance.get(`/cities`, {
+      params: {
+        ...values,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      error.response?.data.message || "Error: Can't get the cities"
+    );
+  }
+};
+
 export const postNewCity = async (cityName, cityDescription) => {
   try {
     const response = await axiosInstance.post(`/cities`, {
