@@ -10,6 +10,8 @@ import {
   Container,
   IconButton,
 } from "@mui/material";
+import TablePagination from "@mui/material/TablePagination";
+
 import DeleteIcon from "@mui/icons-material/Delete";
 import PropTypes from "prop-types";
 
@@ -20,6 +22,11 @@ const DetailedGrid = ({
   onUpdate,
   onDelete,
   EntityFormComponent,
+  page,
+  setPage,
+  rowsPerPage,
+  setRowsPerPage,
+  totalCount,
 }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedEntity, setSelectedEntity] = useState(null);
@@ -44,6 +51,22 @@ const DetailedGrid = ({
     onDelete(entity);
   };
 
+  const handleChangePage = (event, newPage) => {
+    const maxPageIndex = Math.ceil(totalCount / rowsPerPage) - 1;
+    if (newPage < 0) {
+      setPage(0);
+    } else if (newPage > maxPageIndex) {
+      setPage(maxPageIndex);
+    } else {
+      setPage(newPage);
+    }
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0); // Reset to first page when rows per page changes
+  };
+
   return (
     <>
       <Container maxWidth="md" sx={{ textAlign: "center" }}>
@@ -58,30 +81,43 @@ const DetailedGrid = ({
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.map((row) => (
-                <TableRow
-                  key={row.id}
-                  hover
-                  onClick={() => handleRowClick(row)}
-                >
-                  {columns.map((column) => (
-                    <TableCell key={column.field}>
-                      {row[column.field]}
+              {data
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row) => (
+                  <TableRow
+                    key={row.id}
+                    hover
+                    onClick={() => handleRowClick(row)}
+                  >
+                    {columns.map((column) => (
+                      <TableCell key={`${row.id}-${column.field}`}>
+                        {row[column.field]}
+                      </TableCell>
+                    ))}
+                    <TableCell>
+                      <IconButton
+                        color="primary"
+                        onClick={(e) => handleDelete(row, e)}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
                     </TableCell>
-                  ))}
-                  <TableCell>
-                    <IconButton
-                      color="primary"
-                      onClick={(e) => handleDelete(row, e)}
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
-              ))}
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </TableContainer>
+        {totalCount > 0 && (
+          <TablePagination
+            component="div"
+            count={totalCount}
+            page={page}
+            onPageChange={handleChangePage}
+            rowsPerPage={rowsPerPage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+            // disabled={page === 0}
+          />
+        )}
       </Container>
       {EntityFormComponent && (
         <EntityFormComponent
@@ -110,4 +146,9 @@ DetailedGrid.propTypes = {
   onUpdate: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
   EntityFormComponent: PropTypes.elementType,
+  page: PropTypes.number.isRequired,
+  setPage: PropTypes.func.isRequired,
+  rowsPerPage: PropTypes.number.isRequired,
+  setRowsPerPage: PropTypes.func.isRequired,
+  totalCount: PropTypes.number.isRequired,
 };
