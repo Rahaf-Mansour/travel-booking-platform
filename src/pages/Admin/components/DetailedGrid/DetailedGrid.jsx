@@ -11,7 +11,6 @@ import {
   IconButton,
 } from "@mui/material";
 import TablePagination from "@mui/material/TablePagination";
-
 import DeleteIcon from "@mui/icons-material/Delete";
 import PropTypes from "prop-types";
 
@@ -107,6 +106,7 @@ const DetailedGrid = ({
             </TableBody>
           </Table>
         </TableContainer>
+        
         {totalCount > 0 && (
           <TablePagination
             component="div"
