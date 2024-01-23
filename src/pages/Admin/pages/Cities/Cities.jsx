@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import LeftNavigation from "../../components/LeftNavigation";
-import SearchBar from "./components/SearchBar";
+import SearchBar from "../../components/SearchBar";
 import { CssBaseline, Box, Container } from "@mui/material";
 import UpdateCityForm from "./components/UpdateCityForm";
 import GenericSnackbar from "../../../../components/GenericSnackbar";
@@ -8,10 +8,14 @@ import useSnackbar from "../../../../hooks/useSnackbar";
 import { deleteCity } from "../../../../services/manageCities";
 import CreateCityDialog from "./components/CreateCityDialog";
 import DetailedGrid from "../../components/DetailedGrid";
+import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
 
 const Cities = () => {
   const [, setSelectedEntity] = useState(null);
   const [cities, setCities] = useState([]);
+  const [page, setPage] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const {
     snackbar,
     handleCloseSnackbar,
@@ -24,7 +28,7 @@ const Cities = () => {
   };
 
   const handleAddCity = (newCity) => {
-    setCities((prevCities) => [...prevCities, newCity]);
+    setCities((prevCities) => [newCity, ...prevCities]);
   };
 
   const handleUpdateCities = (updatedCity) => {
@@ -48,6 +52,41 @@ const Cities = () => {
     }
   };
 
+  const fetchCities = async (
+    searchTerm = "",
+    searchType = "name",
+    page = 0,
+    pageSize = rowsPerPage
+  ) => {
+    setLoading(true);
+    const queryParam = searchTerm
+      ? `${searchType === "name" ? "name" : "searchQuery"}=${encodeURIComponent(
+          searchTerm
+        )}&`
+      : "";
+    try {
+      const response = await fetch(
+        `https://app-hotel-reservation-webapi-uae-dev-001.azurewebsites.net/api/cities?${queryParam}pageSize=${pageSize}&pageNumber=${
+          page + 1
+        }`
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const citiesData = await response.json();
+      setCities(citiesData);
+    } catch (error) {
+      console.error("Fetching cities failed: ", error);
+      showErrorSnackbar(`Error fetching cities: ${error.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchCities();
+  }, [page, rowsPerPage]);
+
   return (
     <Box>
       <CssBaseline />
@@ -60,7 +99,7 @@ const Cities = () => {
             my: 2,
           }}
         >
-          <SearchBar />
+          <SearchBar onSearch={fetchCities} />
           <CreateCityDialog
             addCity={handleAddCity}
             snackbarProps={{
@@ -71,6 +110,7 @@ const Cities = () => {
             }}
           />
         </Container>
+
         <Container>
           <DetailedGrid
             data={cities}
@@ -82,9 +122,16 @@ const Cities = () => {
             onUpdate={handleUpdateCities}
             onDelete={handleDeleteCity}
             EntityFormComponent={UpdateCityForm}
+            page={page}
+            setPage={setPage}
+            rowsPerPage={rowsPerPage}
+            setRowsPerPage={setRowsPerPage}
+            totalCount={cities.length}
           />
+          {loading && <CircularProgressIndicator />}
         </Container>
       </Box>
+
       <GenericSnackbar
         open={snackbar.open}
         message={snackbar.message}
