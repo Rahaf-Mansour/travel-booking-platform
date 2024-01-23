@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import LeftNavigation from "../../components/LeftNavigation";
-import SearchBar from "./components/SearchBar";
+import SearchBar from "../../components/SearchBar";
 import { CssBaseline, Box, Container } from "@mui/material";
 import UpdateHotelForm from "./components/UpdateHotelForm";
 import GenericSnackbar from "../../../../components/GenericSnackbar";
@@ -11,10 +11,14 @@ import {
 } from "../../../../services/manageHotels";
 import CreateHotelDialog from "./components/CreateHotelDialog";
 import DetailedGrid from "../../components/DetailedGrid";
+import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
 
 const Hotels = () => {
   const [, setSelectedEntity] = useState(null);
   const [hotels, setHotels] = useState([]);
+  const [page, setPage] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const {
     snackbar,
     handleCloseSnackbar,
@@ -27,7 +31,7 @@ const Hotels = () => {
   };
 
   const handleAddHotel = (newHotel) => {
-    setHotels((prevHotels) => [...prevHotels, newHotel]);
+    setHotels((prevHotels) => [newHotel, ...prevHotels]);
   };
 
   const handleUpdateHotels = (updatedHotel) => {
@@ -52,6 +56,41 @@ const Hotels = () => {
     }
   };
 
+  const fetchHotels = async (
+    searchTerm = "",
+    searchType = "name",
+    page = 0,
+    pageSize = rowsPerPage
+  ) => {
+    setLoading(true);
+    const queryParam = searchTerm
+      ? `${searchType === "name" ? "name" : "searchQuery"}=${encodeURIComponent(
+          searchTerm
+        )}&`
+      : "";
+    try {
+      const response = await fetch(
+        `https://app-hotel-reservation-webapi-uae-dev-001.azurewebsites.net/api/hotels?${queryParam}pageSize=${pageSize}&pageNumber=${
+          page + 1
+        }`
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const hotelsData = await response.json();
+      setHotels(hotelsData);
+    } catch (error) {
+      console.error("Fetching hotels failed: ", error);
+      showErrorSnackbar(`Error fetching hotels: ${error.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchHotels();
+  }, [page, rowsPerPage]);
+
   return (
     <Box>
       <CssBaseline />
@@ -64,7 +103,7 @@ const Hotels = () => {
             my: 2,
           }}
         >
-          <SearchBar />
+          <SearchBar onSearch={fetchHotels} />
           <CreateHotelDialog
             addHotel={handleAddHotel}
             snackbarProps={{
@@ -90,7 +129,13 @@ const Hotels = () => {
             onUpdate={handleUpdateHotels}
             onDelete={handleDeleteHotel}
             EntityFormComponent={UpdateHotelForm}
+            page={page}
+            setPage={setPage}
+            rowsPerPage={rowsPerPage}
+            setRowsPerPage={setRowsPerPage}
+            totalCount={hotels.length}
           />
+          {loading && <CircularProgressIndicator />}
         </Container>
       </Box>
       <GenericSnackbar
