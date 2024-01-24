@@ -10,10 +10,11 @@ import { getHotelDetails } from "../../../../services/hotelPageServices";
 import { useNavigate } from "react-router-dom";
 import useSnackbar from "../../../../hooks/useSnackbar";
 import GenericSnackbar from "../../../../components/GenericSnackbar";
+import { useLoading } from "../../../../context/LoadingContext";
 
 const FeaturedDeals = () => {
   const [deals, setDeals] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useLoading();
   const [error, setError] = useState(null);
   const [slidesToShow, setSlidesToShow] = useState(1);
   const { snackbar, showErrorSnackbar, handleCloseSnackbar } = useSnackbar();
@@ -28,7 +29,7 @@ const FeaturedDeals = () => {
       } catch (error) {
         setError(error);
         console.error("Error fetching deals:", error);
-        showErrorSnackbar("Whoops! Something went wrong when loading deals.");
+        showErrorSnackbar("Whoops! Something went wrong when fetching deals.");
       } finally {
         setIsLoading(false);
       }
@@ -78,7 +79,8 @@ const FeaturedDeals = () => {
     <div className={styles.featuredDealsContainer}>
       <h2> Featured Deals </h2>
       {error && <p>Something went wrong. Please try again later.</p>}
-      {isLoading && (
+
+      {isLoading ? (
         <Slider {...settings}>
           {[1, 2, 3].map((_, index) => (
             <div key={index}>
@@ -93,8 +95,7 @@ const FeaturedDeals = () => {
             </div>
           ))}
         </Slider>
-      )}
-      {!isLoading && (
+      ) : (
         <div style={{ marginTop: "2rem", cursor: "pointer" }}>
           <Slider {...settings}>
             {deals.map((deal) => (
@@ -136,6 +137,7 @@ const FeaturedDeals = () => {
           </Slider>
         </div>
       )}
+
       <GenericSnackbar {...snackbar} onClose={handleCloseSnackbar} />
     </div>
   );
