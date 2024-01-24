@@ -7,12 +7,13 @@ import { searchAPI } from "../../../../services/searchService";
 import GenericSnackbar from "../../../../components/GenericSnackbar";
 import useSnackbar from "../../../../hooks/useSnackbar";
 import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
+import { useLoading } from "../../../../context/LoadingContext";
 
 const SearchResult = () => {
   const [searchParams] = useSearchParams();
   const [results, setResults] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const { snackbar, showErrorSnackbar, handleCloseSnackbar } = useSnackbar();
+  const [isLoading, setIsLoading] = useLoading();
 
   useEffect(() => {
     const fetchResults = async () => {

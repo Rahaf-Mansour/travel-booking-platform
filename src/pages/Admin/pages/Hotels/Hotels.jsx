@@ -12,12 +12,13 @@ import {
 import CreateHotelDialog from "./components/CreateHotelDialog";
 import DetailedGrid from "../../components/DetailedGrid";
 import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
+import { useLoading } from "../../../../context/LoadingContext";
 
 const Hotels = () => {
   const [, setSelectedEntity] = useState(null);
   const [hotels, setHotels] = useState([]);
   const [page, setPage] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useLoading();
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const {
     snackbar,
@@ -62,7 +63,7 @@ const Hotels = () => {
     page = 0,
     pageSize = rowsPerPage
   ) => {
-    setLoading(true);
+    setIsLoading(true);
     const queryParam = searchTerm
       ? `${searchType === "name" ? "name" : "searchQuery"}=${encodeURIComponent(
           searchTerm
@@ -83,7 +84,7 @@ const Hotels = () => {
       console.error("Fetching hotels failed: ", error);
       showErrorSnackbar(`Error fetching hotels: ${error.message}`);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -135,7 +136,7 @@ const Hotels = () => {
             setRowsPerPage={setRowsPerPage}
             totalCount={hotels.length}
           />
-          {loading && <CircularProgressIndicator />}
+          {isLoading && <CircularProgressIndicator />}
         </Container>
       </Box>
       <GenericSnackbar

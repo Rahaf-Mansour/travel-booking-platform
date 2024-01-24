@@ -9,12 +9,13 @@ import { deleteCity } from "../../../../services/manageCities";
 import CreateCityDialog from "./components/CreateCityDialog";
 import DetailedGrid from "../../components/DetailedGrid";
 import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
+import { useLoading } from "../../../../context/LoadingContext";
 
 const Cities = () => {
   const [, setSelectedEntity] = useState(null);
   const [cities, setCities] = useState([]);
   const [page, setPage] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useLoading();
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const {
     snackbar,
@@ -58,7 +59,7 @@ const Cities = () => {
     page = 0,
     pageSize = rowsPerPage
   ) => {
-    setLoading(true);
+    setIsLoading(true);
     const queryParam = searchTerm
       ? `${searchType === "name" ? "name" : "searchQuery"}=${encodeURIComponent(
           searchTerm
@@ -79,7 +80,7 @@ const Cities = () => {
       console.error("Fetching cities failed: ", error);
       showErrorSnackbar(`Error fetching cities: ${error.message}`);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -128,7 +129,7 @@ const Cities = () => {
             setRowsPerPage={setRowsPerPage}
             totalCount={cities.length}
           />
-          {loading && <CircularProgressIndicator />}
+          {isLoading && <CircularProgressIndicator />}
         </Container>
       </Box>
 
