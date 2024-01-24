@@ -4,15 +4,18 @@ import { recentlyVisitedHotelsAPI } from "../../../../services/homePageServices"
 import useUserIdFromToken from "../../../../hooks/useUserIdFromToken";
 import useSnackbar from "../../../../hooks/useSnackbar";
 import GenericSnackbar from "../../../../components/GenericSnackbar";
+import { useLoading } from "../../../../context/LoadingContext";
+import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
 
 export function RecentlyVisitedHotels() {
   const [recentHotels, setRecentHotels] = React.useState([]);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = useLoading();
   const { snackbar, showErrorSnackbar, handleCloseSnackbar } = useSnackbar();
 
   const userId = useUserIdFromToken();
 
   const handleFetchRecentlyVisitedHotels = async () => {
+    setIsLoading(true);
     try {
       if (userId) {
         const recentHotelsData = await recentlyVisitedHotelsAPI(userId);
@@ -28,7 +31,6 @@ export function RecentlyVisitedHotels() {
   };
 
   React.useEffect(() => {
-    console.log("hotels");
     handleFetchRecentlyVisitedHotels();
   }, []);
 
@@ -44,7 +46,7 @@ export function RecentlyVisitedHotels() {
         Recently Visited Hotels
       </h2>
       {isLoading ? (
-        <p>Loading...</p>
+        <CircularProgressIndicator />
       ) : (
         <Grid container spacing={2}>
           {lastVisitedHotels.map((hotel) => (

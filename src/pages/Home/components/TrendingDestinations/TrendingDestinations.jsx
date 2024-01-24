@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { trendingDestinationsAPI } from "../../../../services/homePageServices";
 import { Grid, Card, CardContent, Typography } from "@mui/material";
+import { useLoading } from "../../../../context/LoadingContext";
+import useSnackbar from "../../../../hooks/useSnackbar";
+import GenericSnackbar from "../../../../components/GenericSnackbar";
+import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
 
 export function TrendingDestinations() {
   const [trendingDestinations, setTrendingDestinations] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useLoading();
+  const { snackbar, showErrorSnackbar, handleCloseSnackbar } = useSnackbar();
 
   const handleFetchTrendingDestinations = async () => {
     try {
       const trendingDestinationsData = await trendingDestinationsAPI();
       setTrendingDestinations(trendingDestinationsData);
     } catch (error) {
-      setError(error);
-      console.error("Error fetching trending destinations:", error);
+      showErrorSnackbar(
+        "Whoops! Something went wrong when loading trending destinations."
+      );
     } finally {
       setIsLoading(false);
     }
@@ -33,9 +38,7 @@ export function TrendingDestinations() {
         Trending Destinations
       </h2>
       {isLoading ? (
-        <p>Loading...</p>
-      ) : error ? (
-        <p>Error: {error.message}</p>
+        <CircularProgressIndicator />
       ) : (
         <Grid container spacing={2}>
           {trendingDestinations.map((item) => (
@@ -70,6 +73,7 @@ export function TrendingDestinations() {
           ))}
         </Grid>
       )}
+      <GenericSnackbar {...snackbar} onClose={handleCloseSnackbar} />
     </>
   );
 }
