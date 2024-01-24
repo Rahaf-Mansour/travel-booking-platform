@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Typography, IconButton, Link } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import EmailIcon from "@mui/icons-material/Email";
 
 const Footer = () => {
   return (
@@ -46,6 +47,15 @@ const Footer = () => {
           color="inherit"
         >
           <LinkedInIcon />
+        </IconButton>
+        <IconButton
+          aria-label="Email"
+          component={Link}
+          href="mailto:rahafmansour2018@gmail.com"
+          target="_blank"
+          color="inherit"
+        >
+          <EmailIcon />
         </IconButton>
       </Box>
     </Box>
