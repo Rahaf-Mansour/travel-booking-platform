@@ -149,6 +149,9 @@ const NavBar = () => {
               </ListItemButton>
             </ListItem>
           ))}
+          <ListItemButton sx={{ textAlign: "center" }} onClick={logoutUser}>
+            <ListItemText primary={"Logout"} />
+          </ListItemButton>
         </List>
       </Box>
     </Drawer>
