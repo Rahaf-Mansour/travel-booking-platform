@@ -1,5 +1,4 @@
 .formContainer {
-    max-width: 720px;
     margin: auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -20,7 +19,6 @@
 
 @media screen and (max-width: 600px) {
     .formContainer {
-        max-width: 450px;
         padding: 10px;
     }
 
@@ -34,11 +32,6 @@
 }
 
 @media screen and (max-width: 450px) {
-    .formContainer {
-        max-width: 300px;
-        padding: 10px;
-    }
-
     .formHeader {
         font-size: 1.2rem;
     }

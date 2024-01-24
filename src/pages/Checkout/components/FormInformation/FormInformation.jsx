@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik, Field, Form } from "formik";
+import { Formik, Form } from "formik";
 import Button from "@mui/material/Button";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
@@ -11,6 +11,7 @@ import { useCartContext } from "../../../../context/CartContext";
 import { postNewBooking } from "../../../../services/bookingServices";
 import CustomTextField from "../CustomTextField";
 import paymentSchema from "./paymentSchema";
+import useSnackbar from "../../../../hooks/useSnackbar";
 
 const initialValues = {
   fullName: "",
@@ -34,7 +35,12 @@ const formatCardNumber = (value) => {
 };
 
 const FormInformation = () => {
-  const [openSnackbar, setOpenSnackbar] = React.useState(false);
+  const {
+    snackbar,
+    handleCloseSnackbar,
+    showErrorSnackbar,
+    showSuccessSnackbar,
+  } = useSnackbar();
   const navigateToConfirmationPage = useNavigate();
   const { setValues } = useFormContext();
   const { cart } = useCartContext();
@@ -53,12 +59,12 @@ const FormInformation = () => {
       console.log("Booking submitted:", bookingRequest);
       console.log("Booking response:", response);
       setValues(values);
-      setOpenSnackbar(true);
+      showSuccessSnackbar("Completed! Thanks for your order!");
       setTimeout(() => {
         navigateToConfirmationPage("/confirmation");
       }, 2000);
     } catch (error) {
-      console.log(error);
+      showErrorSnackbar("Sorry, your booking is failed.");
     }
   };
 
@@ -81,20 +87,18 @@ const FormInformation = () => {
           <CustomTextField name="billingAddress.state" label="State" />
           <CustomTextField name="billingAddress.city" label="City" />
 
-          <div style={{ marginBottom: "20px" }}>
-            <Field
-              name="paymentMethod"
-              label="Payment Method"
-              as={Select}
-              fullWidth
-            >
-              {paymentMethods.map((method) => (
-                <MenuItem key={method} value={method}>
-                  {method}
-                </MenuItem>
-              ))}
-            </Field>
-          </div>
+          <CustomTextField
+            name="paymentMethod"
+            label="Payment Method"
+            as={Select}
+            fullWidth
+          >
+            {paymentMethods.map((method) => (
+              <MenuItem key={method} value={method}>
+                {method}
+              </MenuItem>
+            ))}
+          </CustomTextField>
 
           <CustomTextField
             name="cardNumber"
@@ -139,10 +143,10 @@ const FormInformation = () => {
       </Formik>
 
       <GenericSnackbar
-        open={openSnackbar}
-        message="Completed! Thanks for your order!"
-        onClose={() => setOpenSnackbar(false)}
-        severity="success"
+        open={snackbar.open}
+        message={snackbar.message}
+        onClose={handleCloseSnackbar}
+        severity={snackbar.severity}
       />
     </div>
   );
