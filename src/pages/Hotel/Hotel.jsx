@@ -65,28 +65,32 @@ const Hotel = () => {
   return (
     <>
       <NavBar />
-      <div className={styles.container}>
-        <div className={styles.hotelDetailsAndMapContainer}>
-          <HotelDetails
-            hotelDetails={hotelDetails}
-            hotelGuestReviews={hotelGuestReviews}
-          />
-          {hotelDetails && hotelDetails.latitude && hotelDetails.longitude && (
-            <HotelMapLocation
-              latitude={hotelDetails.latitude}
-              longitude={hotelDetails.longitude}
-              hotelName={hotelDetails.hotelName}
-              location={hotelDetails.location}
+      <div>
+        <div className={styles.container}>
+          <div className={styles.hotelDetailsAndMapContainer}>
+            <HotelDetails
+              hotelDetails={hotelDetails}
+              hotelGuestReviews={hotelGuestReviews}
             />
-          )}
-        </div>
+            {hotelDetails &&
+              hotelDetails.latitude &&
+              hotelDetails.longitude && (
+                <HotelMapLocation
+                  latitude={hotelDetails.latitude}
+                  longitude={hotelDetails.longitude}
+                  hotelName={hotelDetails.hotelName}
+                  location={hotelDetails.location}
+                />
+              )}
+          </div>
 
-        <div className={styles.galleryAndRoomsContainer}>
-          <VisualGallery hotelGallery={hotelGallery} />
-          <AvailableRooms
-            hotelAvailableRooms={hotelAvailableRooms}
-            isThereDates={isThereDates}
-          />
+          <div className={styles.galleryAndRoomsContainer}>
+            <VisualGallery hotelGallery={hotelGallery} />
+            <AvailableRooms
+              hotelAvailableRooms={hotelAvailableRooms}
+              isThereDates={isThereDates}
+            />
+          </div>
         </div>
       </div>
       <Footer />

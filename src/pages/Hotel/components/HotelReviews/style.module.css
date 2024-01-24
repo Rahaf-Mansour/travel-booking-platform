@@ -44,6 +44,12 @@
     line-height: 1.4;
 }
 
+.centerButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .loadMore {
     background-color: var(--secondary-color);
     color: #fff;
@@ -53,8 +59,6 @@
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.2s ease-in-out;
-    margin-left: 50%;
-    transform: translateX(-50%)
 }
 
 .loadMore:hover {

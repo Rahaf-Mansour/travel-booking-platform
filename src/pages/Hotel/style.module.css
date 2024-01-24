@@ -1,11 +1,10 @@
 .container {
-    max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 20px 0 20px 15px;
     margin-top: 2rem;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .hotelDetailsAndMapContainer {
@@ -13,11 +12,11 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
     border-radius: 8px;
-    flex: 1.2;
+    flex: 1.6;
 }
 
 .galleryAndRoomsContainer {
-    flex: 3;
+    flex: 3.8;
     margin-left: 1rem;
 }
 
@@ -36,7 +35,5 @@
 @media screen and (min-width: 768px) {
     .container {
         max-width: 1200px;
-        margin-left: auto;
-        margin-right: auto;
     }
 }

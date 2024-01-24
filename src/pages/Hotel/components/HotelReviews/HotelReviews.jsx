@@ -25,9 +25,11 @@ const HotelReviews = ({ hotelGuestReviews }) => {
         </div>
       ))}
       {visibleReviews < hotelGuestReviews.length && (
-        <CustomButton className={styles.loadMore} onClick={loadMoreReviews}>
-          Load More
-        </CustomButton>
+        <div className={styles.centerButton}>
+          <CustomButton className={styles.loadMore} onClick={loadMoreReviews}>
+            Load More
+          </CustomButton>
+        </div>
       )}
     </div>
   );
