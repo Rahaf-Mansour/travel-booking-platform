@@ -97,6 +97,12 @@
     transition: background-color 0.2s ease-in-out;
 }
 
+.selectDatesWarning {
+    color: red;
+    text-align: center;
+}
+
+
 @media screen and (max-width: 768px) {
     .availableRoomsContainer {
         flex-direction: column;
