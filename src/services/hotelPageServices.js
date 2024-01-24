@@ -5,9 +5,7 @@ export const getHotelDetails = async (hotelId) => {
     const response = await axiosInstance.get(`/hotels/${hotelId}`);
     return response.data;
   } catch (error) {
-    throw new Error(
-      error.response?.data.message || "Error: Can't get the hotel's details"
-    );
+    return Promise.reject(error.response);
   }
 };
 
@@ -16,9 +14,7 @@ export const getHotelGuestReviews = async (hotelId) => {
     const response = await axiosInstance.get(`/hotels/${hotelId}/reviews`);
     return response.data;
   } catch (error) {
-    throw new Error(
-      error.response?.data.message || "Error: Can't get the hotel's reviews"
-    );
+    return Promise.reject(error.response);
   }
 };
 
@@ -27,9 +23,7 @@ export const getHotelPicturesGallery = async (hotelId) => {
     const response = await axiosInstance.get(`/hotels/${hotelId}/gallery`);
     return response.data;
   } catch (error) {
-    throw new Error(
-      error.response?.data.message || "Error: Can't get the hotel's pictures"
-    );
+    return Promise.reject(error.response);
   }
 };
 
@@ -50,9 +44,6 @@ export const getHotelAvailableRooms = async (
     );
     return response.data;
   } catch (error) {
-    throw new Error(
-      error.response?.data.message ||
-        "Error: Can't get the hotel's available rooms"
-    );
+    return Promise.reject(error.response);
   }
 };
