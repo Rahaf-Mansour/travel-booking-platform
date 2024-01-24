@@ -6,6 +6,7 @@ import useSnackbar from "../../../../hooks/useSnackbar";
 import GenericSnackbar from "../../../../components/GenericSnackbar";
 import { useLoading } from "../../../../context/LoadingContext";
 import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
+import { useNavigate } from "react-router-dom";
 
 export function RecentlyVisitedHotels() {
   const [recentHotels, setRecentHotels] = React.useState([]);
@@ -13,6 +14,7 @@ export function RecentlyVisitedHotels() {
   const { snackbar, showErrorSnackbar, handleCloseSnackbar } = useSnackbar();
 
   const userId = useUserIdFromToken();
+  const navigate = useNavigate();
 
   const handleFetchRecentlyVisitedHotels = async () => {
     setIsLoading(true);
@@ -35,7 +37,7 @@ export function RecentlyVisitedHotels() {
   }, []);
 
   const handleNavigation = (hotelId) => {
-    console.log("Clicked item hotelId:", hotelId);
+    navigate(`/hotel/${hotelId}`);
   };
 
   const lastVisitedHotels = recentHotels.slice(1, 5);
@@ -45,6 +47,7 @@ export function RecentlyVisitedHotels() {
       <h2 style={{ marginTop: "4rem", marginBottom: "2rem" }}>
         Recently Visited Hotels
       </h2>
+      
       {isLoading ? (
         <CircularProgressIndicator />
       ) : (
