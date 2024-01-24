@@ -77,7 +77,9 @@ const AvailableRooms = ({ hotelAvailableRooms, isThereDates }) => {
           ))}
         </div>
       ) : (
-        <p>Please select dates to see available rooms.</p>
+        <p style={{ textAlign: "center" }}>
+          Please select dates to see the available rooms.
+        </p>
       )}
     </>
   );
