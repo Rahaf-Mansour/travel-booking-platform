@@ -6,6 +6,7 @@ import FeaturedDeals from "./components/FeaturedDeals";
 import styles from "./style.module.css";
 import TrendingDestinations from "./components/TrendingDestinations";
 import RecentlyVisitedHotels from "./components/RecentlyVisitedHotels";
+import Footer from "../../components/Footer";
 
 const Home = () => {
   return (
@@ -18,6 +19,7 @@ const Home = () => {
         <TrendingDestinations />
         <RecentlyVisitedHotels />
       </div>
+      <Footer />
     </>
   );
 };

@@ -6,6 +6,7 @@ import styles from "./style.module.css";
 import ConfirmationTable from "./components/ConfirmationTable";
 import CelebrationIcon from "@mui/icons-material/Celebration";
 import { useCartContext } from "../../context/CartContext";
+import Footer from "../../components/Footer";
 
 const Confirmation = () => {
   const { clearCart } = useCartContext();
@@ -36,6 +37,7 @@ const Confirmation = () => {
           Print Confirmation
         </CustomButton>
       </div>
+      <Footer />
     </>
   );
 };

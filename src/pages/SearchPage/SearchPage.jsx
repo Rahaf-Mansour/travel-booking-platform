@@ -4,6 +4,7 @@ import NavBar from "../../components/NavBar";
 import SearchResult from "./components/SearchResult";
 import styles from "./style.module.css";
 import SearchFilters from "./components/SearchFilters";
+import Footer from "../../components/Footer";
 
 const SearchPage = () => {
   return (
@@ -16,6 +17,7 @@ const SearchPage = () => {
           <SearchResult />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

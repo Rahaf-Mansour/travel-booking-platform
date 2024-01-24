@@ -4,6 +4,7 @@ import { Box, Grid, Card, Container } from "@mui/material";
 import FormInformation from "./components/FormInformation/FormInformation";
 import CartItems from "./components/CartItems";
 import { CartContext } from "../../context/CartContext";
+import Footer from "../../components/Footer";
 
 const Checkout = () => {
   const { cart } = React.useContext(CartContext);
@@ -29,6 +30,7 @@ const Checkout = () => {
           </Grid>
         </Box>
       </Container>
+      {cart.length > 0 && <Footer />}
     </>
   );
 };

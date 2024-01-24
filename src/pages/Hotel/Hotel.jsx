@@ -14,6 +14,7 @@ import {
   getHotelAvailableRooms,
   getHotelGuestReviews,
 } from "../../services/hotelPageServices";
+import Footer from "../../components/Footer";
 
 const Hotel = () => {
   const { hotelId } = useParams();
@@ -88,6 +89,7 @@ const Hotel = () => {
           />
         </div>
       </div>
+      <Footer />
     </>
   );
 };
