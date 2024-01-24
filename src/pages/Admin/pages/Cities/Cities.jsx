@@ -10,6 +10,7 @@ import CreateCityDialog from "./components/CreateCityDialog";
 import DetailedGrid from "../../components/DetailedGrid";
 import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
 import { useLoading } from "../../../../context/LoadingContext";
+import axiosInstance from "../../../../Axios/axiosInstance";
 
 const Cities = () => {
   const [, setSelectedEntity] = useState(null);
@@ -66,16 +67,15 @@ const Cities = () => {
         )}&`
       : "";
     try {
-      const response = await fetch(
-        `https://app-hotel-reservation-webapi-uae-dev-001.azurewebsites.net/api/cities?${queryParam}pageSize=${pageSize}&pageNumber=${
-          page + 1
-        }`
+      const response = await axiosInstance.get(
+        `/cities?${queryParam}pageSize=${pageSize}&pageNumber=${page + 1}`
       );
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      setCities(response.data);
+      if (response.data.length > 0) {
+        showSuccessSnackbar("Cities fetched successfully!");
+      } else {
+        showErrorSnackbar(`No data were found.`);
       }
-      const citiesData = await response.json();
-      setCities(citiesData);
     } catch (error) {
       console.error("Fetching cities failed: ", error);
       showErrorSnackbar(`Error fetching cities: ${error.message}`);

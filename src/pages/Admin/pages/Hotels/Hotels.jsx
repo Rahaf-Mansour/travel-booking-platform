@@ -13,6 +13,7 @@ import CreateHotelDialog from "./components/CreateHotelDialog";
 import DetailedGrid from "../../components/DetailedGrid";
 import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
 import { useLoading } from "../../../../context/LoadingContext";
+import axiosInstance from "../../../../Axios/axiosInstance";
 
 const Hotels = () => {
   const [, setSelectedEntity] = useState(null);
@@ -70,16 +71,15 @@ const Hotels = () => {
         )}&`
       : "";
     try {
-      const response = await fetch(
-        `https://app-hotel-reservation-webapi-uae-dev-001.azurewebsites.net/api/hotels?${queryParam}pageSize=${pageSize}&pageNumber=${
-          page + 1
-        }`
+      const response = await axiosInstance.get(
+        `/hotels?${queryParam}pageSize=${pageSize}&pageNumber=${page + 1}`
       );
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      setHotels(response.data);
+      if (response.data.length > 0) {
+        showSuccessSnackbar("Hotels fetched successfully!");
+      } else {
+        showErrorSnackbar(`No data were found.`);
       }
-      const hotelsData = await response.json();
-      setHotels(hotelsData);
     } catch (error) {
       console.error("Fetching hotels failed: ", error);
       showErrorSnackbar(`Error fetching hotels: ${error.message}`);
