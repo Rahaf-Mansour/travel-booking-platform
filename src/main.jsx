@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import CartContextProvider from "./context/CartContext.jsx";
 import { FormContextProvider } from "./context/CheckoutFormContext .jsx";
 import SearchContextProvider from "./context/searchContext.jsx";
+import { LoadingProvider } from "./context/LoadingContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -14,7 +15,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <SearchContextProvider>
         <CartContextProvider>
           <FormContextProvider>
-            <App />
+            <LoadingProvider>
+              <App />
+            </LoadingProvider>
           </FormContextProvider>
         </CartContextProvider>
       </SearchContextProvider>
