@@ -39,6 +39,7 @@ const Footer = () => {
         >
           <GitHubIcon />
         </IconButton>
+
         <IconButton
           aria-label="LinkedIn"
           component={Link}
@@ -48,6 +49,7 @@ const Footer = () => {
         >
           <LinkedInIcon />
         </IconButton>
+        
         <IconButton
           aria-label="Email"
           component={Link}
