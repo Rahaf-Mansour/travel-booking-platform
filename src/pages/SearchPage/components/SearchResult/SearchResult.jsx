@@ -22,15 +22,16 @@ const SearchResult = () => {
       try {
         const data = await searchAPI(params);
         setResults(data);
-      } catch (err) {
-        showErrorSnackbar("Whoops! Something went wrong.");
+      } catch (error) {
+        showErrorSnackbar(
+          "Whoops! Something went wrong when fetching the result."
+        );
       } finally {
         setIsLoading(false);
       }
     };
 
     if (searchParams.toString()) {
-      // Fetch only if there are search parameters
       fetchResults();
     }
   }, [searchParams]);
