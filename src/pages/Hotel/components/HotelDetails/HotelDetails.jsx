@@ -5,12 +5,8 @@ import HotelReviews from "../HotelReviews";
 import HotelAmenities from "../HotelAmenities";
 
 const HotelDetails = ({ hotelDetails, hotelGuestReviews }) => {
-  if (!hotelDetails || !hotelGuestReviews) {
-    return <p>Loading...</p>;
-  }
-
-  if (hotelGuestReviews.length === 0) {
-    return <p>No reviews available.</p>;
+  if ({ hotelDetails }.length === 0 || hotelGuestReviews.length === 0) {
+    return <p>No Data available.</p>;
   }
 
   return (
