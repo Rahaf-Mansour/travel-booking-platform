@@ -16,7 +16,9 @@ const Checkout = () => {
         <Box sx={{ marginTop: 4, marginBottom: 4 }}>
           <Grid container spacing={3}>
             <Grid item xs={12} md={cart.length > 0 ? 6 : 12}>
-              <Card sx={{ padding: 2 }}>
+              <Card
+                sx={{ padding: 2, boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)" }}
+              >
                 <CartItems />
               </Card>
             </Grid>
