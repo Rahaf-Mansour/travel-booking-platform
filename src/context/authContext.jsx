@@ -17,7 +17,7 @@ const AuthContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    setUser(cookies["authData"]);
+    setUser(cookies["auth"] || null);
   }, [cookies]);
 
   if (user) {
@@ -34,11 +34,23 @@ const AuthContextProvider = ({ children }) => {
     navigate("/");
   };
 
-  useEffect(() => {
-    setUser(cookies["auth"] || null);
-  }, [cookies]);
-
   console.log("user", user);
+
+  useEffect(() => {
+    const interceptor = axiosInstance.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        if (error.response && error.response.status === 401) {
+          logoutUser();
+        }
+        return Promise.reject(error);
+      }
+    );
+
+    return () => {
+      axiosInstance.interceptors.response.eject(interceptor);
+    };
+  }, []);
 
   return (
     <AuthContext.Provider value={{ loginUser, logoutUser, user }}>
