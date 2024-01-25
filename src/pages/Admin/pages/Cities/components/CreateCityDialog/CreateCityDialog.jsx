@@ -9,14 +9,15 @@ import { fields, initialValues, validationSchema } from "../../cityConfig";
 import useDialogState from "../../../../hooks/useDialogState";
 
 const CreateCityDialog = ({ addCity, snackbarProps }) => {
-  const { isDialogOpen, handleDialogOpen, handleDialogClose } = useDialogState();
+  const { isDialogOpen, handleDialogOpen, handleDialogClose } =
+    useDialogState();
 
-  const handleCreateEntity = async (values, actions) => {
+  const handleCreateCity = async (values, actions) => {
     try {
-      const newEntity = await postNewCity(values.name, values.description);
-      console.log("City created:", newEntity);
+      const newCity = await postNewCity(values.name, values.description);
+      console.log("City created:", newCity);
       snackbarProps.showSuccessSnackbar("New city created successfully!");
-      addCity(newEntity);
+      addCity(newCity);
     } catch (error) {
       snackbarProps.showErrorSnackbar(`Whoops! ${error.message}`);
     } finally {
@@ -34,7 +35,7 @@ const CreateCityDialog = ({ addCity, snackbarProps }) => {
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={handleCreateEntity}
+          onSubmit={handleCreateCity}
         >
           {({ errors, touched, isSubmitting }) => (
             <CreateEntityDialog
