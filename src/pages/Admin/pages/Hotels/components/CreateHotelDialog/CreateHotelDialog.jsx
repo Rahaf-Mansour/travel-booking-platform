@@ -64,7 +64,7 @@ export default CreateHotelDialog;
 CreateHotelDialog.propTypes = {
   addHotel: PropTypes.func.isRequired,
   snackbarProps: PropTypes.shape({
-    open: PropTypes.bool,
+    open: PropTypes.bool.isRequired,
     message: PropTypes.string,
     severity: PropTypes.string,
     handleCloseSnackbar: PropTypes.func,
