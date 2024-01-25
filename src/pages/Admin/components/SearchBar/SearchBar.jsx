@@ -28,7 +28,6 @@ const SearchBar = ({ onSearch }) => {
         p: "1px 4px",
         display: "flex",
         alignItems: "center",
-        width: "50%",
         border: "1px solid #ccc",
         borderRadius: "5px",
         mr: 1,
