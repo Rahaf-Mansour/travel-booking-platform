@@ -1,0 +1,23 @@
+.hotelAmenities {
+    margin-bottom: 2rem;
+}
+
+.hotelAmenities h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.hotelAmenities ul {
+    list-style: none;
+    padding: 0;
+}
+
+.hotelAmenities li {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}

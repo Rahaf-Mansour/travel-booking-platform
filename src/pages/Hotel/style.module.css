@@ -1,0 +1,39 @@
+.container {
+    margin: 0 auto;
+    padding: 20px 0 20px 15px;
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.hotelDetailsAndMapContainer {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    flex: 1.6;
+}
+
+.galleryAndRoomsContainer {
+    flex: 3.8;
+    margin-left: 1rem;
+}
+
+@media screen and (max-width: 450px) {
+    .container {
+        margin-left: 1rem;
+        margin-right: 1rem;
+        padding: 1rem;
+    }
+
+    .galleryAndRoomsContainer {
+        margin-left: 0;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .container {
+        max-width: 1200px;
+    }
+}

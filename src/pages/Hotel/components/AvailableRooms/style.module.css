@@ -1,0 +1,114 @@
+.header {
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.availableRoomsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.roomCard {
+    width: 48%;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.roomImage {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.roomHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.roomType {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.price {
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+.availabilityAvailable {
+    color: green;
+}
+
+.capacityInfo {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.iconContainer {
+    margin-right: 8px;
+}
+
+.amenities {
+    margin-top: 8px;
+}
+
+.amenities ul {
+    list-style: none;
+    padding: 0;
+}
+
+.amenities li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.amenities li svg {
+    margin-right: 1rem;
+}
+
+.addCartButton {
+    background-color: #3f89bb;
+    color: #fff;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-radius: 5px;
+    gap: 8px;
+    font-size: 1rem;
+}
+
+.addCartButton:hover {
+    background-color: #154a6d;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.selectDatesWarning {
+    color: red;
+    text-align: center;
+}
+
+
+@media screen and (max-width: 768px) {
+    .availableRoomsContainer {
+        flex-direction: column;
+    }
+
+    .roomCard {
+        width: 100%;
+    }
+}

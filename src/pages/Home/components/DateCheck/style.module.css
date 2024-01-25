@@ -1,0 +1,41 @@
+.heroSearchText {
+    font-size: 1rem;
+    color: black;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+
+.heroIcon {
+    color: var(--main-color);
+    margin-right: 5px;
+}
+
+.datePicker {
+    position: absolute;
+    top: 60px;
+}
+
+@media screen and (max-width: 480px) {
+    .datePicker {
+        top: 80px;
+        left: 0;
+        right: 0;
+    }
+}
+
+@media screen and (max-width: 780px) {
+    .datePicker {
+        top: 80px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .datePicker {
+        top: 80px;
+        z-index: 99;
+    }
+}

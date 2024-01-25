@@ -1,0 +1,40 @@
+.container {
+    margin-top: 8rem;
+    display: flex;
+    justify-content: center;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 1150px;
+    display: flex;
+    gap: 30px;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        margin-top: 15rem;
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+
+    .wrapper {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .container {
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1200px) {
+    .container {
+        margin-top: 15rem;
+        max-width: 90%;
+    }
+}

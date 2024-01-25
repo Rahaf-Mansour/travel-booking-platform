@@ -1,35 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import Login from "./pages/Login";
+import { Routes, Route, Navigate } from "react-router-dom"; // 'Navigate' is used instead of 'Redirect', and 'Switch' is removed
+import PageNotFound from "./pages/PageNotFound";
+import Home from "./pages/Home";
+import SearchPage from "./pages/SearchPage";
+import { AuthContext } from "./context/authContext";
+import Hotel from "./pages/Hotel";
+import Checkout from "./pages/Checkout";
+import Confirmation from "./pages/Confirmation";
+import Cities from "./pages/Admin/pages/Cities";
+import Hotels from "./pages/Admin/pages/Hotels";
+import Rooms from "./pages/Admin/pages/Rooms/Rooms";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { user } = React.useContext(AuthContext);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        {user?.userType === "User" && (
+          <>
+            <Route path="/home" element={<Home />} />
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/hotel/:hotelId" element={<Hotel />} />
+            <Route path="/cart" element={<Checkout />} />
+            <Route path="/confirmation" element={<Confirmation />} />
+          </>
+        )}
+        {user?.userType === "Admin" && (
+          <>
+            <Route path="/adminDashboard/cities" element={<Cities />} />
+            <Route path="/adminDashboard/hotels" element={<Hotels />} />
+            <Route path="/adminDashboard/rooms" element={<Rooms />} />
+            <Route
+              path="/adminDashboard/*"
+              element={<Navigate to="/adminDashboard/cities" replace />}
+            />
+          </>
+        )}
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
