@@ -63,6 +63,7 @@ const UpdateRoomForm = ({ open, onClose, entityData, onUpdate }) => {
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={handleUpdateClick}
+          enableReinitialize={true}
         >
           {({ errors, touched, isSubmitting }) => (
             <Form>
