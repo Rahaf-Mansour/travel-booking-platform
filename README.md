@@ -4,7 +4,7 @@ Welcome to the Travel Booking Platform! Dive into a user-friendly experience tha
 
 ## 🚀 Technologies
 
-Our platform harnesses the power of cutting-edge technologies to deliver a seamless and responsive user experience:
+The platform harnesses the power of cutting-edge technologies to deliver a seamless and responsive user experience:
 
 - **[React](https://beta.reactjs.org/)**: Crafting dynamic UIs with modern React, ensuring a fast, efficient, and scalable application. 🎨
 - **[Vite](https://vitejs.dev/)**: Supercharging our development with Vite's next-generation front-end tooling. ⚡
@@ -117,6 +117,11 @@ Dive into the details of my project with the [Complete Project Documentation on 
 #### 6.5 Entity Update Form
 
 - Forms for updating information on entities within the platform.
+
+### 6. Page Not Found
+![image](https://github.com/Rahaf-Mansour/travel-booking-platform/assets/109438456/76586b95-a191-46bb-96c0-18160c80b0b9)
+
+- This page is displayed whenever a user navigates to a URL that does not correspond to any active route within the application.
 
 ## 💾 Installation
 
