@@ -7,7 +7,7 @@ const CreateButton = ({ handleDialogOpen }) => {
   return (
     <Button
       variant="outlined"
-      sx={{ backgroundColor: "#fff", color: "#000", height: 50 }}
+      sx={{ backgroundColor: "#fff", color: "#000", height: 53 }}
       onClick={handleDialogOpen}
     >
       Create <AddBoxIcon color="primary" sx={{ marginLeft: "5px" }} />
