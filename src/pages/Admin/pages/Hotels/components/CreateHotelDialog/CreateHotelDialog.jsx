@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Dialog, DialogTitle } from "@mui/material";
 import { Formik } from "formik";
 import PropTypes from "prop-types";
@@ -6,17 +6,11 @@ import { postNewHotel } from "../../../../../../services/manageHotels";
 import CreateButton from "../../../../components/CreateButton/CreateButton";
 import { fields, initialValues, validationSchema } from "../../hotelConfig";
 import CreateEntityDialog from "../../../../components/CreateEntityDialog";
+import useDialogState from "../../../../hooks/useDialogState";
 
 const CreateHotelDialog = ({ addHotel, snackbarProps }) => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-
-  const handleDialogOpen = () => {
-    setIsDialogOpen(true);
-  };
-
-  const handleDialogClose = () => {
-    setIsDialogOpen(false);
-  };
+  const { isDialogOpen, handleDialogOpen, handleDialogClose } =
+    useDialogState();
 
   const handleCreateHotel = async (values, actions) => {
     try {
