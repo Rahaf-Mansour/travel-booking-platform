@@ -106,7 +106,7 @@ const DetailedGrid = ({
             </TableBody>
           </Table>
         </TableContainer>
-        
+
         {totalCount > 0 && (
           <TablePagination
             component="div"
@@ -115,7 +115,6 @@ const DetailedGrid = ({
             onPageChange={handleChangePage}
             rowsPerPage={rowsPerPage}
             onRowsPerPageChange={handleChangeRowsPerPage}
-            // disabled={page === 0}
           />
         )}
       </Container>
