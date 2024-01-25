@@ -7,7 +7,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { NavLink } from "react-router-dom";
@@ -16,7 +15,7 @@ import HotelIcon from "@mui/icons-material/Hotel";
 import RoomIcon from "@mui/icons-material/MeetingRoom";
 import { Logout as LogoutIcon } from "@mui/icons-material";
 import { AuthContext } from "../../../../context/authContext";
-import { Button } from "@mui/material";
+import { ListItemButton } from "@mui/material";
 
 const LeftNavigation = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -60,21 +59,18 @@ const LeftNavigation = () => {
               to={item.path}
               style={{ color: "inherit", textDecoration: "none" }}
             >
-              <ListItem button>
+              <ListItemButton>
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText primary={`Manage ${item.name}`} />
-              </ListItem>
+              </ListItemButton>
             </NavLink>
           ))}
-          <Button
-            onClick={logoutUser}
-            sx={{ color: "inherit", marginLeft: 1.5 }}
-          >
-            <LogoutIcon />
-            <Typography variant="ListItemText" sx={{ marginLeft: 4 }}>
-              Logout
-            </Typography>
-          </Button>
+          <ListItemButton onClick={logoutUser}>
+            <ListItemIcon>
+              <LogoutIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Logout"} />
+          </ListItemButton>
         </List>
       </Box>
     </Drawer>
