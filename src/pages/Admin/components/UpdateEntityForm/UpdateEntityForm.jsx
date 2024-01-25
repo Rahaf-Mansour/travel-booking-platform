@@ -13,6 +13,7 @@ const UpdateEntityForm = ({ fields, touched, errors }) => {
           as={TextField}
           name={field.name}
           label={field.label}
+          {...(field.name === "description" && { multiline: true })}
           fullWidth
           variant="standard"
           type={field.type}

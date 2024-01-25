@@ -22,6 +22,7 @@ const CreateEntityDialog = ({
               margin="dense"
               name={field.name}
               label={field.label}
+              {...(field.name === "description" && { multiline: true })}
               fullWidth
               variant="outlined"
               type={field.type}
