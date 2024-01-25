@@ -27,6 +27,7 @@ const DetailedGrid = ({
   setRowsPerPage,
   totalCount,
 }) => {
+
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedEntity, setSelectedEntity] = useState(null);
 
@@ -79,6 +80,7 @@ const DetailedGrid = ({
                 <TableCell>Action</TableCell>
               </TableRow>
             </TableHead>
+
             <TableBody>
               {data
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -93,6 +95,7 @@ const DetailedGrid = ({
                         {row[column.field]}
                       </TableCell>
                     ))}
+                    
                     <TableCell>
                       <IconButton
                         color="primary"
@@ -118,6 +121,7 @@ const DetailedGrid = ({
           />
         )}
       </Container>
+      
       {EntityFormComponent && (
         <EntityFormComponent
           open={isDrawerOpen}
