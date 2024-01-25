@@ -93,11 +93,14 @@ const Cities = () => {
       <CssBaseline />
       <Box component="main">
         <LeftNavigation />
+
         <Container
           sx={{
             display: "flex",
+            flexDirection: { xs: "column", sm: "row" },
             justifyContent: "center",
             my: 2,
+            px: 4,
           }}
         >
           <SearchBar onSearch={fetchCities} />
