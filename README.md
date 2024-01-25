@@ -31,6 +31,15 @@ Dive into the details of my project with the [Complete Project Documentation on 
 
 - Authenticate securely with username and password entry fields. 🔐
 
+- User Login: 
+  - Username: user
+  - Password: user
+
+- Admin Login: 
+  - Username: admin
+  - Password: admin
+
+
 ### 2. Home Page
 ![image](https://github.com/Rahaf-Mansour/travel-booking-platform/assets/109438456/9656ec8c-8896-4c92-97bf-39fbfe210450)
 
