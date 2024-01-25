@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Dialog, DialogTitle } from "@mui/material";
 import { Formik } from "formik";
 import PropTypes from "prop-types";
@@ -6,17 +6,10 @@ import { postNewCity } from "../../../../../../services/manageCities";
 import CreateEntityDialog from "../../../../components/CreateEntityDialog";
 import CreateButton from "../../../../components/CreateButton/CreateButton";
 import { fields, initialValues, validationSchema } from "../../cityConfig";
+import useDialogState from "../../../../hooks/useDialogState";
 
 const CreateCityDialog = ({ addCity, snackbarProps }) => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-
-  const handleDialogOpen = () => {
-    setIsDialogOpen(true);
-  };
-
-  const handleDialogClose = () => {
-    setIsDialogOpen(false);
-  };
+  const { isDialogOpen, handleDialogOpen, handleDialogClose } = useDialogState();
 
   const handleCreateEntity = async (values, actions) => {
     try {
@@ -63,7 +56,7 @@ export default CreateCityDialog;
 CreateCityDialog.propTypes = {
   addCity: PropTypes.func.isRequired,
   snackbarProps: PropTypes.shape({
-    open: PropTypes.bool,
+    open: PropTypes.bool.isRequired,
     message: PropTypes.string,
     severity: PropTypes.string,
     handleCloseSnackbar: PropTypes.func,
