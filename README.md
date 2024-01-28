@@ -11,6 +11,7 @@ The platform harnesses the power of cutting-edge technologies to deliver a seaml
 - **[Axios](https://www.npmjs.com/package/axios)**: Streamlining HTTP requests with Axios for robust and elegant asynchronous operations. 🌐
 - **[Day.js](https://www.npmjs.com/package/dayjs)**: Manipulating and displaying dates with the lightweight Day.js library. 📅
 - **[JWT Decode](https://www.npmjs.com/package/jwt-decode)**: Safely decoding JWTs to extract user credentials and information. 🔐
+- **[React Cookie](https://www.npmjs.com/package/react-cookie)**: Managing browser cookies with ease, facilitating state management across sessions. 🍪
 - **[React Router Dom](https://www.npmjs.com/package/react-router-dom)**: Navigating the application with ease using the robust routing solutions of React Router. 🛣️
 - **[Formik](https://formik.org/)**: Streamlining form creation and handling, making complex forms simple. 📋
 - **[Yup](https://www.npmjs.com/package/yup)**: Leveraging Yup for effective schema validation, keeping data integrity in check. ✅
