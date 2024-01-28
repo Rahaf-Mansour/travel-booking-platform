@@ -8,7 +8,7 @@
 .availableRoomsContainer {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .roomCard {
@@ -96,12 +96,6 @@
     background-color: #154a6d;
     transition: background-color 0.2s ease-in-out;
 }
-
-.selectDatesWarning {
-    color: red;
-    text-align: center;
-}
-
 
 @media screen and (max-width: 768px) {
     .availableRoomsContainer {
