@@ -8,7 +8,7 @@ const PageNotFound = () => {
   return (
     <>
       <NavBar />
-      <div className={styles.errorImage}>
+      <div className={styles.errorContainer}>
         <img
           className={styles.pageNotFoundImage}
           src={pageError}
@@ -16,7 +16,7 @@ const PageNotFound = () => {
           width={500}
         />
         <h1 className={styles.errorMessage}>
-          We can’t find the page you’re looking for!
+          We cannot find the page you are looking for!
         </h1>
       </div>
       <Footer />
