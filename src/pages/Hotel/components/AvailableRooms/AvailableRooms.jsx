@@ -45,6 +45,15 @@ const AvailableRooms = ({ hotelAvailableRooms, isThereDates }) => {
     <>
       <h3 className={styles.header}>Available Rooms</h3>
 
+      {(!isThereDates ||
+        (hotelAvailableRooms && hotelAvailableRooms.length === 0)) && (
+        <p className={styles.warningInfoParagraph}>
+          {isThereDates
+            ? `There are no available rooms between ${checkInDate} and ${checkOutDate}.`
+            : "Please select dates from the Search box to see the available rooms."}
+        </p>
+      )}
+
       <div className={styles.availableRoomsContainer}>
         {availableRooms.map((room, index) => (
           <div key={index} className={styles.roomCard}>
