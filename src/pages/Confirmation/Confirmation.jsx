@@ -27,8 +27,8 @@ const Confirmation = () => {
       <NavBar />
       <div className={styles.confirmationContainer} ref={componentRef}>
         <div className={styles.confirmationHeader}>
-          <h1>Here is your confirmation details. Hope you enjoy your stay! </h1>
           <CelebrationIcon />
+          <h1>Here is your confirmation details. Hope you enjoy your stay! </h1>
         </div>
         <ConfirmationTable />
       </div>
