@@ -25,8 +25,10 @@ const VisualGallery = ({ hotelGallery }) => {
           />
         ))}
       </div>
+
       {selectedImage && (
         <div className={styles.fullscreenOverlay} onClick={closeFullscreen}>
+          <button onClick={closeFullscreen}>&times;</button>
           <img
             src={selectedImage.url}
             alt={`Gallery ${selectedImage.id}`}

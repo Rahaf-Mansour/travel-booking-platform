@@ -12,6 +12,10 @@
     object-fit: cover;
 }
 
+.thumbnailContainer img:hover {
+    filter: brightness(90%);
+}
+
 .fullscreenOverlay {
     position: fixed;
     top: 0;
@@ -24,21 +28,54 @@
     align-items: center;
     cursor: pointer;
     z-index: 1000;
+    overflow: hidden;
 }
 
 .fullscreenImage {
     max-width: 95%;
     max-height: 95%;
     margin-top: 0.5rem;
+    object-fit: contain;
 }
 
-@media screen and (max-width: 385px) {
+.fullscreenOverlay button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+}
+
+@media screen and (max-width: 450px) {
     .thumbnailContainer {
         margin-top: 2rem;
     }
 
     .thumbnailContainer img {
-        max-width: 100%;
-        height: auto;
+        max-width: 165px;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 389px) {
+    .thumbnailContainer {
+        margin-top: 2rem;
+    }
+
+    .thumbnailContainer img {
+        max-width: 150px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .thumbnailContainer {
+        margin-top: 2rem;
+    }
+
+    .thumbnailContainer img {
+        max-width: 120px;
     }
 }

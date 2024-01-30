@@ -11,6 +11,12 @@
     justify-content: space-evenly;
 }
 
+.warningInfoParagraph {
+    text-align: center;
+    margin-top: 1rem;
+    color: red;
+}
+
 .roomCard {
     width: 48%;
     margin-bottom: 1rem;
@@ -96,6 +102,7 @@
     background-color: #154a6d;
     transition: background-color 0.2s ease-in-out;
 }
+
 
 @media screen and (max-width: 768px) {
     .availableRoomsContainer {
