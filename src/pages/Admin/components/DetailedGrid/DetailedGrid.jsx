@@ -26,8 +26,8 @@ const DetailedGrid = ({
   rowsPerPage,
   setRowsPerPage,
   totalCount,
+  isLoading,
 }) => {
-
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedEntity, setSelectedEntity] = useState(null);
 
@@ -82,30 +82,42 @@ const DetailedGrid = ({
             </TableHead>
 
             <TableBody>
-              {data
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => (
-                  <TableRow
-                    key={row.id}
-                    hover
-                    onClick={() => handleRowClick(row)}
-                  >
-                    {columns.map((column) => (
-                      <TableCell key={`${row.id}-${column.field}`}>
-                        {row[column.field]}
+              {isLoading ? (
+                <TableRow>
+                  <TableCell colSpan={columns.length + 1}>Loading...</TableCell>
+                </TableRow>
+              ) : data.length > 0 ? (
+                data
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => (
+                    <TableRow
+                      key={row.id}
+                      hover
+                      onClick={() => handleRowClick(row)}
+                    >
+                      {columns.map((column) => (
+                        <TableCell key={`${row.id}-${column.field}`}>
+                          {row[column.field]}
+                        </TableCell>
+                      ))}
+
+                      <TableCell>
+                        <IconButton
+                          color="primary"
+                          onClick={(e) => handleDelete(row, e)}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
                       </TableCell>
-                    ))}
-                    
-                    <TableCell>
-                      <IconButton
-                        color="primary"
-                        onClick={(e) => handleDelete(row, e)}
-                      >
-                        <DeleteIcon />
-                      </IconButton>
-                    </TableCell>
-                  </TableRow>
-                ))}
+                    </TableRow>
+                  ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={columns.length + 1}>
+                    No data were found
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </TableContainer>
@@ -121,7 +133,7 @@ const DetailedGrid = ({
           />
         )}
       </Container>
-      
+
       {EntityFormComponent && (
         <EntityFormComponent
           open={isDrawerOpen}

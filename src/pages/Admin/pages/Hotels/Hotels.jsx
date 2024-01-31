@@ -137,10 +137,12 @@ const Hotels = () => {
             rowsPerPage={rowsPerPage}
             setRowsPerPage={setRowsPerPage}
             totalCount={hotels.length}
+            isLoading={isLoading}
           />
           {isLoading && <CircularProgressIndicator />}
         </Container>
       </Box>
+
       <GenericSnackbar
         open={snackbar.open}
         message={snackbar.message}
