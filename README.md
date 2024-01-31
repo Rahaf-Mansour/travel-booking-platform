@@ -8,6 +8,7 @@ The platform harnesses the power of cutting-edge technologies to deliver a seaml
 
 - **[React](https://beta.reactjs.org/)**: Crafting dynamic UIs with modern React, ensuring a fast, efficient, and scalable application. 🎨
 - **[Vite](https://vitejs.dev/)**: Supercharging our development with Vite's next-generation front-end tooling. ⚡
+- **[PropTypes](https://www.npmjs.com/package/prop-types)**: Utilizing Prop Types for component prop type checking, ensuring the props passed to components are valid. ✔️
 - **[Axios](https://www.npmjs.com/package/axios)**: Streamlining HTTP requests with Axios for robust and elegant asynchronous operations. 🌐
 - **[Day.js](https://www.npmjs.com/package/dayjs)**: Manipulating and displaying dates with the lightweight Day.js library. 📅
 - **[JWT Decode](https://www.npmjs.com/package/jwt-decode)**: Safely decoding JWTs to extract user credentials and information. 🔐
