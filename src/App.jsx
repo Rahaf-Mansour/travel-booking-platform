@@ -10,8 +10,16 @@ import Confirmation from "./pages/Confirmation";
 import Cities from "./pages/Admin/pages/Cities";
 import Hotels from "./pages/Admin/pages/Hotels";
 import Rooms from "./pages/Admin/pages/Rooms/Rooms";
-import { withAdminProtection } from "./components/ProtectedRoutes/ProtectedRoutes";
+import {
+  withUserProtection,
+  withAdminProtection,
+} from "./components/ProtectedRoutes/ProtectedRoutes";
 
+const ProtectedHome = withUserProtection(Home);
+const ProtectedSearchPage = withUserProtection(SearchPage);
+const ProtectedHotel = withUserProtection(Hotel);
+const ProtectedCheckout = withUserProtection(Checkout);
+const ProtectedConfirmation = withUserProtection(Confirmation);
 const ProtectedCities = withAdminProtection(Cities);
 const ProtectedHotels = withAdminProtection(Hotels);
 const ProtectedRooms = withAdminProtection(Rooms);
@@ -20,11 +28,15 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
-      <Route path="/home" element={<Home />} />
-      <Route path="/search" element={<SearchPage />} />
-      <Route path="/hotel/:hotelId" element={<Hotel />} />
-      <Route path="/cart" element={<Checkout />} />
-      <Route path="/confirmation" element={<Confirmation />} />
+
+      {/* user routes */}
+      <Route path="/home" element={<ProtectedHome />} />
+      <Route path="/search" element={<ProtectedSearchPage />} />
+      <Route path="/hotel/:hotelId" element={<ProtectedHotel />} />
+      <Route path="/cart" element={<ProtectedCheckout />} />
+      <Route path="/confirmation" element={<ProtectedConfirmation />} />
+
+      {/* admin routes */}
       <Route
         path="/adminDashboard"
         element={<Navigate to="/adminDashboard/cities" replace />}
@@ -33,6 +45,7 @@ function App() {
       <Route path="/adminDashboard/hotels" element={<ProtectedHotels />} />
       <Route path="/adminDashboard/rooms" element={<ProtectedRooms />} />
 
+      {/* for not found pages */}
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
