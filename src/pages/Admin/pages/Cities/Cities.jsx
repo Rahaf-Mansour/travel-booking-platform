@@ -131,6 +131,7 @@ const Cities = () => {
             rowsPerPage={rowsPerPage}
             setRowsPerPage={setRowsPerPage}
             totalCount={cities.length}
+            isLoading={isLoading}
           />
           {isLoading && <CircularProgressIndicator />}
         </Container>
