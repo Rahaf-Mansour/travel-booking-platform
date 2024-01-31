@@ -2,11 +2,7 @@
 
 Welcome to the Travel Booking Platform! Dive into a user-friendly experience that streamlines the way you search and book accommodations. From cosy B&Bs to luxurious resorts, my platform connects you to your next stay with just a few clicks.
 
-
-
-https://github.com/Rahaf-Mansour/travel-booking-platform/assets/109438456/7dea078c-707e-4e14-accc-de3ce7ea9b02
-
-
+https://github.com/Rahaf-Mansour/travel-booking-platform/assets/109438456/50b91848-86c0-48b0-8cc3-f8aeecf87dd2
 
 ## 🚀 Technologies
 
