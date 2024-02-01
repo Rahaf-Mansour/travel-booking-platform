@@ -24,6 +24,6 @@ export default CustomTextField;
 
 CustomTextField.propTypes = {
   name: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   type: PropTypes.string,
 };
