@@ -18,10 +18,10 @@
 }
 
 .roomCard {
-    width: 48%;
+    width: 47%;
     margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    padding: 15px;
+    border: 1px solid #c2c2c2;
+    padding: 20px;
     box-sizing: border-box;
 }
 
@@ -45,12 +45,9 @@
 }
 
 .price {
-    font-size: 16px;
-    margin-top: 5px;
-}
-
-.availabilityAvailable {
-    color: green;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #f39c12;
 }
 
 .capacityInfo {

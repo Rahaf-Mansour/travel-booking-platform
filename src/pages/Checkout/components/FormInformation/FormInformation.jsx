@@ -87,12 +87,7 @@ const FormInformation = () => {
           <CustomTextField name="billingAddress.state" label="State" />
           <CustomTextField name="billingAddress.city" label="City" />
 
-          <CustomTextField
-            name="paymentMethod"
-            label="Payment Method"
-            as={Select}
-            fullWidth
-          >
+          <CustomTextField name="paymentMethod" as={Select} fullWidth>
             {paymentMethods.map((method) => (
               <MenuItem key={method} value={method}>
                 {method}
