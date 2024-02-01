@@ -8,7 +8,7 @@ https://github.com/Rahaf-Mansour/travel-booking-platform/assets/109438456/50b918
 
 The platform harnesses the power of cutting-edge technologies to deliver a seamless and responsive user experience:
 
-- **[React](https://beta.reactjs.org/)**: Crafting dynamic UIs with modern React, ensuring a fast, efficient, and scalable application. 🎨
+- **[React](https://beta.reactjs.org/)**: Crafting dynamic UIs with modern React, ensuring a fast, efficient, and scalable application. ⚛️
 - **[Vite](https://vitejs.dev/)**: Supercharging our development with Vite's next-generation front-end tooling. ⚡
 - **[PropTypes](https://www.npmjs.com/package/prop-types)**: Utilizing Prop Types for component prop type checking, ensuring the props passed to components are valid. ✔️
 - **[Axios](https://www.npmjs.com/package/axios)**: Streamlining HTTP requests with Axios for robust and elegant asynchronous operations. 🌐
@@ -23,6 +23,9 @@ The platform harnesses the power of cutting-edge technologies to deliver a seaml
 - **[React Slick](https://react-slick.neostack.com/)**: Showcasing images and content with a responsive carousel that adds a dynamic edge to our UI. 🖼️
 - **[React Leaflet](https://react-leaflet.js.org/)**: Integrating interactive maps with React Leaflet, enhancing location-based features. 🗺️
 - **[React To Print](https://www.npmjs.com/package/react-to-print)**: Providing users with the convenience of printing documents directly from the platform. 🖨️
+- **Testing Frameworks**: Ensuring code quality and functionality with comprehensive testing suites using:
+  - **[Jest](https://jestjs.io/)**: A delightful JavaScript Testing Framework with a focus on simplicity. ✅
+  - **[React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)**: Building strong tests for React components without relying on their implementation details. 🧪
 
 ## 📚 Notion Documentation Link
 Dive into the details of my project with the [Complete Project Documentation on Notion](https://bejewled-seaplane-db0.notion.site/Documentation-d21a301505174f34a61aab12cf4bb6ba?pvs=4).
