@@ -64,10 +64,9 @@ const AvailableRooms = ({ hotelAvailableRooms, isThereDates }) => {
             />
             <div className={styles.roomHeader}>
               <p className={styles.roomType}>{room.roomType} Room</p>
-              <p className={styles.availabilityAvailable}>Available</p>
+              <p className={styles.price}>${room.price}/night</p>
             </div>
 
-            <p className={styles.price}>Price: ${room.price}</p>
             <div className={styles.capacityInfo}>
               <div className={styles.iconContainer}>
                 <PersonIcon fontSize="small" />
