@@ -10,6 +10,7 @@ import {
   Radio,
   RadioGroup,
   Button,
+  Typography,
 } from "@mui/material";
 import styles from "./style.module.css";
 import { useSearchParams } from "react-router-dom";
@@ -55,6 +56,13 @@ const SearchFilters = () => {
                 max={700}
                 step={10}
               />
+              <Typography
+                variant="body2"
+                color="text.primary"
+                sx={{ marginBottom: 1 }}
+              >
+                ${values.priceRange[0]} - ${values.priceRange[1]}
+              </Typography>
             </FormControl>
 
             <FormControl component="fieldset" sx={{ display: "block", mb: 2 }}>
