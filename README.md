@@ -69,7 +69,7 @@ Dive into the details of my project with the [Complete Project Documentation on 
 - A curated list of popular cities with visually appealing thumbnails.
 
 ### 3. Search Results Page
-![image](https://github.com/Rahaf-Mansour/travel-booking-platform/assets/109438456/1695d907-94a4-420e-aad1-e1ecca52984e)
+![image](https://github.com/Rahaf-Mansour/travel-booking-platform/assets/109438456/a1e035b7-75d3-4401-a8f4-99b1c0ef3371)
 
 #### 3.1 Comprehensive Search Filters
 
@@ -106,7 +106,7 @@ Dive into the details of my project with the [Complete Project Documentation on 
 - List of booked rooms with their details (room number, price, capacity and amenities).
 
 #### 6. Confirmation Page
-![image](https://github.com/Rahaf-Mansour/travel-booking-platform/assets/109438456/a1fe5e69-a048-42f8-80d6-1f559420b28a)
+![image](https://github.com/Rahaf-Mansour/travel-booking-platform/assets/109438456/79d6c555-1866-434c-bbea-ac781146f49e)
 
 - Booking details with confirmation number and printable options.
 
