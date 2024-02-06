@@ -1,4 +1,3 @@
-import React from "react";
 import LeftNavigation from "./components/LeftNavigation";
 
 const Admin = () => {

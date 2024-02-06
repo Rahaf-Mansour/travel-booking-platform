@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import LeftNavigation from "../../components/LeftNavigation";
 import SearchBar from "../../components/SearchBar";
 import { CssBaseline, Box, Container } from "@mui/material";
@@ -16,7 +16,7 @@ import { useLoading } from "../../../../context/LoadingContext";
 import axiosInstance from "../../../../Axios/axiosInstance";
 
 const Hotels = () => {
-  const [, setSelectedEntity] = useState(null);
+  // const [, setSelectedEntity] = useState(null);
   const [hotels, setHotels] = useState([]);
   const [page, setPage] = useState(0);
   const [isLoading, setIsLoading] = useLoading();
@@ -28,9 +28,9 @@ const Hotels = () => {
     showSuccessSnackbar,
   } = useSnackbar();
 
-  const handleRowClick = (entity) => {
-    setSelectedEntity(entity);
-  };
+  // const handleRowClick = (entity) => {
+  //   setSelectedEntity(entity);
+  // };
 
   const handleAddHotel = (newHotel) => {
     setHotels((prevHotels) => [newHotel, ...prevHotels]);
@@ -128,7 +128,7 @@ const Hotels = () => {
               { field: "latitude", headerName: "Latitude" },
               { field: "longitude", headerName: "Longitude" },
             ]}
-            onRowClick={handleRowClick}
+            // onRowClick={handleRowClick}
             onUpdate={handleUpdateHotels}
             onDelete={handleDeleteHotel}
             EntityFormComponent={UpdateHotelForm}

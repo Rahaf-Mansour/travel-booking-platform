@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Paper,
   Table,
@@ -17,7 +17,7 @@ import PropTypes from "prop-types";
 const DetailedGrid = ({
   data,
   columns,
-  onRowClick,
+  // onRowClick,
   onUpdate,
   onDelete,
   EntityFormComponent,
@@ -33,7 +33,7 @@ const DetailedGrid = ({
 
   const handleRowClick = (entity) => {
     setSelectedEntity(entity);
-    onRowClick && onRowClick(entity);
+    // onRowClick && onRowClick(entity);
     setIsDrawerOpen(true);
   };
 
@@ -166,4 +166,5 @@ DetailedGrid.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
   setRowsPerPage: PropTypes.func.isRequired,
   totalCount: PropTypes.number.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };

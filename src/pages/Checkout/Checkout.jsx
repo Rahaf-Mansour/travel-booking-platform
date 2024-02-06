@@ -1,4 +1,4 @@
-import React from "react";
+import { useContext } from "react";
 import NavBar from "../../components/NavBar";
 import { Box, Grid, Card, Container } from "@mui/material";
 import FormInformation from "./components/FormInformation/FormInformation";
@@ -7,7 +7,7 @@ import { CartContext } from "../../context/CartContext";
 import Footer from "../../components/Footer";
 
 const Checkout = () => {
-  const { cart } = React.useContext(CartContext);
+  const { cart } = useContext(CartContext);
 
   return (
     <>

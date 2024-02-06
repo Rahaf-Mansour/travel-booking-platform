@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./style.module.css";
 import SearchResultItem from "../SearchResultItem/SearchResultItem";
 import { Link } from "react-router-dom";

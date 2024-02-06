@@ -1,4 +1,3 @@
-import React from "react";
 import { render, waitFor, screen } from "@testing-library/react";
 import Home from "../pages/Home";
 import { AuthContext } from "../context/authContext";

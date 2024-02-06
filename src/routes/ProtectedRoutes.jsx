@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
+import PropTypes from "prop-types";
 
 const ProtectedRoutes = ({ allowedRoles }) => {
   const { user } = useContext(AuthContext);
@@ -13,3 +14,7 @@ const ProtectedRoutes = ({ allowedRoles }) => {
 };
 
 export default ProtectedRoutes;
+
+ProtectedRoutes.propTypes = {
+  allowedRoles: PropTypes.arrayOf(PropTypes.string).isRequired,
+};

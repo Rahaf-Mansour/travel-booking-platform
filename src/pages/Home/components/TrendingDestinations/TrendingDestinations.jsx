@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { trendingDestinationsAPI } from "../../../../services/homePageServices";
 import { Grid, Card, CardContent, Typography } from "@mui/material";
 import { useLoading } from "../../../../context/LoadingContext";
