@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Drawer from "@mui/material/Drawer";
 import Typography from "@mui/material/Typography";
@@ -18,8 +18,8 @@ import { AuthContext } from "../../../../context/authContext";
 import { ListItemButton } from "@mui/material";
 
 const LeftNavigation = () => {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const { logoutUser } = React.useContext(AuthContext);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const { logoutUser } = useContext(AuthContext);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);

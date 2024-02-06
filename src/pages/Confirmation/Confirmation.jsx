@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import NavBar from "../../components/NavBar";
 import { useReactToPrint } from "react-to-print";
 import CustomButton from "../../components/CustomButton";

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import LeftNavigation from "../../components/LeftNavigation";
 import SearchBar from "../../components/SearchBar";
 import { CssBaseline, Box, Container } from "@mui/material";
@@ -13,7 +13,7 @@ import { useLoading } from "../../../../context/LoadingContext";
 import axiosInstance from "../../../../Axios/axiosInstance";
 
 const Cities = () => {
-  const [, setSelectedEntity] = useState(null);
+  // const [selectedEntity, setSelectedEntity] = useState(null);
   const [cities, setCities] = useState([]);
   const [page, setPage] = useState(0);
   const [isLoading, setIsLoading] = useLoading();
@@ -25,9 +25,10 @@ const Cities = () => {
     showSuccessSnackbar,
   } = useSnackbar();
 
-  const handleRowClick = (entity) => {
-    setSelectedEntity(entity);
-  };
+  // console.log("entities", selectedEntity);
+  // const handleRowClick = (entity) => {
+  //   setSelectedEntity(entity);
+  // };
 
   const handleAddCity = (newCity) => {
     setCities((prevCities) => [newCity, ...prevCities]);
@@ -122,7 +123,7 @@ const Cities = () => {
               { field: "name", headerName: "Name" },
               { field: "description", headerName: "Description" },
             ]}
-            onRowClick={handleRowClick}
+            // onRowClick={handleRowClick}
             onUpdate={handleUpdateCities}
             onDelete={handleDeleteCity}
             EntityFormComponent={UpdateCityForm}

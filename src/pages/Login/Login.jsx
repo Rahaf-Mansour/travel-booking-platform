@@ -1,4 +1,4 @@
-import React from "react";
+import { useContext } from "react";
 import styles from "./style.module.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -18,7 +18,7 @@ const loginSchema = Yup.object().shape({
 
 const Login = () => {
   const navigate = useNavigate();
-  const { loginUser } = React.useContext(AuthContext);
+  const { loginUser } = useContext(AuthContext);
   const {
     snackbar,
     handleCloseSnackbar,
@@ -35,7 +35,7 @@ const Login = () => {
         showSuccessSnackbar("Welcome, you're successfully logged in!");
         setTimeout(() => {
           navigate(response.userType === "User" ? "/home" : "/adminDashboard");
-        }, 2000);
+        }, 600);
       }
     } catch (error) {
       showErrorSnackbar(
@@ -55,52 +55,54 @@ const Login = () => {
         {({
           values,
           errors,
-          handleChange,
-          handleBlur,
-          handleSubmit,
+          // handleChange,
+          // handleBlur,
+          // handleSubmit,
           isSubmitting,
-          touched,
+          // touched,
         }) => {
           const areFieldsFilled = values.username && values.password;
-          const areThereErrors =
-            (touched.username && errors.username) ||
-            (touched.password && errors.password);
+          const areThereErrors = errors.username || errors.password;
           const buttonClassName =
             areFieldsFilled && !areThereErrors ? "activeBtn" : "defaultBtn";
 
           return (
             <div className={styles.loginForm}>
-              <Form onSubmit={handleSubmit}>
+              <Form>
                 <h1>Login 👋</h1>
                 <Field
                   type="text"
                   name="username"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.username}
+                  // onChange={handleChange}
+                  // onBlur={handleBlur}
+                  // value={values.username}
                   placeholder="Username"
-                  className="username-field"
-                  id="username"
+                  // className="username-field"
+                  // id="username"
                 />
 
-                <ErrorMessage name="username">
-                  {(msg) => <div className={styles.errorMessage}>{msg}</div>}
-                </ErrorMessage>
+                <ErrorMessage
+                  name="username"
+                  component="div"
+                  className={styles.errorMessage}
+                />
 
                 <Field
                   type="password"
                   name="password"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.password}
+                  // onChange={handleChange}
+                  // onBlur={handleBlur}
+                  // value={values.password}
                   placeholder="Password"
-                  className="password-field"
-                  id="password"
+                  // className="password-field"
+                  // id="password"
                 />
 
-                <ErrorMessage name="password">
-                  {(msg) => <div className={styles.errorMessage}>{msg}</div>}
-                </ErrorMessage>
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className={styles.errorMessage}
+                />
 
                 <CustomButton
                   className={buttonClassName}
@@ -109,17 +111,17 @@ const Login = () => {
                   {isSubmitting ? "Logging in..." : "Log in"}
                 </CustomButton>
               </Form>
-
-              <GenericSnackbar
-                open={snackbar.open}
-                message={snackbar.message}
-                onClose={handleCloseSnackbar}
-                severity={snackbar.severity}
-              />
             </div>
           );
         }}
       </Formik>
+
+      <GenericSnackbar
+        open={snackbar.open}
+        message={snackbar.message}
+        onClose={handleCloseSnackbar}
+        severity={snackbar.severity}
+      />
     </div>
   );
 };

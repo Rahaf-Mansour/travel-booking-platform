@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState, useEffect } from "react";
 import { Grid, Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { recentlyVisitedHotelsAPI } from "../../../../services/homePageServices";
 import useUserIdFromToken from "../../../../hooks/useUserIdFromToken";
@@ -9,7 +9,7 @@ import CircularProgressIndicator from "../../../../components/CircularProgressIn
 import { useNavigate } from "react-router-dom";
 
 export function RecentlyVisitedHotels() {
-  const [recentHotels, setRecentHotels] = React.useState([]);
+  const [recentHotels, setRecentHotels] = useState([]);
   const [isLoading, setIsLoading] = useLoading();
   const { snackbar, showErrorSnackbar, handleCloseSnackbar } = useSnackbar();
 
@@ -32,7 +32,7 @@ export function RecentlyVisitedHotels() {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     handleFetchRecentlyVisitedHotels();
   }, []);
 
@@ -47,7 +47,7 @@ export function RecentlyVisitedHotels() {
       <h2 style={{ marginTop: "4rem", marginBottom: "2rem" }}>
         Recently Visited Hotels
       </h2>
-      
+
       {isLoading ? (
         <CircularProgressIndicator />
       ) : (

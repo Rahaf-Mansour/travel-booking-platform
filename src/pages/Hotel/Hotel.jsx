@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
 import CircularProgressIndicator from "../../components/CircularProgressIndicator";

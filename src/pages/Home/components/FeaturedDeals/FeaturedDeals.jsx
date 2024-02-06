@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Slider from "react-slick";
 import { featuredDealsAPI } from "../../../../services/homePageServices";
 import "slick-carousel/slick/slick.css";

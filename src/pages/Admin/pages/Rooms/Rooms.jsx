@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import LeftNavigation from "../../components/LeftNavigation";
 import SearchBar from "./components/SearchBar";
 import { CssBaseline, Box, Container } from "@mui/material";
@@ -10,7 +10,7 @@ import CreateRoomDialog from "./components/CreateRoomDialog";
 import RoomsDetailedGrid from "./components/RoomsDetailedGrid";
 
 const Rooms = () => {
-  const [, setSelectedEntity] = useState(null);
+  // const [, setSelectedEntity] = useState(null);
   const [rooms, setRooms] = useState([]);
   const {
     snackbar,
@@ -19,9 +19,9 @@ const Rooms = () => {
     showSuccessSnackbar,
   } = useSnackbar();
 
-  const handleRowClick = (entity) => {
-    setSelectedEntity(entity);
-  };
+  // const handleRowClick = (entity) => {
+  //   setSelectedEntity(entity);
+  // };
 
   const handleAddRoom = (newRoom) => {
     setRooms((prevRooms) => [...prevRooms, newRoom]);
@@ -76,7 +76,7 @@ const Rooms = () => {
               { field: "roomNumber", headerName: "Room Number" },
               { field: "cost", headerName: "Cost" },
             ]}
-            onRowClick={handleRowClick}
+            // onRowClick={handleRowClick}
             onUpdate={handleUpdateRooms}
             onDelete={handleDeleteRoom}
             EntityFormComponent={UpdateRoomForm}
