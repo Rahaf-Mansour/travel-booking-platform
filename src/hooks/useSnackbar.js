@@ -9,7 +9,10 @@ const useSnackbar = () => {
   });
 
   const handleCloseSnackbar = () => {
-    setSnackbar({ ...snackbar, open: false });
+    if (snackbar.open) {
+      setSnackbar({ ...snackbar, open: false });
+      setSnackbarQueue((prevQueue) => prevQueue.slice(1));
+    }
   };
 
   const showSnackbar = (message, severity) => {
@@ -25,12 +28,11 @@ const useSnackbar = () => {
   };
 
   useEffect(() => {
-    if (!snackbar.open && snackbarQueue.length > 0) {
+    if (snackbarQueue.length > 0) {
       const nextSnackbar = snackbarQueue[0];
       setSnackbar({ open: true, ...nextSnackbar });
-      setSnackbarQueue((prevQueue) => prevQueue.slice(1));
     }
-  }, [snackbar, snackbarQueue]);
+  }, [snackbarQueue]);
 
   return {
     snackbar,
