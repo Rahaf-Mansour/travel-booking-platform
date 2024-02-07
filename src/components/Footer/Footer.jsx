@@ -2,15 +2,33 @@ import { Box, Typography, IconButton, Link } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EmailIcon from "@mui/icons-material/Email";
+import colors from "../../constants/colorConstants";
 
 const Footer = () => {
+  const iconLinks = [
+    {
+      icon: <GitHubIcon />,
+      href: "https://github.com/Rahaf-Mansour",
+      label: "GitHub",
+    },
+    {
+      icon: <LinkedInIcon />,
+      href: "https://www.linkedin.com/in/rahafmansour/",
+      label: "LinkedIn",
+    },
+    {
+      icon: <EmailIcon />,
+      href: "mailto:rahafmansour2018@gmail.com",
+      label: "Email",
+    },
+  ];
+
   return (
     <Box
       sx={{
-        bgcolor: "#395591",
+        bgcolor: colors.primaryColor,
         color: "white",
-        paddingTop: 3,
-        paddingBottom: 1,
+        padding: "18px 0px 8px 0px",
         marginTop: "1rem",
         display: "flex",
         flexDirection: "column",
@@ -26,38 +44,23 @@ const Footer = () => {
       </Typography>
       <Box
         sx={{
-          m: 0.5,
+          marginTop: 0.5,
+          display: "flex",
+          gap: "0.2rem",
         }}
       >
-        <IconButton
-          aria-label="GitHub"
-          component={Link}
-          href="https://github.com/Rahaf-Mansour"
-          target="_blank"
-          color="inherit"
-        >
-          <GitHubIcon />
-        </IconButton>
-
-        <IconButton
-          aria-label="LinkedIn"
-          component={Link}
-          href="https://www.linkedin.com/in/rahafmansour/"
-          target="_blank"
-          color="inherit"
-        >
-          <LinkedInIcon />
-        </IconButton>
-
-        <IconButton
-          aria-label="Email"
-          component={Link}
-          href="mailto:rahafmansour2018@gmail.com"
-          target="_blank"
-          color="inherit"
-        >
-          <EmailIcon />
-        </IconButton>
+        {iconLinks.map((link, index) => (
+          <IconButton
+            key={index}
+            aria-label={link.label}
+            component={Link}
+            href={link.href}
+            target="_blank"
+            color="inherit"
+          >
+            {link.icon}
+          </IconButton>
+        ))}
       </Box>
     </Box>
   );
