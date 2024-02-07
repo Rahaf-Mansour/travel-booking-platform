@@ -24,13 +24,12 @@ const NavBar = () => {
             isMobileOpened={isMobileOpened}
             handleDrawerToggle={handleDrawerToggle}
           />
+
           <AppBar
             position="static"
             component="nav"
             sx={{
               backgroundColor: colors.primaryColor,
-              display: "flex",
-              alignItems: "center",
             }}
           >
             <IconButton

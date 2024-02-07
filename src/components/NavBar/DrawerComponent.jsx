@@ -8,13 +8,13 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import React from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 import PropTypes from "prop-types";
 
 const DrawerComponent = ({ isMobileOpened, handleDrawerToggle }) => {
-  const { logoutUser } = React.useContext(AuthContext);
+  const { logoutUser } = useContext(AuthContext);
   const navItems = ["Home", "Search", "Cart"];
   const navigate = useNavigate();
 
@@ -33,7 +33,9 @@ const DrawerComponent = ({ isMobileOpened, handleDrawerToggle }) => {
         <Typography variant="h6" sx={{ my: 2, textAlign: "center" }}>
           Booking
         </Typography>
+
         <Divider />
+
         <List>
           {navItems.map((item) => (
             <ListItem key={item} disablePadding>
@@ -45,6 +47,7 @@ const DrawerComponent = ({ isMobileOpened, handleDrawerToggle }) => {
               </ListItemButton>
             </ListItem>
           ))}
+
           <ListItemButton sx={{ textAlign: "center" }} onClick={logoutUser}>
             <ListItemText primary={"Logout"} />
           </ListItemButton>
