@@ -1,23 +1,21 @@
 import { jwtDecode } from "jwt-decode";
 import useAuthToken from "./useAuthToken";
 
+const getUserIdFromToken = (token) => {
+  try {
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      return decodedToken.user_id;
+    }
+  } catch (error) {
+    console.error("Error decoding token:", error);
+  }
+  return null;
+};
+
 const useUserIdFromToken = () => {
   const token = useAuthToken();
-
-  const getUserIdFromToken = () => {
-    try {
-      if (token) {
-        const decodedToken = jwtDecode(token);
-        const userId = decodedToken.user_id;
-        return userId;
-      }
-    } catch (error) {
-      console.error("Error decoding token:", error);
-    }
-    return null;
-  };
-
-  return getUserIdFromToken();
+  return getUserIdFromToken(token);
 };
 
 export default useUserIdFromToken;
