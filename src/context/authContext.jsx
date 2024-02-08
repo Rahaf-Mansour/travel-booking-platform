@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
@@ -8,7 +8,7 @@ export const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
   const [cookies, setCookie, removeCookie] = useCookies(["auth"]);
-  const [user, setUser] = useState(cookies["auth"]);
+  const [user, setUser] = useState(cookies["auth"] || null);
   const navigate = useNavigate();
 
   const loginUser = (authData) => {
@@ -16,9 +16,11 @@ const AuthContextProvider = ({ children }) => {
     setUser(authData);
   };
 
-  useEffect(() => {
-    setUser(cookies["auth"] || null);
-  }, [cookies]);
+  const logoutUser = useCallback(() => {
+    setUser(null);
+    removeCookie("auth");
+    navigate("/");
+  }, [removeCookie, navigate]);
 
   if (user) {
     axiosInstance.defaults.headers.common[
@@ -28,18 +30,13 @@ const AuthContextProvider = ({ children }) => {
     delete axiosInstance.defaults.headers.common["Authorization"];
   }
 
-  const logoutUser = () => {
-    setUser(null);
-    removeCookie("auth");
-    navigate("/");
-  };
-
   console.log("user", user);
 
   useEffect(() => {
     const interceptor = axiosInstance.interceptors.response.use(
       (response) => response,
       (error) => {
+        // unauthorized error
         if (error.response && error.response.status === 401) {
           logoutUser();
         }
@@ -50,7 +47,7 @@ const AuthContextProvider = ({ children }) => {
     return () => {
       axiosInstance.interceptors.response.eject(interceptor);
     };
-  }, []);
+  }, [logoutUser]);
 
   return (
     <AuthContext.Provider value={{ loginUser, logoutUser, user }}>

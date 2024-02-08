@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AppBar, Badge, Button, Toolbar, Typography } from "@mui/material";
 import {
@@ -10,6 +10,7 @@ import {
 import { CartContext } from "../../context/CartContext";
 import { AuthContext } from "../../context/authContext";
 import colors from "../../constants/colorConstants";
+import ButtonLink from "./ButtonLink";
 
 const AppBarComponent = () => {
   const { cart } = useContext(CartContext);
@@ -25,7 +26,7 @@ const AppBarComponent = () => {
         sx={{
           display: "flex",
           justifyContent: "space-between",
-          paddingX: { sm: "2rem", md: "4rem", lg: "6rem" },
+          paddingX: { sm: "3rem", md: "3rem", lg: "6rem" },
         }}
       >
         <Typography
@@ -36,50 +37,23 @@ const AppBarComponent = () => {
           sx={{
             textDecoration: "none",
             fontSize: "1.5rem",
-            display: { xs: "none", md: "block" },
           }}
         >
           Booking
         </Typography>
 
         <div>
-          <Button
-            component={Link}
-            to="/home"
-            color="inherit"
-            sx={{ marginRight: 2 }}
-          >
-            <HomeIcon />
-            <Typography
-              variant="body1"
-              sx={{ marginLeft: 1, display: { xs: "none", md: "block" } }}
-            >
-              Home
-            </Typography>
-          </Button>
-
-          <Button
-            component={Link}
-            to="/search"
-            color="inherit"
-            sx={{ marginRight: 2 }}
-          >
-            <SearchIcon />
-            <Typography
-              variant="body1"
-              sx={{ marginLeft: 1, display: { xs: "none", md: "block" } }}
-            >
-              Search
-            </Typography>
-          </Button>
-
-          <Button component={Link} to="/cart" color="inherit">
-            <Badge badgeContent={cart.length} color="error">
-              <ShoppingCartIcon />
-            </Badge>
-          </Button>
-
-          <Button onClick={logoutUser} sx={{ marginLeft: 1, color: "inherit" }}>
+          <ButtonLink to="/home" icon={<HomeIcon />} text="Home" />
+          <ButtonLink to="/search" icon={<SearchIcon />} text="Search" />
+          <ButtonLink
+            to="/cart"
+            icon={
+              <Badge badgeContent={cart.length} color="error">
+                <ShoppingCartIcon />
+              </Badge>
+            }
+          />
+          <Button onClick={logoutUser} sx={{ color: "inherit" }}>
             <LogoutIcon />
             <Typography
               variant="body1"

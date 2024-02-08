@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Grid, Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { recentlyVisitedHotelsAPI } from "../../../../services/homePageServices";
-import useUserIdFromToken from "../../../../hooks/useUserIdFromToken";
+import useValueFromToken from "../../../../hooks/useValueFromToken";
 import useSnackbar from "../../../../hooks/useSnackbar";
 import GenericSnackbar from "../../../../components/GenericSnackbar";
 import { useLoading } from "../../../../context/LoadingContext";
@@ -13,7 +13,7 @@ export function RecentlyVisitedHotels() {
   const [isLoading, setIsLoading] = useLoading();
   const { snackbar, showErrorSnackbar, handleCloseSnackbar } = useSnackbar();
 
-  const userId = useUserIdFromToken();
+  const userId = useValueFromToken("user_id");
   const navigate = useNavigate();
 
   const handleFetchRecentlyVisitedHotels = async () => {

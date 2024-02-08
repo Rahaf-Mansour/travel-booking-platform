@@ -52,15 +52,7 @@ const Login = () => {
         initialValues={{ username: "", password: "" }}
         onSubmit={handleLogin}
       >
-        {({
-          values,
-          errors,
-          // handleChange,
-          // handleBlur,
-          // handleSubmit,
-          isSubmitting,
-          // touched,
-        }) => {
+        {({ values, errors, isSubmitting }) => {
           const areFieldsFilled = values.username && values.password;
           const areThereErrors = errors.username || errors.password;
           const buttonClassName =
@@ -70,16 +62,7 @@ const Login = () => {
             <div className={styles.loginForm}>
               <Form>
                 <h1>Login 👋</h1>
-                <Field
-                  type="text"
-                  name="username"
-                  // onChange={handleChange}
-                  // onBlur={handleBlur}
-                  // value={values.username}
-                  placeholder="Username"
-                  // className="username-field"
-                  // id="username"
-                />
+                <Field type="text" name="username" placeholder="Username" />
 
                 <ErrorMessage
                   name="username"
@@ -87,16 +70,7 @@ const Login = () => {
                   className={styles.errorMessage}
                 />
 
-                <Field
-                  type="password"
-                  name="password"
-                  // onChange={handleChange}
-                  // onBlur={handleBlur}
-                  // value={values.password}
-                  placeholder="Password"
-                  // className="password-field"
-                  // id="password"
-                />
+                <Field type="password" name="password" placeholder="Password" />
 
                 <ErrorMessage
                   name="password"
