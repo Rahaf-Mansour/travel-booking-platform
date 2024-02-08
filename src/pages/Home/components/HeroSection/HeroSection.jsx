@@ -4,7 +4,7 @@ import styles from "./style.module.css";
 const HeroSection = () => {
   return (
     <>
-      <div className={styles.imageContainer}>
+      <header className={styles.imageContainer}>
         <h1 className={styles.overlayText}>
           Book with us for a happy,
           <br /> comfortable accommodation!
@@ -14,7 +14,7 @@ const HeroSection = () => {
           className={styles.homeBackground}
           alt="HomeHeroBackground"
         />
-      </div>
+      </header>
     </>
   );
 };
