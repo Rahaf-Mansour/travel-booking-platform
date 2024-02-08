@@ -51,6 +51,13 @@
     margin: 0.2rem 0;
 }
 
+.priceInfoContainer {
+    display: flex;
+    justify-content: start;
+    margin-top: 1rem;
+    align-items: center;
+}
+
 .originalPrice {
     font-size: 0.9rem;
     font-weight: 400;

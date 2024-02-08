@@ -1,13 +1,17 @@
 import { useState, createContext, useContext } from "react";
 import PropTypes from "prop-types";
 
-const LoadingContext = createContext([false, () => {}]);
+const LoadingContext = createContext();
 
 export const LoadingProvider = ({ children }) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const stopLoading = () => {
+    setIsLoading(false);
+  };
 
   return (
-    <LoadingContext.Provider value={[isLoading, setIsLoading]}>
+    <LoadingContext.Provider value={[isLoading, setIsLoading, stopLoading]}>
       {children}
     </LoadingContext.Provider>
   );
