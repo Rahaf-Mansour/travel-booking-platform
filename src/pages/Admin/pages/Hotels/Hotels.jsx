@@ -12,14 +12,14 @@ import {
 import CreateHotelDialog from "./components/CreateHotelDialog";
 import DetailedGrid from "../../components/DetailedGrid";
 import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
-import { useLoading } from "../../../../context/LoadingContext";
+import useLoading from "../../../../hooks/useLoading";
 import axiosInstance from "../../../../Axios/axiosInstance";
 
 const Hotels = () => {
   // const [, setSelectedEntity] = useState(null);
   const [hotels, setHotels] = useState([]);
   const [page, setPage] = useState(0);
-  const [isLoading, setIsLoading] = useLoading();
+  const [isLoading, stopLoading] = useLoading();
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const {
     snackbar,
@@ -64,7 +64,6 @@ const Hotels = () => {
     page = 0,
     pageSize = rowsPerPage
   ) => {
-    setIsLoading(true);
     const queryParam = searchTerm
       ? `${searchType === "name" ? "name" : "searchQuery"}=${encodeURIComponent(
           searchTerm
@@ -84,7 +83,7 @@ const Hotels = () => {
       console.error("Fetching hotels failed: ", error);
       showErrorSnackbar(`Error fetching hotels: ${error.message}`);
     } finally {
-      setIsLoading(false);
+      stopLoading();
     }
   };
 

@@ -6,7 +6,7 @@ import styles from "./style.module.css";
 import GenericSnackbar from "../../../../components/GenericSnackbar";
 import { useNavigate } from "react-router-dom";
 import { useFormContext } from "../../../../context/CheckoutFormContext ";
-import { useCartContext } from "../../../../context/CartContext";
+import useCartContext from "../../../../hooks/useCartContext";
 import { postNewBooking } from "../../../../services/bookingServices";
 import CustomTextField from "../CustomTextField";
 import paymentSchema from "./paymentSchema";

@@ -1,11 +1,7 @@
-import { createContext, useState, useContext, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 export const CartContext = createContext();
-
-export const useCartContext = () => {
-  return useContext(CartContext);
-};
 
 const CartContextProvider = ({ children }) => {
   const [cart, setCart] = useState(() => {

@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ShopCartIcon from "@mui/icons-material/ShoppingCart";
-import { useCartContext } from "../../../../context/CartContext";
+import useCartContext from "../../../../hooks/useCartContext";
 
 const CartItems = () => {
   const { cart, removeFromCart, getCartTotalPrice } = useCartContext();

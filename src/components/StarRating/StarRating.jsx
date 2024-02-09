@@ -1,15 +1,9 @@
 import PropTypes from "prop-types";
 import { Star } from "@mui/icons-material";
 
-const StarRating = ({ starsNumber, className, style }) => {
-  const defaultStyles = {
-    display: "flex",
-  };
-
-  const mergedStyles = { ...defaultStyles, ...style };
-
+const StarRating = ({ starsNumber, className }) => {
   return (
-    <div className={className} style={mergedStyles}>
+    <div className={className} style={{ display: "flex" }}>
       {Array(starsNumber)
         .fill()
         .map((_, i) => (
@@ -19,10 +13,9 @@ const StarRating = ({ starsNumber, className, style }) => {
   );
 };
 
+export default StarRating;
+
 StarRating.propTypes = {
   starsNumber: PropTypes.number.isRequired,
   className: PropTypes.string,
-  style: PropTypes.object,
 };
-
-export default StarRating;

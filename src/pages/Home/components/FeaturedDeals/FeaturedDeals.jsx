@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styles from "./style.module.css";
 import { featuredDealsAPI } from "../../../../services/homePageServices";
-import { useLoading } from "../../../../context/LoadingContext";
+import useLoading from "../../../../hooks/useLoading";
 import useSnackbar from "../../../../hooks/useSnackbar";
 import GenericSnackbar from "../../../../components/GenericSnackbar";
 import SkeletonDealCard from "./SkeletonDealCard";
@@ -17,19 +17,21 @@ const FeaturedDeals = () => {
   const [slidesToShow, setSlidesToShow] = useState(1);
   const { snackbar, showErrorSnackbar, handleCloseSnackbar } = useSnackbar();
 
-  const fetchDeals = async () => {
-    try {
-      const dealsData = await featuredDealsAPI();
-      setDeals(dealsData);
-    } catch (error) {
-      setError(error);
-      showErrorSnackbar("Failed to fetch deals. Please try again later.");
-    } finally {
-      stopLoading();
-    }
-  };
+  useEffect(() => {
+    const fetchDeals = async () => {
+      try {
+        const dealsData = await featuredDealsAPI();
+        setDeals(dealsData);
+      } catch (error) {
+        setError(error);
+        showErrorSnackbar("Failed to fetch deals. Please try again later.");
+      } finally {
+        stopLoading();
+      }
+    };
 
-  fetchDeals();
+    fetchDeals();
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {

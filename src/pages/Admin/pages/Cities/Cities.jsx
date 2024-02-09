@@ -9,14 +9,14 @@ import { deleteCity } from "../../../../services/manageCities";
 import CreateCityDialog from "./components/CreateCityDialog";
 import DetailedGrid from "../../components/DetailedGrid";
 import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
-import { useLoading } from "../../../../context/LoadingContext";
+import useLoading from "../../../../hooks/useLoading";
 import axiosInstance from "../../../../Axios/axiosInstance";
 
 const Cities = () => {
   // const [selectedEntity, setSelectedEntity] = useState(null);
   const [cities, setCities] = useState([]);
   const [page, setPage] = useState(0);
-  const [isLoading, setIsLoading] = useLoading();
+  const [isLoading, stopLoading] = useLoading();
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const {
     snackbar,
@@ -61,7 +61,6 @@ const Cities = () => {
     page = 0,
     pageSize = rowsPerPage
   ) => {
-    setIsLoading(true);
     const queryParam = searchTerm
       ? `${searchType === "name" ? "name" : "searchQuery"}=${encodeURIComponent(
           searchTerm
@@ -81,7 +80,7 @@ const Cities = () => {
       console.error("Fetching cities failed: ", error);
       showErrorSnackbar(`Error fetching cities: ${error.message}`);
     } finally {
-      setIsLoading(false);
+      stopLoading();
     }
   };
 

@@ -6,7 +6,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import ChildFriendlyIcon from "@mui/icons-material/ChildFriendly";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { renderAmenityIcon } from "../../../../helpers/helpers";
-import { useCartContext } from "../../../../context/CartContext";
+import useCartContext from "../../../../hooks/useCartContext";
 import useSnackbar from "../../../../hooks/useSnackbar";
 import GenericSnackbar from "../../../../components/GenericSnackbar";
 import { SearchContext } from "../../../../context/searchContext";

@@ -16,11 +16,10 @@ export const useHotelData = (
   const [hotelGuestReviews, setHotelGuestReviews] = useState([]);
   const [hotelGallery, setHotelGallery] = useState([]);
   const [hotelAvailableRooms, setHotelAvailableRooms] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, stopLoading] = useState(false);
   const [error, setError] = useState("");
 
   const fetchHotelData = useCallback(() => {
-    setIsLoading(true);
     setError("");
 
     Promise.allSettled([
@@ -63,7 +62,7 @@ export const useHotelData = (
           }
         });
       })
-      .finally(() => setIsLoading(false));
+      .finally(() => stopLoading());
   }, [hotelId, checkInDate, checkOutDate, isThereDates]);
 
   return {

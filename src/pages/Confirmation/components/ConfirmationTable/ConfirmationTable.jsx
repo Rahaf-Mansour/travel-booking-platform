@@ -10,7 +10,7 @@ import FormContext from "../../../../context/CheckoutFormContext ";
 import { SearchContext } from "../../../../context/searchContext";
 import Container from "@mui/material/Container";
 import styles from "./style.module.css";
-import { useCartContext } from "../../../../context/CartContext";
+import useCartContext from "../../../../hooks/useCartContext";
 
 const ConfirmationTable = () => {
   const { searchParams } = useContext(SearchContext);
