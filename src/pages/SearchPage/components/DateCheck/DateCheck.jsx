@@ -8,12 +8,12 @@ import dayjs from "dayjs";
 import PropTypes from "prop-types";
 import CustomButton from "../../../../components/CustomButton";
 
-function DateCheck({
+const DateCheck = ({
   handleSetDate,
   isDateOpened,
   setIsDateOpened,
   dateValues,
-}) {
+}) => {
   const [date, setDate] = useState([
     {
       startDate: dayjs(dateValues.checkInDate).toDate(),
@@ -58,7 +58,7 @@ function DateCheck({
       )}
     </>
   );
-}
+};
 
 export default DateCheck;
 

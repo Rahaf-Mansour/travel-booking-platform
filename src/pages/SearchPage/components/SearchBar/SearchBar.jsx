@@ -3,7 +3,7 @@ import styles from "./style.module.css";
 import SingleBedIcon from "@mui/icons-material/SingleBed";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import SearchItem from "../SearchItem";
-import DateCheck from "../../../Home/components/DateCheck";
+import DateCheck from "../DateCheck";
 import OptionItem from "../OptionItem";
 import CustomButton from "../../../../components/CustomButton";
 import PropTypes from "prop-types";

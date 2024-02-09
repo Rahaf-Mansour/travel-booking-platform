@@ -1,11 +1,7 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState } from "react";
 import PropTypes from "prop-types";
 
-const FormContext = createContext();
-
-export const useFormContext = () => {
-  return useContext(FormContext);
-};
+export const FormContext = createContext();
 
 export const FormContextProvider = ({ children }) => {
   const [formValues, setFormValues] = useState(null);
@@ -25,4 +21,4 @@ FormContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default FormContext;
+export default FormContextProvider;

@@ -5,12 +5,13 @@ import MenuItem from "@mui/material/MenuItem";
 import styles from "./style.module.css";
 import GenericSnackbar from "../../../../components/GenericSnackbar";
 import { useNavigate } from "react-router-dom";
-import { useFormContext } from "../../../../context/CheckoutFormContext ";
+import { FormContext } from "../../../../context/CheckoutFormContext ";
 import useCartContext from "../../../../hooks/useCartContext";
 import { postNewBooking } from "../../../../services/bookingServices";
 import CustomTextField from "../CustomTextField";
 import paymentSchema from "./paymentSchema";
 import useSnackbar from "../../../../hooks/useSnackbar";
+import { useContext } from "react";
 
 const initialValues = {
   fullName: "",
@@ -41,7 +42,7 @@ const FormInformation = () => {
     showSuccessSnackbar,
   } = useSnackbar();
   const navigateToConfirmationPage = useNavigate();
-  const { setValues } = useFormContext();
+  const { setValues } = useContext(FormContext);
   const { cart } = useCartContext();
 
   const handlePayment = async (values) => {
