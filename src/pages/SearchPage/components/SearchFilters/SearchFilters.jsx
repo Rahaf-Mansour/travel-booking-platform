@@ -39,10 +39,7 @@ const SearchFilters = () => {
       {({ values, handleChange, handleSubmit }) => (
         <Form style={{ flex: 1.2 }}>
           <div className={styles.filterSide}>
-            <FormControl
-              component="fieldset"
-              sx={{ display: "block", width: "100%", mb: 2 }}
-            >
+            <FormControl component="fieldset" sx={{ width: "100%", mb: 2 }}>
               <FormLabel component="legend">Your Budget per night:</FormLabel>
               <Slider
                 value={values.priceRange}
@@ -52,7 +49,7 @@ const SearchFilters = () => {
                 valueLabelDisplay="auto"
                 valueLabelFormat={(value) => `$${value}`}
                 min={20}
-                max={700}
+                max={400}
                 step={10}
               />
               <Typography
@@ -64,7 +61,7 @@ const SearchFilters = () => {
               </Typography>
             </FormControl>
 
-            <FormControl component="fieldset" sx={{ display: "block", mb: 2 }}>
+            <FormControl component="fieldset" sx={{ mb: 2 }}>
               <FormLabel component="legend">Star Rating:</FormLabel>
               <RadioGroup
                 aria-label="star-rating"
@@ -77,7 +74,7 @@ const SearchFilters = () => {
                     key={rating}
                     value={rating}
                     control={<Radio />}
-                    label={`${rating} Star${rating !== 1 && "s"}`}
+                    label={`${rating} Stars`}
                   />
                 ))}
               </RadioGroup>
