@@ -5,6 +5,7 @@ import useLoading from "../../../../hooks/useLoading";
 import useSnackbar from "../../../../hooks/useSnackbar";
 import GenericSnackbar from "../../../../components/GenericSnackbar";
 import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 export function TrendingDestinations() {
   const [trendingDestinations, setTrendingDestinations] = useState([]);
@@ -59,8 +60,14 @@ export function TrendingDestinations() {
                   <Typography
                     variant="subtitle1"
                     component="div"
-                    sx={{ fontWeight: "bold", fontSize: "1.2rem" }}
+                    sx={{
+                      fontWeight: "bold",
+                      fontSize: "1.2rem",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
                   >
+                    <LocationOnIcon />
                     {item.cityName}
                   </Typography>
                 </CardContent>
