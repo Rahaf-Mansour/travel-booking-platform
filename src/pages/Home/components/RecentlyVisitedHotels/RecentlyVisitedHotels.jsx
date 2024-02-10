@@ -74,7 +74,7 @@ export function RecentlyVisitedHotels() {
                     {hotel.hotelName}
                   </Typography>
                   <Typography variant="subtitle2" color="textSecondary">
-                    {`${hotel.cityName} | Rating: ${hotel.starRating} Stars | Price Range: $${hotel.priceLowerBound} - $${hotel.priceUpperBound}`}
+                    {`${hotel.cityName} | ${hotel.starRating} Stars | Price Range: $${hotel.priceLowerBound} - $${hotel.priceUpperBound}`}
                   </Typography>
                 </CardContent>
               </Card>
