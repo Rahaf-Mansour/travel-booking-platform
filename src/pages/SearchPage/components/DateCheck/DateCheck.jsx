@@ -8,12 +8,7 @@ import dayjs from "dayjs";
 import PropTypes from "prop-types";
 import CustomButton from "../../../../components/CustomButton";
 
-const DateCheck = ({
-  handleSetDate,
-  isDateOpened,
-  setIsDateOpened,
-  dateValues,
-}) => {
+const DateCheck = ({ handleSetDate, isDateOpened, toggleDate, dateValues }) => {
   const [date, setDate] = useState([
     {
       startDate: dayjs(dateValues.checkInDate).toDate(),
@@ -37,7 +32,7 @@ const DateCheck = ({
       <CustomButton
         type="button"
         className={styles.heroSearchText}
-        onClick={() => setIsDateOpened(!isDateOpened)}
+        onClick={toggleDate}
       >
         <DateRangeIcon className={styles.heroIcon} />
         <span>
@@ -65,6 +60,6 @@ export default DateCheck;
 DateCheck.propTypes = {
   handleSetDate: PropTypes.func,
   isDateOpened: PropTypes.bool,
-  setIsDateOpened: PropTypes.func,
+  toggleDate: PropTypes.func,
   dateValues: PropTypes.object,
 };

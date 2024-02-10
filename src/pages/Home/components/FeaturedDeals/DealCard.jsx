@@ -37,7 +37,9 @@ const DealCard = ({ deal }) => {
         </div>
         <div className={styles.bottomSpaceBetweenContainer}>
           <p className={styles.cityName}>
-            <LocationOnIcon sx={{ color: "#3d3737" }} />
+            <LocationOnIcon
+              sx={{ color: "#3d3737", fontSize: "1.2rem", marginRight: 0.5 }}
+            />
             {cityName}
           </p>
           <div className={styles.priceInfoContainer}>
