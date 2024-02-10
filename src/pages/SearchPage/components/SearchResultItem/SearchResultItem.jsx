@@ -6,6 +6,7 @@ import {
   Typography,
   Button,
   Chip,
+  Box,
 } from "@mui/material";
 import StarRating from "../../../../components/StarRating";
 
@@ -21,7 +22,7 @@ const SearchResultItem = ({ hotel }) => {
   } = hotel;
 
   return (
-    <div>
+    <Box>
       <Card
         elevation={3}
         sx={{
@@ -66,7 +67,7 @@ const SearchResultItem = ({ hotel }) => {
           <Typography variant="body1" sx={{ marginTop: 1 }}>
             {hotelName} in {cityName} offers {roomType} rooms.
           </Typography>
-          <div style={{ display: "flex", marginTop: "1rem" }}>
+          <Box sx={{ marginTop: "1rem" }}>
             {amenities.map((amenity, index) => (
               <Chip
                 key={index}
@@ -80,34 +81,27 @@ const SearchResultItem = ({ hotel }) => {
                 }}
               />
             ))}
-          </div>
-          <div className="price" style={{ marginTop: "1rem" }}>
+          </Box>
+          <Box sx={{ m: 2 }}>
             <Typography variant="body1">
-              Price per night: US${roomPrice}
+              <span style={{ fontWeight: 600 }}>US${roomPrice}/night</span>
             </Typography>
-          </div>
-          <div
-            style={{
-              marginTop: "auto",
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
+          </Box>
+          <Box>
             <Button
               variant="contained"
               color="primary"
               sx={{
-                marginTop: 1,
                 borderRadius: 5,
                 width: { xs: "100%", md: "50%" },
               }}
             >
               See Availability
             </Button>
-          </div>
+          </Box>
         </CardContent>
       </Card>
-    </div>
+    </Box>
   );
 };
 
