@@ -67,7 +67,9 @@ export function TrendingDestinations() {
                       alignItems: "center",
                     }}
                   >
-                    <LocationOnIcon />
+                    <LocationOnIcon
+                      sx={{ fontSize: "1.2rem", marginRight: 0.5 }}
+                    />
                     {item.cityName}
                   </Typography>
                 </CardContent>
