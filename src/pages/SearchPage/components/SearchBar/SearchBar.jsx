@@ -2,7 +2,6 @@ import { useState, useContext } from "react";
 import styles from "./style.module.css";
 import SingleBedIcon from "@mui/icons-material/SingleBed";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import SearchItem from "../SearchItem";
 import DateCheck from "../DateCheck";
 import OptionItem from "../OptionItem";
 import CustomButton from "../../../../components/CustomButton";
@@ -14,6 +13,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import useSnackbar from "../../../../hooks/useSnackbar";
 import GenericSnackbar from "../../../../components/GenericSnackbar";
 import { SearchContext } from "../../../../context/searchContext";
+import SearchItemContainer from "../SearchItemContainer";
 
 const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
   const [searchState, setSearchState] = useState({
@@ -111,7 +111,7 @@ const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
     <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
       <div className={styles.parent}>
         <SearchContainer topXs={topXs} topLg={topLg}>
-          <SearchItem>
+          <SearchItemContainer>
             <SingleBedIcon className={styles.searchIcon} />
             <input
               id="city"
@@ -122,9 +122,9 @@ const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
               placeholder="Where are you going?"
               className={styles.searchInput}
             />
-          </SearchItem>
+          </SearchItemContainer>
 
-          <SearchItem>
+          <SearchItemContainer>
             <DateCheck
               dateValues={{
                 checkInDate: formik.values.checkInDate,
@@ -134,9 +134,9 @@ const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
               isDateOpened={isDateOpened}
               toggleDate={() => handleToggleState("isDateOpened")}
             />
-          </SearchItem>
+          </SearchItemContainer>
 
-          <SearchItem>
+          <SearchItemContainer>
             <CustomButton
               type="button"
               className={styles.searchText}
@@ -145,7 +145,6 @@ const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
               <PersonOutlineIcon className={styles.searchIcon} />
               <span>{`${formik.values.adults} adult . ${formik.values.children} children . ${formik.values.numberOfRooms} room`}</span>
             </CustomButton>
-
             {isOptionsOpened && (
               <div className={styles.options}>
                 {[
@@ -164,8 +163,9 @@ const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
                 ))}
               </div>
             )}
-          </SearchItem>
-          <SearchItem>
+          </SearchItemContainer>
+
+          <SearchItemContainer>
             <CustomButton
               type="submit"
               className={styles.searchButton}
@@ -173,7 +173,7 @@ const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
             >
               Search
             </CustomButton>
-          </SearchItem>
+          </SearchItemContainer>
         </SearchContainer>
       </div>
       <GenericSnackbar {...snackbar} onClose={handleCloseSnackbar} />

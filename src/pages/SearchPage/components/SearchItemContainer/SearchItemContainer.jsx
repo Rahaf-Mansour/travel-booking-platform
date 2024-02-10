@@ -1,12 +1,12 @@
 import PropTypes from "prop-types";
 import styles from "./style.module.css";
 
-const SearchItem = ({ children }) => {
+const SearchItemContainer = ({ children }) => {
   return <div className={styles.heroSearchItem}>{children}</div>;
 };
 
-SearchItem.propTypes = {
+SearchItemContainer.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default SearchItem;
+export default SearchItemContainer;
