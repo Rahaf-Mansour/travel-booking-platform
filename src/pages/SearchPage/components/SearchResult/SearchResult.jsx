@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./style.module.css";
-import SearchResultItem from "../SearchResultItem/SearchResultItem";
+import SearchResultItem from "../SearchResultItem";
 import { Link } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import { searchAPI } from "../../../../services/searchService";
@@ -41,7 +41,7 @@ const SearchResult = () => {
     <div className={styles.resultList}>
       {isLoading ? (
         <CircularProgressIndicator />
-      ) : (
+      ) : hotelData.length > 0 ? (
         hotelData.map((hotel) => (
           <Link
             to={`/hotel/${hotel.hotelId}`}
@@ -51,6 +51,11 @@ const SearchResult = () => {
             <SearchResultItem key={hotel.hotelId} hotel={hotel} />
           </Link>
         ))
+      ) : (
+        <p className={styles.noHotelsMessage}>
+          No hotels available for the selected criteria. Please refine your
+          search parameters and try again.
+        </p>
       )}
       <GenericSnackbar {...snackbar} onClose={handleCloseSnackbar} />
     </div>
