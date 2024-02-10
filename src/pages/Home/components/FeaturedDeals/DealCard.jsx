@@ -2,6 +2,7 @@ import styles from "./style.module.css";
 import StarRating from "../../../../components/StarRating";
 import { useNavigate } from "react-router-dom";
 import { getHotelDetails } from "../../../../services/hotelPageServices";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PropTypes from "prop-types";
 
 const DealCard = ({ deal }) => {
@@ -30,12 +31,19 @@ const DealCard = ({ deal }) => {
     <div onClick={handleDealClick} className={styles.dealCard}>
       <img className={styles.roomPhoto} src={roomPhotoUrl} alt={hotelName} />
       <div className={styles.bottomContainer}>
-        <h3 className={styles.hotelName}>{hotelName}</h3>
-        <p className={styles.cityName}>{cityName}</p>
-        <StarRating starsNumber={hotelStarRating} />
-        <div className={styles.priceInfoContainer}>
-          <p className={styles.originalPrice}>${originalRoomPrice}</p>
-          <p className={styles.finalPrice}>${finalPrice}</p>
+        <div className={styles.topSpaceBetweenContainer}>
+          <h3 className={styles.hotelName}>{hotelName}</h3>
+          <StarRating starsNumber={hotelStarRating} />
+        </div>
+        <div className={styles.bottomSpaceBetweenContainer}>
+          <p className={styles.cityName}>
+            <LocationOnIcon sx={{ color: "#3d3737" }} />
+            {cityName}
+          </p>
+          <div className={styles.priceInfoContainer}>
+            <p className={styles.originalPrice}>${originalRoomPrice}</p>
+            <p className={styles.finalPrice}>${finalPrice}</p>
+          </div>
         </div>
       </div>
     </div>
