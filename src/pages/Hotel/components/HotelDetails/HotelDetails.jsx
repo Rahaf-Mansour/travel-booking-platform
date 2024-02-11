@@ -10,7 +10,11 @@ const HotelDetails = ({ hotelDetails, hotelGuestReviews }) => {
 
   return (
     <div>
-      <HotelHeaderAndDescription hotelDetails={hotelDetails} />
+      <HotelHeaderAndDescription
+        hotelName={hotelDetails.hotelName}
+        starRating={hotelDetails.starRating}
+        description={hotelDetails.description}
+      />
       <HotelAmenities amenities={hotelDetails.amenities} />
       <HotelReviews hotelGuestReviews={hotelGuestReviews} />
     </div>
