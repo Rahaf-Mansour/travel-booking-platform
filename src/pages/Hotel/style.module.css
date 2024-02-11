@@ -20,6 +20,13 @@
     margin-left: 1rem;
 }
 
+.errorMessage {
+    color: red;
+    font-size: 1.1rem;
+    text-align: center;
+    margin-top: 1rem;
+}
+
 @media screen and (max-width: 450px) {
     .container {
         margin-left: 1rem;
