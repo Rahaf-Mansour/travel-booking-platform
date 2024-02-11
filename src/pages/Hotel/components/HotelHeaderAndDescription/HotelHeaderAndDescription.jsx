@@ -6,10 +6,10 @@ const HotelDetailsInfo = ({ hotelDetails }) => {
   const { hotelName, starRating, description } = hotelDetails;
 
   return (
-    <div className={styles.hotelDetailsInfo}>
+    <div className={styles.hotelHeaderAndDescriptionContainer}>
       <div className={styles.hotelHeader}>
         <h1 className={styles.hotelName}>{hotelName}</h1>
-        <StarRating starsNumber={starRating} className={styles.starRating} />
+        <StarRating starsNumber={starRating} />
       </div>
       <p>{description}</p>
     </div>
