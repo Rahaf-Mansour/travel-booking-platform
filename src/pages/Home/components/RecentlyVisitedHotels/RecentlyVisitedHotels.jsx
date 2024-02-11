@@ -5,7 +5,6 @@ import useValueFromToken from "../../../../hooks/useValueFromToken";
 import useSnackbar from "../../../../hooks/useSnackbar";
 import GenericSnackbar from "../../../../components/GenericSnackbar";
 import useLoading from "../../../../hooks/useLoading";
-// import { useLoadingg } from "../../../../context/LoadingContext";
 import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
 import { useNavigate } from "react-router-dom";
 
@@ -75,7 +74,11 @@ export function RecentlyVisitedHotels() {
                   <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
                     {hotel.hotelName}
                   </Typography>
-                  <Typography variant="subtitle2" color="textSecondary">
+                  <Typography
+                    variant="subtitle2"
+                    color="textSecondary"
+                    sx={{ fontSize: { lg: "1rem" } }}
+                  >
                     {`${hotel.cityName} | ${hotel.starRating} Stars | Price Range: $${hotel.priceLowerBound} - $${hotel.priceUpperBound}`}
                   </Typography>
                 </CardContent>
