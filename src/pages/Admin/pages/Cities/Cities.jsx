@@ -16,7 +16,7 @@ const Cities = () => {
   // const [selectedEntity, setSelectedEntity] = useState(null);
   const [cities, setCities] = useState([]);
   const [page, setPage] = useState(0);
-  const [isLoading, stopLoading] = useLoading();
+  const [isLoading, startLoading, stopLoading] = useLoading();
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const {
     snackbar,
@@ -66,6 +66,7 @@ const Cities = () => {
           searchTerm
         )}&`
       : "";
+    startLoading();
     try {
       const response = await axiosInstance.get(
         `/cities?${queryParam}pageSize=${pageSize}&pageNumber=${page + 1}`

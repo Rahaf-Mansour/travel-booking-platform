@@ -19,7 +19,7 @@ const Hotels = () => {
   // const [, setSelectedEntity] = useState(null);
   const [hotels, setHotels] = useState([]);
   const [page, setPage] = useState(0);
-  const [isLoading, stopLoading] = useLoading();
+  const [isLoading, startLoading, stopLoading] = useLoading();
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const {
     snackbar,
@@ -69,6 +69,7 @@ const Hotels = () => {
           searchTerm
         )}&`
       : "";
+    startLoading();
     try {
       const response = await axiosInstance.get(
         `/hotels?${queryParam}pageSize=${pageSize}&pageNumber=${page + 1}`

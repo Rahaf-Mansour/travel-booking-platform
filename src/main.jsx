@@ -11,15 +11,15 @@ import { LoadingProvider } from "./context/LoadingContext.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <AuthContextProvider>
-      <SearchContextProvider>
-        <CartContextProvider>
-          <FormContextProvider>
-            <LoadingProvider>
+      <LoadingProvider>
+        <SearchContextProvider>
+          <CartContextProvider>
+            <FormContextProvider>
               <App />
-            </LoadingProvider>
-          </FormContextProvider>
-        </CartContextProvider>
-      </SearchContextProvider>
+            </FormContextProvider>
+          </CartContextProvider>
+        </SearchContextProvider>
+      </LoadingProvider>
     </AuthContextProvider>
   </BrowserRouter>
 );
