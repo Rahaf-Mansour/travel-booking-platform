@@ -5,18 +5,20 @@ import useValueFromToken from "../../../../hooks/useValueFromToken";
 import useSnackbar from "../../../../hooks/useSnackbar";
 import GenericSnackbar from "../../../../components/GenericSnackbar";
 import useLoading from "../../../../hooks/useLoading";
+// import { useLoadingg } from "../../../../context/LoadingContext";
 import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
 import { useNavigate } from "react-router-dom";
 
 export function RecentlyVisitedHotels() {
   const [recentHotels, setRecentHotels] = useState([]);
-  const [isLoading, stopLoading] = useLoading();
+  const [isLoading, startLoading, stopLoading] = useLoading();
   const { snackbar, showErrorSnackbar, handleCloseSnackbar } = useSnackbar();
 
   const userId = useValueFromToken("user_id");
   const navigate = useNavigate();
 
   const handleFetchRecentlyVisitedHotels = async () => {
+    startLoading();
     try {
       const recentHotelsData = await recentlyVisitedHotelsAPI(userId);
       setRecentHotels(recentHotelsData);
