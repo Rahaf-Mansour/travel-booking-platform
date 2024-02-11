@@ -5,6 +5,7 @@ import {
   getHotelPicturesGallery,
   getHotelAvailableRooms,
 } from "../../../services/hotelPageServices";
+import useLoading from "../../../hooks/useLoading";
 
 export const useHotelData = (
   hotelId,
@@ -16,12 +17,13 @@ export const useHotelData = (
   const [hotelGuestReviews, setHotelGuestReviews] = useState([]);
   const [hotelGallery, setHotelGallery] = useState([]);
   const [hotelAvailableRooms, setHotelAvailableRooms] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+
+  const [isLoading, startLoading, stopLoading] = useLoading();
   const [error, setError] = useState("");
 
   const fetchHotelData = useCallback(() => {
-    setIsLoading(true);
     setError("");
+    startLoading();
 
     Promise.allSettled([
       getHotelDetails(hotelId),
@@ -63,7 +65,7 @@ export const useHotelData = (
           }
         });
       })
-      .finally(() => setIsLoading(false));
+      .finally(() => stopLoading());
   }, [hotelId, checkInDate, checkOutDate, isThereDates]);
 
   return {

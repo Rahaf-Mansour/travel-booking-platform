@@ -2,8 +2,14 @@ import PropTypes from "prop-types";
 import styles from "./style.module.css";
 import CustomButton from "../../../../components/CustomButton";
 
-const OptionItem = ({ count, label, onDecrement, onIncrement, min = 0 }) => (
-  <>
+const OptionItem = ({ count, label, onDecrement, onIncrement, min }) => {
+  const handleDecrement = () => {
+    if (count > min) {
+      onDecrement();
+    }
+  };
+
+  return (
     <div className={styles.optionItem}>
       <span className={styles.optionText}>{label}</span>
       <div className={styles.optionCounter}>
@@ -11,7 +17,8 @@ const OptionItem = ({ count, label, onDecrement, onIncrement, min = 0 }) => (
           type="button"
           disabled={count <= min}
           className={styles.optionCounterButton}
-          onClick={onDecrement}
+          onClick={handleDecrement}
+          aria-label={`Decrease ${label}`}
         >
           <span className={styles.sign}>&#x2212;</span>
         </CustomButton>
@@ -20,13 +27,14 @@ const OptionItem = ({ count, label, onDecrement, onIncrement, min = 0 }) => (
           type="button"
           className={styles.optionCounterButton}
           onClick={onIncrement}
+          aria-label={`Increase ${label}`}
         >
           <span className={styles.sign}>&#43;</span>
         </CustomButton>
       </div>
     </div>
-  </>
-);
+  );
+};
 
 export default OptionItem;
 

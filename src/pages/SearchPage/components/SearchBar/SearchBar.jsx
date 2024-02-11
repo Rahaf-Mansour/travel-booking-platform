@@ -1,9 +1,8 @@
-import { useState, useContext } from "react";
+import { useContext, useState } from "react";
 import styles from "./style.module.css";
 import SingleBedIcon from "@mui/icons-material/SingleBed";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import SearchItem from "../SearchItem";
-import DateCheck from "../../../Home/components/DateCheck";
+import DateCheck from "../DateCheck";
 import OptionItem from "../OptionItem";
 import CustomButton from "../../../../components/CustomButton";
 import PropTypes from "prop-types";
@@ -14,23 +13,27 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import useSnackbar from "../../../../hooks/useSnackbar";
 import GenericSnackbar from "../../../../components/GenericSnackbar";
 import { SearchContext } from "../../../../context/searchContext";
+import SearchItemContainer from "../SearchItemContainer";
 
 const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
-  const [isOptionsOpened, setIsOptionsOpened] = useState(false);
-  const [isDateOpened, setIsDateOpened] = useState(false);
+  const [searchState, setSearchState] = useState({
+    isOptionsOpened: false,
+    isDateOpened: false,
+  });
+  const { isOptionsOpened, isDateOpened } = searchState;
+
   const { snackbar, showErrorSnackbar, handleCloseSnackbar } = useSnackbar();
   const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
   const { updateSearchParams } = useContext(SearchContext);
+  const navigate = useNavigate();
 
-  const handleSetDate = (newDate) => {
-    const currentDate = dayjs().format("YYYY-MM-DD");
+  const handleDateLogic = (newDate, currentDate) => {
     const formattedCheckInDate = dayjs(newDate.startDate).format("YYYY-MM-DD");
     const formattedCheckOutDate = dayjs(newDate.endDate).format("YYYY-MM-DD");
 
     if (
       formattedCheckInDate < currentDate ||
-      formattedCheckOutDate <= currentDate
+      formattedCheckOutDate < currentDate
     ) {
       showErrorSnackbar(
         "Whoops! Check-in date or check-out date cannot be in the past."
@@ -39,13 +42,40 @@ const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
 
     const newCheckInDate =
       formattedCheckInDate < currentDate ? currentDate : formattedCheckInDate;
+
     const newCheckOutDate =
       formattedCheckOutDate <= currentDate
         ? dayjs(currentDate).add(1, "day").format("YYYY-MM-DD")
+        : formattedCheckOutDate === formattedCheckInDate
+        ? dayjs(formattedCheckInDate).add(1, "day").format("YYYY-MM-DD")
         : formattedCheckOutDate;
+
+    return { newCheckInDate, newCheckOutDate };
+  };
+
+  const handleSetDate = (newDate) => {
+    const currentDate = dayjs().format("YYYY-MM-DD");
+    const { newCheckInDate, newCheckOutDate } = handleDateLogic(
+      newDate,
+      currentDate
+    );
 
     formik.setFieldValue("checkInDate", newCheckInDate);
     formik.setFieldValue("checkOutDate", newCheckOutDate);
+  };
+
+  const handleToggleState = (stateKey) => {
+    setSearchState((prevState) => ({
+      ...prevState,
+      [stateKey]: !prevState[stateKey],
+    }));
+  };
+
+  const handleCloseSearchState = () => {
+    setSearchState({
+      isOptionsOpened: false,
+      isDateOpened: false,
+    });
   };
 
   const adjustValue = (option, increment) => {
@@ -69,10 +99,7 @@ const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
     onSubmit: (values) => {
       const newSearchParams = new URLSearchParams(values);
       setSearchParams(newSearchParams);
-      updateSearchParams({
-        checkInDate: values.checkInDate,
-        checkOutDate: values.checkOutDate,
-      });
+      updateSearchParams(values);
       navigate("/search?" + newSearchParams.toString());
     },
   });
@@ -81,7 +108,7 @@ const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
     <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
       <div className={styles.parent}>
         <SearchContainer topXs={topXs} topLg={topLg}>
-          <SearchItem>
+          <SearchItemContainer>
             <SingleBedIcon className={styles.searchIcon} />
             <input
               id="city"
@@ -92,9 +119,9 @@ const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
               placeholder="Where are you going?"
               className={styles.searchInput}
             />
-          </SearchItem>
+          </SearchItemContainer>
 
-          <SearchItem>
+          <SearchItemContainer>
             <DateCheck
               dateValues={{
                 checkInDate: formik.values.checkInDate,
@@ -102,49 +129,56 @@ const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
               }}
               handleSetDate={handleSetDate}
               isDateOpened={isDateOpened}
-              setIsDateOpened={setIsDateOpened}
+              toggleDate={() => handleToggleState("isDateOpened")}
             />
-          </SearchItem>
+          </SearchItemContainer>
 
-          <SearchItem>
+          <SearchItemContainer>
             <CustomButton
               type="button"
               className={styles.searchText}
-              onClick={() => setIsOptionsOpened(!isOptionsOpened)}
+              onClick={() => handleToggleState("isOptionsOpened")}
             >
               <PersonOutlineIcon className={styles.searchIcon} />
-              <span>{`${formik.values.adults} adult . ${formik.values.children} children . ${formik.values.numberOfRooms} room`}</span>
+              <span>{`${formik.values.adults}  
+                      ${formik.values.adults > 1 ? "adults . " : "adult . "}
+             ${formik.values.children}    ${
+                formik.values.children === 1 ? "child . " : "children . "
+              }
+             ${formik.values.numberOfRooms}  
+                      ${formik.values.numberOfRooms > 1 ? "rooms" : "room"}
+              `}</span>
             </CustomButton>
+
             {isOptionsOpened && (
               <div className={styles.options}>
-                <OptionItem
-                  label="Adults"
-                  count={formik.values.adults}
-                  min={1}
-                  onIncrement={() => adjustValue("adults", true)}
-                  onDecrement={() => adjustValue("adults", false)}
-                />
-                <OptionItem
-                  label="Children"
-                  count={formik.values.children}
-                  onIncrement={() => adjustValue("children", true)}
-                  onDecrement={() => adjustValue("children", false)}
-                />
-                <OptionItem
-                  label="Rooms"
-                  count={formik.values.numberOfRooms}
-                  min={1}
-                  onIncrement={() => adjustValue("numberOfRooms", true)}
-                  onDecrement={() => adjustValue("numberOfRooms", false)}
-                />
+                {[
+                  { label: "Adults", option: "adults", min: 1 },
+                  { label: "Children", option: "children", min: 0 },
+                  { label: "Rooms", option: "numberOfRooms", min: 1 },
+                ].map(({ label, option, min }) => (
+                  <OptionItem
+                    key={option}
+                    label={label}
+                    count={formik.values[option]}
+                    min={min}
+                    onIncrement={() => adjustValue(option, true)}
+                    onDecrement={() => adjustValue(option, false)}
+                  />
+                ))}
               </div>
             )}
-          </SearchItem>
-          <SearchItem>
-            <CustomButton type="submit" className={styles.searchButton}>
+          </SearchItemContainer>
+
+          <SearchItemContainer>
+            <CustomButton
+              type="submit"
+              className={styles.searchButton}
+              onClick={handleCloseSearchState}
+            >
               Search
             </CustomButton>
-          </SearchItem>
+          </SearchItemContainer>
         </SearchContainer>
       </div>
       <GenericSnackbar {...snackbar} onClose={handleCloseSnackbar} />

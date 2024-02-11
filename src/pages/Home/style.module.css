@@ -1,21 +1,11 @@
 .container {
-    margin-left: 2rem;
-    margin-right: 2rem;
+    margin: 0 auto;
     padding: 2rem;
+    max-width: 1200px;
 }
 
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
     .container {
-        margin-left: 1rem;
-        margin-right: 1rem;
-        padding: 1rem;
-    }
-}
-
-@media screen and (min-width: 768px) {
-    .container {
-        max-width: 1200px;
-        margin-left: auto;
-        margin-right: auto;
+        padding: 2rem;
     }
 }

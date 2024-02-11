@@ -1,3 +1,8 @@
 .resultList {
     flex: 3;
 }
+
+.noHotelsMessage {
+    color: red;
+    font-style: italic;
+}

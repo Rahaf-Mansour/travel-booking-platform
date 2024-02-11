@@ -2,6 +2,7 @@
     margin-top: 4rem;
     margin-left: auto;
     margin-right: auto;
+    max-width: 1200px;
 }
 
 .dealCard {
@@ -39,9 +40,22 @@
     border: 1px solid #e0e0e0;
 }
 
+.topSpaceBetweenContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .hotelName {
     font-size: 1.2rem;
     font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+.bottomSpaceBetweenContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-top: 0.5rem;
 }
 
@@ -49,6 +63,14 @@
     font-size: 1rem;
     font-weight: 400;
     margin: 0.2rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.priceInfoContainer {
+    display: flex;
+    justify-content: start;
+    align-items: center;
 }
 
 .originalPrice {
@@ -72,14 +94,6 @@
 
     .dealCard {
         margin-right: 0;
-    }
-}
-
-@media screen and (min-width: 768px) {
-    .featuredDealsContainer {
-        max-width: 1200px;
-        margin-left: auto;
-        margin-right: auto;
     }
 }
 

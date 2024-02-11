@@ -5,7 +5,7 @@ import CustomButton from "../../components/CustomButton";
 import styles from "./style.module.css";
 import ConfirmationTable from "./components/ConfirmationTable";
 import CelebrationIcon from "@mui/icons-material/Celebration";
-import { useCartContext } from "../../context/CartContext";
+import useCartContext from "../../hooks/useCartContext";
 import Footer from "../../components/Footer";
 
 const Confirmation = () => {

@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axiosInstance from "../Axios/axiosInstance";
 
@@ -9,7 +8,6 @@ export const AuthContext = createContext();
 const AuthContextProvider = ({ children }) => {
   const [cookies, setCookie, removeCookie] = useCookies(["auth"]);
   const [user, setUser] = useState(cookies["auth"] || null);
-  const navigate = useNavigate();
 
   const loginUser = (authData) => {
     setCookie("auth", authData);
@@ -19,8 +17,7 @@ const AuthContextProvider = ({ children }) => {
   const logoutUser = useCallback(() => {
     setUser(null);
     removeCookie("auth");
-    navigate("/");
-  }, [removeCookie, navigate]);
+  }, [removeCookie]);
 
   if (user) {
     axiosInstance.defaults.headers.common[

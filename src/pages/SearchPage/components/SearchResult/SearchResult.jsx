@@ -1,33 +1,33 @@
 import { useEffect, useState } from "react";
 import styles from "./style.module.css";
-import SearchResultItem from "../SearchResultItem/SearchResultItem";
+import SearchResultItem from "../SearchResultItem";
 import { Link } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import { searchAPI } from "../../../../services/searchService";
 import GenericSnackbar from "../../../../components/GenericSnackbar";
 import useSnackbar from "../../../../hooks/useSnackbar";
 import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
-import { useLoading } from "../../../../context/LoadingContext";
+import useLoading from "../../../../hooks/useLoading";
 
 const SearchResult = () => {
   const [searchParams] = useSearchParams();
   const [results, setResults] = useState([]);
   const { snackbar, showErrorSnackbar, handleCloseSnackbar } = useSnackbar();
-  const [isLoading, setIsLoading] = useLoading();
+  const [isLoading, startLoading, stopLoading] = useLoading();
 
   useEffect(() => {
     const fetchResults = async () => {
-      setIsLoading(true);
       const params = Object.fromEntries([...searchParams]);
+      startLoading();
       try {
         const data = await searchAPI(params);
         setResults(data);
       } catch (error) {
         showErrorSnackbar(
-          "Whoops! Something went wrong when fetching the result."
+          "Failed to fetch the results. Please try again later."
         );
       } finally {
-        setIsLoading(false);
+        stopLoading();
       }
     };
 
@@ -42,7 +42,7 @@ const SearchResult = () => {
     <div className={styles.resultList}>
       {isLoading ? (
         <CircularProgressIndicator />
-      ) : (
+      ) : hotelData.length > 0 ? (
         hotelData.map((hotel) => (
           <Link
             to={`/hotel/${hotel.hotelId}`}
@@ -52,6 +52,11 @@ const SearchResult = () => {
             <SearchResultItem key={hotel.hotelId} hotel={hotel} />
           </Link>
         ))
+      ) : (
+        <p className={styles.noHotelsMessage}>
+          No hotels available for the selected criteria. Please refine your
+          search parameters and try again.
+        </p>
       )}
       <GenericSnackbar {...snackbar} onClose={handleCloseSnackbar} />
     </div>
