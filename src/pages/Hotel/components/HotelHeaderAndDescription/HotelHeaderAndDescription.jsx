@@ -2,9 +2,7 @@ import PropTypes from "prop-types";
 import styles from "./style.module.css";
 import StarRating from "../../../../components/StarRating";
 
-const HotelHeaderAndDescription = ({ hotelDetails }) => {
-  const { hotelName, starRating, description } = hotelDetails;
-
+const HotelHeaderAndDescription = ({ hotelName, starRating, description }) => {
   return (
     <div className={styles.hotelHeaderAndDescriptionContainer}>
       <div className={styles.hotelHeader}>
@@ -19,9 +17,7 @@ const HotelHeaderAndDescription = ({ hotelDetails }) => {
 export default HotelHeaderAndDescription;
 
 HotelHeaderAndDescription.propTypes = {
-  hotelDetails: PropTypes.shape({
-    hotelName: PropTypes.string.isRequired,
-    starRating: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-  }),
+  hotelName: PropTypes.string.isRequired,
+  starRating: PropTypes.number.isRequired,
+  description: PropTypes.string.isRequired,
 };
