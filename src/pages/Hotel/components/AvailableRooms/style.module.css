@@ -79,9 +79,7 @@
     margin-right: 1rem;
 }
 
-.addCartButton {
-    background-color: #3f89bb;
-    color: #fff;
+.addButtonCommon {
     padding: 8px 12px;
     border: none;
     cursor: pointer;
@@ -93,13 +91,21 @@
     border-radius: 5px;
     gap: 8px;
     font-size: 1rem;
+    color: #fff;
+}
+
+.addCartButton {
+    background-color: #3f89bb;
 }
 
 .addCartButton:hover {
-    background-color: #154a6d;
-    transition: background-color 0.2s ease-in-out;
+    background-color: #3a7ca0;
 }
 
+.addedButton {
+    background-color: #acaaad;
+    cursor: not-allowed;
+}
 
 @media screen and (max-width: 768px) {
     .availableRoomsContainer {
