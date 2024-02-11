@@ -18,12 +18,17 @@ const CartContextProvider = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
+  const isRoomAlreadyInCart = (roomId) => {
+    return cart.some((item) => item.roomId === roomId);
+  };
+
   const addToCart = (room) => {
-    setCart((prevCart) => {
-      const updatedCart = [...prevCart, room];
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
-      return updatedCart;
-    });
+    (cart.length === 0 || !isRoomAlreadyInCart(room.roomId)) &&
+      setCart((prevCart) => {
+        const updatedCart = [...prevCart, room];
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+        return updatedCart;
+      });
   };
 
   const removeFromCart = (roomId) => {
@@ -40,9 +45,17 @@ const CartContextProvider = ({ children }) => {
       totalCost,
     };
   };
+
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, getCartTotalPrice, clearCart }}
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        getCartTotalPrice,
+        clearCart,
+        isRoomAlreadyInCart,
+      }}
     >
       {children}
     </CartContext.Provider>
