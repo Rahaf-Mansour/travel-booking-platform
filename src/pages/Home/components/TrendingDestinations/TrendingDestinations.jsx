@@ -9,11 +9,12 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 export function TrendingDestinations() {
   const [trendingDestinations, setTrendingDestinations] = useState([]);
-  const [isLoading, stopLoading] = useLoading();
+  const [isLoading, startLoading, stopLoading] = useLoading();
   const { snackbar, showErrorSnackbar, handleCloseSnackbar } = useSnackbar();
 
   useEffect(() => {
     const handleFetchTrendingDestinations = async () => {
+      startLoading();
       try {
         const trendingDestinationsData = await trendingDestinationsAPI();
         setTrendingDestinations(trendingDestinationsData);
