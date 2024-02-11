@@ -50,7 +50,7 @@
     align-items: center;
 }
 
-.loadMore {
+.loadButton {
     background-color: var(--secondary-color);
     color: #fff;
     padding: 10px 20px;
@@ -61,6 +61,6 @@
     transition: background-color 0.2s ease-in-out;
 }
 
-.loadMore:hover {
+.loadButton:hover {
     background-color: var(--primary-color);
 }
