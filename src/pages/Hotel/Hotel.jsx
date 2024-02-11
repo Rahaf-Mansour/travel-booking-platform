@@ -26,14 +26,9 @@ const Hotel = () => {
     hotelAvailableRooms,
     isLoading,
     error,
-    fetchHotelData,
   } = useHotelData(hotelId, isThereDates, checkInDate, checkOutDate);
 
   const { snackbar, showErrorSnackbar, handleCloseSnackbar } = useSnackbar();
-
-  useEffect(() => {
-    fetchHotelData();
-  }, [hotelId, checkInDate, checkOutDate, fetchHotelData]);
 
   useEffect(() => {
     if (error) {
