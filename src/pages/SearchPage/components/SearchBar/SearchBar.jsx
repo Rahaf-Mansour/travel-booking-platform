@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useContext, useState } from "react";
 import styles from "./style.module.css";
 import SingleBedIcon from "@mui/icons-material/SingleBed";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
@@ -99,10 +99,7 @@ const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
     onSubmit: (values) => {
       const newSearchParams = new URLSearchParams(values);
       setSearchParams(newSearchParams);
-      updateSearchParams({
-        checkInDate: values.checkInDate,
-        checkOutDate: values.checkOutDate,
-      });
+      updateSearchParams(values);
       navigate("/search?" + newSearchParams.toString());
     },
   });
@@ -143,8 +140,16 @@ const SearchBar = ({ topXs = "80px", topLg = "80px" }) => {
               onClick={() => handleToggleState("isOptionsOpened")}
             >
               <PersonOutlineIcon className={styles.searchIcon} />
-              <span>{`${formik.values.adults} adult . ${formik.values.children} children . ${formik.values.numberOfRooms} room`}</span>
+              <span>{`${formik.values.adults}  
+                      ${formik.values.adults > 1 ? "adults . " : "adult . "}
+             ${formik.values.children}    ${
+                formik.values.children === 1 ? "child . " : "children . "
+              }
+             ${formik.values.numberOfRooms}  
+                      ${formik.values.numberOfRooms > 1 ? "rooms" : "room"}
+              `}</span>
             </CustomButton>
+
             {isOptionsOpened && (
               <div className={styles.options}>
                 {[
