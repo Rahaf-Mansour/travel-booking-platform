@@ -7,10 +7,14 @@ export const SearchContextProvider = ({ children }) => {
   const [searchParams, setSearchParams] = useState({
     checkInDate: null,
     checkOutDate: null,
+    city: "",
+    adults: 1,
+    children: 0,
+    numberOfRooms: 1,
   });
 
   const updateSearchParams = (newParams) => {
-    setSearchParams((prevState) => ({ ...prevState, ...newParams }));
+    setSearchParams((prevParams) => ({ ...prevParams, ...newParams }));
   };
 
   return (
