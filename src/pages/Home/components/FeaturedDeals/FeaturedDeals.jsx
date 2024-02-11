@@ -12,13 +12,14 @@ import DealCard from "./DealCard";
 
 const FeaturedDeals = () => {
   const [deals, setDeals] = useState([]);
-  const [isLoading, stopLoading] = useLoading();
+  const [isLoading, startLoading, stopLoading] = useLoading();
   const [error, setError] = useState(null);
   const [slidesToShow, setSlidesToShow] = useState(1);
   const { snackbar, showErrorSnackbar, handleCloseSnackbar } = useSnackbar();
 
   useEffect(() => {
     const fetchDeals = async () => {
+      startLoading();
       try {
         const dealsData = await featuredDealsAPI();
         setDeals(dealsData);
