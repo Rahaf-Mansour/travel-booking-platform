@@ -12,11 +12,10 @@ import GenericSnackbar from "../../../../components/GenericSnackbar";
 import { SearchContext } from "../../../../context/searchContext";
 
 const AvailableRooms = ({ hotelAvailableRooms, isThereDates }) => {
-  const { addToCart } = useCartContext();
+  const { addToCart, isRoomAlreadyInCart } = useCartContext();
   const { snackbar, showSuccessSnackbar, handleCloseSnackbar, showSnackbar } =
     useSnackbar();
-  const { searchParams } = useContext(SearchContext);
-  const { checkInDate, checkOutDate } = searchParams;
+  const { checkInDate, checkOutDate } = useContext(SearchContext);
 
   useEffect(() => {
     if (!isThereDates) {
@@ -33,8 +32,10 @@ const AvailableRooms = ({ hotelAvailableRooms, isThereDates }) => {
   }, [isThereDates, hotelAvailableRooms, checkInDate, checkOutDate]);
 
   const handleAddToCart = (room) => {
-    addToCart(room);
-    showSuccessSnackbar(`${room.roomType} Room Added to cart!`);
+    if (!isRoomAlreadyInCart(room.roomId)) {
+      addToCart(room);
+      showSuccessSnackbar(`${room.roomType} Room Added to cart!`);
+    }
   };
 
   const availableRooms = hotelAvailableRooms.filter(
@@ -91,11 +92,17 @@ const AvailableRooms = ({ hotelAvailableRooms, isThereDates }) => {
             </div>
 
             <CustomButton
-              className={styles.addCartButton}
+              className={`${styles.addButtonCommon} ${
+                isRoomAlreadyInCart(room.roomId)
+                  ? styles.addedButton
+                  : styles.addCartButton
+              }`}
               onClick={() => handleAddToCart(room)}
             >
-              Add to Cart
-              <AddShoppingCartIcon sx={{ fontSize: "1.3rem" }} />
+              {isRoomAlreadyInCart(room.roomId) ? "Added!" : "Add to Cart"}
+              {!isRoomAlreadyInCart(room.roomId) && (
+                <AddShoppingCartIcon sx={{ fontSize: "1.3rem" }} />
+              )}
             </CustomButton>
           </div>
         ))}
