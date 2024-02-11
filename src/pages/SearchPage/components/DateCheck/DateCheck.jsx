@@ -18,7 +18,6 @@ const DateCheck = ({ handleSetDate, isDateOpened, toggleDate, dateValues }) => {
   ]);
 
   const handleChangeDate = (newDate) => {
-    console.log(newDate);
     try {
       setDate([newDate.selection]);
       handleSetDate(newDate.selection);
