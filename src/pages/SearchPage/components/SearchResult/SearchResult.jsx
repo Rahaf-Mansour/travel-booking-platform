@@ -13,11 +13,12 @@ const SearchResult = () => {
   const [searchParams] = useSearchParams();
   const [results, setResults] = useState([]);
   const { snackbar, showErrorSnackbar, handleCloseSnackbar } = useSnackbar();
-  const [isLoading, stopLoading] = useLoading();
+  const [isLoading, startLoading, stopLoading] = useLoading();
 
   useEffect(() => {
     const fetchResults = async () => {
       const params = Object.fromEntries([...searchParams]);
+      startLoading();
       try {
         const data = await searchAPI(params);
         setResults(data);
