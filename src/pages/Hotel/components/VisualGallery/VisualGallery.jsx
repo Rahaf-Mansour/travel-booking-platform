@@ -23,13 +23,14 @@ const VisualGallery = ({ hotelGallery }) => {
             src={image.url}
             alt={`Gallery ${image.id}`}
             onClick={() => openFullscreen(image)}
+            className={styles.thumbnail}
           />
         ))}
       </div>
 
       {selectedImage && (
         <div className={styles.fullscreenOverlay} onClick={closeFullscreen}>
-          <button onClick={closeFullscreen}>
+          <button onClick={closeFullscreen} className={styles.closeButton}>
             <CloseIcon />
           </button>
           <img
@@ -51,5 +52,5 @@ VisualGallery.propTypes = {
       id: PropTypes.number.isRequired,
       url: PropTypes.string.isRequired,
     })
-  ),
+  ).isRequired,
 };

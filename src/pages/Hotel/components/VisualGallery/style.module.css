@@ -5,14 +5,15 @@
     justify-content: center;
 }
 
-.thumbnailContainer img {
+.thumbnail {
     max-width: 180px;
     height: auto;
     cursor: pointer;
     object-fit: cover;
+    transition: filter 0.2s ease;
 }
 
-.thumbnailContainer img:hover {
+.thumbnail:hover {
     filter: brightness(90%);
 }
 
@@ -34,11 +35,11 @@
 .fullscreenImage {
     max-width: 95%;
     max-height: 95%;
-    margin-top: 0.5rem;
+    margin-top: 0.3rem;
     object-fit: contain;
 }
 
-.fullscreenOverlay button {
+.closeButton {
     position: absolute;
     top: 20px;
     right: 20px;
@@ -55,7 +56,7 @@
         margin-top: 2rem;
     }
 
-    .thumbnailContainer img {
+    .thumbnail {
         max-width: 165px;
     }
 }
@@ -65,7 +66,7 @@
         margin-top: 2rem;
     }
 
-    .thumbnailContainer img {
+    .thumbnail {
         max-width: 150px;
     }
 }
@@ -75,7 +76,7 @@
         margin-top: 2rem;
     }
 
-    .thumbnailContainer img {
+    .thumbnail {
         max-width: 120px;
     }
 }
