@@ -21,6 +21,7 @@ const HotelReviews = ({ hotelGuestReviews }) => {
   return (
     <div className={styles.hotelReviews}>
       <h3>What guests loved the most:</h3>
+
       {sortedReviews.slice(0, visibleReviews).map((review) => (
         <div className={styles.hotelReview} key={review.reviewId}>
           <div className={styles.reviewHeader}>
@@ -30,19 +31,21 @@ const HotelReviews = ({ hotelGuestReviews }) => {
           <p className={styles.description}>{review.description}</p>
         </div>
       ))}
-      {visibleReviews < hotelGuestReviews.length ? (
-        <div className={styles.centerButton}>
-          <CustomButton className={styles.loadButton} onClick={loadMoreReviews}>
-            Load More
-          </CustomButton>
-        </div>
-      ) : (
-        <div className={styles.centerButton}>
-          <CustomButton className={styles.loadButton} onClick={loadLessReviews}>
-            Load Less
-          </CustomButton>
-        </div>
-      )}
+
+      <div className={styles.centerButton}>
+        <CustomButton
+          className={styles.loadButton}
+          onClick={
+            visibleReviews < hotelGuestReviews.length
+              ? loadMoreReviews
+              : loadLessReviews
+          }
+        >
+          {visibleReviews < hotelGuestReviews.length
+            ? "Load More"
+            : "Load Less"}
+        </CustomButton>
+      </div>
     </div>
   );
 };
