@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import styles from "./style.module.css";
 import StarRating from "../../../../components/StarRating";
 
-const HotelDetailsInfo = ({ hotelDetails }) => {
+const HotelHeaderAndDescription = ({ hotelDetails }) => {
   const { hotelName, starRating, description } = hotelDetails;
 
   return (
@@ -16,9 +16,9 @@ const HotelDetailsInfo = ({ hotelDetails }) => {
   );
 };
 
-export default HotelDetailsInfo;
+export default HotelHeaderAndDescription;
 
-HotelDetailsInfo.propTypes = {
+HotelHeaderAndDescription.propTypes = {
   hotelDetails: PropTypes.shape({
     hotelName: PropTypes.string.isRequired,
     starRating: PropTypes.number.isRequired,
