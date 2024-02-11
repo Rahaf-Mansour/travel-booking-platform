@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./style.module.css";
+import CloseIcon from "@mui/icons-material/Close";
 
 const VisualGallery = ({ hotelGallery }) => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -28,7 +29,9 @@ const VisualGallery = ({ hotelGallery }) => {
 
       {selectedImage && (
         <div className={styles.fullscreenOverlay} onClick={closeFullscreen}>
-          <button onClick={closeFullscreen}>&times;</button>
+          <button onClick={closeFullscreen}>
+            <CloseIcon />
+          </button>
           <img
             src={selectedImage.url}
             alt={`Gallery ${selectedImage.id}`}
