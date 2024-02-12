@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 export const SearchContext = createContext();
 
-export const SearchContextProvider = ({ children }) => {
+const SearchContextProvider = ({ children }) => {
   const [searchParams, setSearchParams] = useState({
     checkInDate: null,
     checkOutDate: null,

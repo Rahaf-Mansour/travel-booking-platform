@@ -71,7 +71,7 @@ export function TrendingDestinations() {
                     <LocationOnIcon
                       sx={{ fontSize: "1.2rem", marginRight: 0.5 }}
                     />
-                    {item.cityName}
+                    {item.cityName} - {item.countryName}
                   </Typography>
                 </CardContent>
               </Card>

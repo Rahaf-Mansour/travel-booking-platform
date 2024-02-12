@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 export const LoadingContext = createContext();
 
-export const LoadingProvider = ({ children }) => {
+const LoadingContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const startLoading = () => {
@@ -21,6 +21,8 @@ export const LoadingProvider = ({ children }) => {
   );
 };
 
-LoadingProvider.propTypes = {
+export default LoadingContextProvider;
+
+LoadingContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };

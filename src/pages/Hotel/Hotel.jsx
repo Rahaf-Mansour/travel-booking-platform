@@ -26,14 +26,9 @@ const Hotel = () => {
     hotelAvailableRooms,
     isLoading,
     error,
-    fetchHotelData,
   } = useHotelData(hotelId, isThereDates, checkInDate, checkOutDate);
 
   const { snackbar, showErrorSnackbar, handleCloseSnackbar } = useSnackbar();
-
-  useEffect(() => {
-    fetchHotelData();
-  }, [hotelId, checkInDate, checkOutDate, fetchHotelData]);
 
   useEffect(() => {
     if (error) {
@@ -48,22 +43,26 @@ const Hotel = () => {
         <CircularProgressIndicator />
       ) : (
         <div>
+          {error && (
+            <p className={styles.errorMessage}>
+              Failed to fetch. please try again later.
+            </p>
+          )}
+
           <div className={styles.container}>
             <div className={styles.hotelDetailsAndMapContainer}>
               <HotelDetails
                 hotelDetails={hotelDetails}
                 hotelGuestReviews={hotelGuestReviews}
               />
-              {hotelDetails &&
-                hotelDetails.latitude &&
-                hotelDetails.longitude && (
-                  <HotelMapLocation
-                    latitude={hotelDetails.latitude}
-                    longitude={hotelDetails.longitude}
-                    hotelName={hotelDetails.hotelName}
-                    location={hotelDetails.location}
-                  />
-                )}
+              {hotelDetails && (
+                <HotelMapLocation
+                  latitude={hotelDetails.latitude}
+                  longitude={hotelDetails.longitude}
+                  hotelName={hotelDetails.hotelName}
+                  location={hotelDetails.location}
+                />
+              )}
             </div>
 
             <div className={styles.galleryAndRoomsContainer}>

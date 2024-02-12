@@ -39,7 +39,7 @@ const FeaturedDeals = () => {
       const windowWidth = window.innerWidth;
       if (windowWidth < 768) {
         setSlidesToShow(1);
-      } else if (windowWidth >= 768 && windowWidth <= 902) {
+      } else if (windowWidth >= 768 && windowWidth <= 1000) {
         setSlidesToShow(2);
       } else {
         setSlidesToShow(3);

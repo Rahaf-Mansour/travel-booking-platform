@@ -17,6 +17,7 @@
 .datePicker {
     position: absolute;
     top: 60px;
+    box-shadow: 0px 0px 10px -3px rgba(19, 16, 16, 0.808);
 }
 
 @media screen and (max-width: 480px) {

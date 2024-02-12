@@ -1,8 +1,8 @@
-.hotelDetailsInfo {
+.hotelHeaderAndDescriptionContainer {
     margin-bottom: 2rem;
 }
 
-.hotelDetailsInfo p {
+.hotelHeaderAndDescriptionContainer p {
     font-size: 16px;
     margin-bottom: 4px;
 }
@@ -18,8 +18,4 @@
 .hotelName {
     font-size: 1.5rem;
     font-weight: 600;
-}
-
-.starRating {
-    display: flex;
 }

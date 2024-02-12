@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useEffect } from "react";
 import {
   getHotelDetails,
   getHotelGuestReviews,
@@ -17,11 +17,10 @@ export const useHotelData = (
   const [hotelGuestReviews, setHotelGuestReviews] = useState([]);
   const [hotelGallery, setHotelGallery] = useState([]);
   const [hotelAvailableRooms, setHotelAvailableRooms] = useState([]);
-
   const [isLoading, startLoading, stopLoading] = useLoading();
   const [error, setError] = useState("");
 
-  const fetchHotelData = useCallback(() => {
+  const fetchHotelData = async () => {
     setError("");
     startLoading();
 
@@ -49,8 +48,6 @@ export const useHotelData = (
               case 3:
                 setHotelAvailableRooms(result.value);
                 break;
-              default:
-                break;
             }
           } else {
             console.error(result.reason);
@@ -66,7 +63,11 @@ export const useHotelData = (
         });
       })
       .finally(() => stopLoading());
-  }, [hotelId, checkInDate, checkOutDate, isThereDates]);
+  };
+
+  useEffect(() => {
+    fetchHotelData();
+  }, [hotelId, checkInDate, checkOutDate]);
 
   return {
     hotelDetails,
@@ -75,6 +76,5 @@ export const useHotelData = (
     hotelAvailableRooms,
     isLoading,
     error,
-    fetchHotelData,
   };
 };

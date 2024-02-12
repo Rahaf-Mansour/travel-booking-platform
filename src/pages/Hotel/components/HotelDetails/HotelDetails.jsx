@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import HotelDetailsInfo from "../HotelDetailsInfo";
+import HotelHeaderAndDescription from "../HotelHeaderAndDescription";
 import HotelReviews from "../HotelReviews";
 import HotelAmenities from "../HotelAmenities";
 
@@ -10,7 +10,11 @@ const HotelDetails = ({ hotelDetails, hotelGuestReviews }) => {
 
   return (
     <div>
-      <HotelDetailsInfo hotelDetails={hotelDetails} />
+      <HotelHeaderAndDescription
+        hotelName={hotelDetails.hotelName}
+        starRating={hotelDetails.starRating}
+        description={hotelDetails.description}
+      />
       <HotelAmenities amenities={hotelDetails.amenities} />
       <HotelReviews hotelGuestReviews={hotelGuestReviews} />
     </div>
