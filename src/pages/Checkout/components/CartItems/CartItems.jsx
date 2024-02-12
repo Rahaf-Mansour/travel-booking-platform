@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ShopCartIcon from "@mui/icons-material/ShoppingCart";
+import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 import useCartContext from "../../../../hooks/useCartContext";
 import { SearchContext } from "../../../../context/searchContext";
 import { useContext } from "react";
@@ -18,21 +19,7 @@ import { useContext } from "react";
 const CartItems = () => {
   const { cart, removeFromCart, getCartTotalPrice } = useCartContext();
   const { totalCost } = getCartTotalPrice();
-  const { searchParams } = useContext(SearchContext);
-  const { checkInDate, checkOutDate } = searchParams;
-
-  const getNmberOfNights = () => {
-    if (!checkInDate || !checkOutDate) {
-      return 0;
-    }
-
-    const startDate = new Date(checkInDate);
-    const endDate = new Date(checkOutDate);
-    const differenceInTime = endDate.getTime() - startDate.getTime();
-    const differenceInDays = differenceInTime / (1000 * 3600 * 24);
-    const nightsLength = Math.round(differenceInDays);
-    return nightsLength;
-  };
+  const { getNumberOfNights } = useContext(SearchContext);
 
   return (
     <Box sx={{ padding: "1rem" }}>
@@ -55,14 +42,19 @@ const CartItems = () => {
         Your Cart <ShopCartIcon />
       </Typography>
       {cart.length === 0 ? (
-        <Typography variant="subtitle1">Your cart is empty.</Typography>
+        <Typography
+          variant="subtitle1"
+          sx={{ display: "flex", alignItems: "center" }}
+        >
+          Your cart is empty. <SentimentVeryDissatisfiedIcon sx={{ ml: 1 }} />
+        </Typography>
       ) : (
         <Grid container spacing={2}>
           {cart.map((item, index) => (
             <Grid item xs={12} key={index}>
               <Card
                 sx={{
-                  backgroundColor: "rgba(185, 220, 280, 0.1)",
+                  backgroundColor: "rgba(200, 270, 10, 0.1)",
                   marginTop: 1,
                 }}
               >
@@ -71,16 +63,28 @@ const CartItems = () => {
                     sx={{
                       display: "flex",
                       alignItems: "center",
-                      marginBottom: 2,
+                      justifyContent: "space-between",
+                      mb: 2,
                     }}
                   >
-                    <Avatar
-                      alt={item.roomType}
-                      src={item.roomPhotoUrl}
-                      sx={{ width: 80, height: 80, marginRight: 2 }}
-                    />
-                    <Typography variant="h6" component="div">
-                      {item.roomType}
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                      <Avatar
+                        alt={item.roomType}
+                        src={item.roomPhotoUrl}
+                        sx={{ width: 80, height: 80, marginRight: 2 }}
+                      />
+                      <Typography variant="h6" component="div">
+                        {item.roomType}
+                      </Typography>
+                    </Box>
+
+                    <Typography
+                      variant="body1"
+                      color="text.primary"
+                      fontWeight={500}
+                    >
+                      ${item.price} (x {getNumberOfNights()}{" "}
+                      {getNumberOfNights() > 1 ? "nights" : "night"})
                     </Typography>
                   </Box>
 
@@ -88,16 +92,8 @@ const CartItems = () => {
                     <Typography variant="body1" color="text.secondary">
                       Room Number: {item.roomNumber}
                     </Typography>
-                    <Typography variant="body1" color="text.secondary">
-                      {`Price: $${item.price} * ${getNmberOfNights()} ${
-                        getNmberOfNights() > 1 ? "nights" : "night"
-                      } `}
-                    </Typography>
-                    <Typography
-                      variant="body1"
-                      color="text.secondary"
-                      sx={{ marginBottom: 2 }}
-                    >
+
+                    <Typography variant="body1" color="text.secondary" mb={2}>
                       Capacity: {item.capacityOfAdults} Adults and{" "}
                       {item.capacityOfChildren} Children
                     </Typography>
@@ -109,12 +105,13 @@ const CartItems = () => {
                           label={`${amenity.name}: ${amenity.description}`}
                           variant="outlined"
                           size="small"
+                          sx={{ bgcolor: "rgba(170, 215, 120, 0.15)" }}
                         />
                       ))}
                     </Box>
                   </Box>
                 </CardContent>
-                
+
                 <CardActions sx={{ justifyContent: "center", marginBottom: 2 }}>
                   <Button
                     variant="outlined"
@@ -132,7 +129,7 @@ const CartItems = () => {
       )}
       <Box sx={{ marginTop: 4 }}>
         <Typography variant="h6" component="div">
-          Total cost: ${totalCost * getNmberOfNights()}
+          Total cost: ${totalCost * getNumberOfNights()}
         </Typography>
       </Box>
     </Box>
