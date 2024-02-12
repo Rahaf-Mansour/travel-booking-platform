@@ -16,7 +16,6 @@ import useLoading from "../../../../hooks/useLoading";
 import axiosInstance from "../../../../Axios/axiosInstance";
 
 const Hotels = () => {
-  // const [, setSelectedEntity] = useState(null);
   const [hotels, setHotels] = useState([]);
   const [page, setPage] = useState(0);
   const [isLoading, startLoading, stopLoading] = useLoading();
@@ -27,10 +26,6 @@ const Hotels = () => {
     showErrorSnackbar,
     showSuccessSnackbar,
   } = useSnackbar();
-
-  // const handleRowClick = (entity) => {
-  //   setSelectedEntity(entity);
-  // };
 
   const handleAddHotel = (newHotel) => {
     setHotels((prevHotels) => [newHotel, ...prevHotels]);
@@ -97,6 +92,7 @@ const Hotels = () => {
       <CssBaseline />
       <Box component="main">
         <LeftNavigation />
+
         <Container
           sx={{
             display: "flex",
@@ -107,6 +103,7 @@ const Hotels = () => {
           }}
         >
           <SearchBar onSearch={fetchHotels} />
+
           <CreateHotelDialog
             addHotel={handleAddHotel}
             snackbarProps={{
@@ -117,6 +114,7 @@ const Hotels = () => {
             }}
           />
         </Container>
+
         <Container>
           <DetailedGrid
             data={hotels}
@@ -128,7 +126,6 @@ const Hotels = () => {
               { field: "latitude", headerName: "Latitude" },
               { field: "longitude", headerName: "Longitude" },
             ]}
-            // onRowClick={handleRowClick}
             onUpdate={handleUpdateHotels}
             onDelete={handleDeleteHotel}
             EntityFormComponent={UpdateHotelForm}
@@ -139,6 +136,7 @@ const Hotels = () => {
             totalCount={hotels.length}
             isLoading={isLoading}
           />
+          
           {isLoading && <CircularProgressIndicator />}
         </Container>
       </Box>

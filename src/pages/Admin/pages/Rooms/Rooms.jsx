@@ -10,7 +10,6 @@ import CreateRoomDialog from "./components/CreateRoomDialog";
 import RoomsDetailedGrid from "./components/RoomsDetailedGrid";
 
 const Rooms = () => {
-  // const [, setSelectedEntity] = useState(null);
   const [rooms, setRooms] = useState([]);
   const {
     snackbar,
@@ -18,10 +17,6 @@ const Rooms = () => {
     showErrorSnackbar,
     showSuccessSnackbar,
   } = useSnackbar();
-
-  // const handleRowClick = (entity) => {
-  //   setSelectedEntity(entity);
-  // };
 
   const handleAddRoom = (newRoom) => {
     setRooms((prevRooms) => [...prevRooms, newRoom]);
@@ -59,6 +54,7 @@ const Rooms = () => {
           }}
         >
           <SearchBar />
+
           <CreateRoomDialog
             addRoom={handleAddRoom}
             snackbarProps={{
@@ -69,6 +65,7 @@ const Rooms = () => {
             }}
           />
         </Container>
+
         <Container>
           <RoomsDetailedGrid
             data={rooms}
@@ -76,13 +73,13 @@ const Rooms = () => {
               { field: "roomNumber", headerName: "Room Number" },
               { field: "cost", headerName: "Cost" },
             ]}
-            // onRowClick={handleRowClick}
             onUpdate={handleUpdateRooms}
             onDelete={handleDeleteRoom}
             EntityFormComponent={UpdateRoomForm}
           />
         </Container>
       </Box>
+
       <GenericSnackbar
         open={snackbar.open}
         message={snackbar.message}

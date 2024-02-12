@@ -13,10 +13,9 @@ import useLoading from "../../../../hooks/useLoading";
 import axiosInstance from "../../../../Axios/axiosInstance";
 
 const Cities = () => {
-  // const [selectedEntity, setSelectedEntity] = useState(null);
   const [cities, setCities] = useState([]);
-  const [page, setPage] = useState(0);
   const [isLoading, startLoading, stopLoading] = useLoading();
+  const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const {
     snackbar,
@@ -24,11 +23,6 @@ const Cities = () => {
     showErrorSnackbar,
     showSuccessSnackbar,
   } = useSnackbar();
-
-  // console.log("entities", selectedEntity);
-  // const handleRowClick = (entity) => {
-  //   setSelectedEntity(entity);
-  // };
 
   const handleAddCity = (newCity) => {
     setCities((prevCities) => [newCity, ...prevCities]);
@@ -105,6 +99,7 @@ const Cities = () => {
           }}
         >
           <SearchBar onSearch={fetchCities} />
+
           <CreateCityDialog
             addCity={handleAddCity}
             snackbarProps={{
@@ -123,7 +118,6 @@ const Cities = () => {
               { field: "name", headerName: "Name" },
               { field: "description", headerName: "Description" },
             ]}
-            // onRowClick={handleRowClick}
             onUpdate={handleUpdateCities}
             onDelete={handleDeleteCity}
             EntityFormComponent={UpdateCityForm}
@@ -131,9 +125,9 @@ const Cities = () => {
             setPage={setPage}
             rowsPerPage={rowsPerPage}
             setRowsPerPage={setRowsPerPage}
-            totalCount={cities.length}
             isLoading={isLoading}
           />
+          
           {isLoading && <CircularProgressIndicator />}
         </Container>
       </Box>

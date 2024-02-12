@@ -10,34 +10,33 @@ const CreateEntityDialog = ({
   isSubmitting,
 }) => {
   return (
-    <>
-      <Form>
-        <DialogContent>
-          {fields.map((field) => (
-            <Field
-              key={field.name}
-              as={TextField}
-              autoFocus={field.name === "name"}
-              margin="dense"
-              name={field.name}
-              label={field.label}
-              {...(field.name === "description" && { multiline: true })}
-              fullWidth
-              variant="outlined"
-              type={field.type}
-              error={touched[field.name] && Boolean(errors[field.name])}
-              helperText={touched[field.name] && errors[field.name]}
-            />
-          ))}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleDialogClose}>Cancel</Button>
-          <Button type="submit" disabled={isSubmitting}>
-            Create
-          </Button>
-        </DialogActions>
-      </Form>
-    </>
+    <Form>
+      <DialogContent>
+        {fields.map((field) => (
+          <Field
+            key={field.name}
+            as={TextField}
+            autoFocus={field.name === "name"}
+            margin="dense"
+            name={field.name}
+            label={field.label}
+            multiline={field.name === "description"}
+            fullWidth
+            variant="outlined"
+            type={field.type}
+            error={touched[field.name] && Boolean(errors[field.name])}
+            helperText={touched[field.name] && errors[field.name]}
+          />
+        ))}
+      </DialogContent>
+
+      <DialogActions>
+        <Button onClick={handleDialogClose}>Cancel</Button>
+        <Button type="submit" disabled={isSubmitting}>
+          Create
+        </Button>
+      </DialogActions>
+    </Form>
   );
 };
 
