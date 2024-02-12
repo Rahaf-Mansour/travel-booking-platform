@@ -25,7 +25,7 @@ const CartItems = () => {
     if (!checkInDate || !checkOutDate) {
       return 0;
     }
-    
+
     const startDate = new Date(checkInDate);
     const endDate = new Date(checkOutDate);
     const differenceInTime = endDate.getTime() - startDate.getTime();
@@ -114,6 +114,7 @@ const CartItems = () => {
                     </Box>
                   </Box>
                 </CardContent>
+                
                 <CardActions sx={{ justifyContent: "center", marginBottom: 2 }}>
                   <Button
                     variant="outlined"
