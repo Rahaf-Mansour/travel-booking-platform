@@ -54,12 +54,9 @@ const FormInformation = () => {
         roomType: cart[0].roomType,
         totalCost: cart[0].price,
       };
-      console.log("Payment submitted:", values);
       const response = await postNewBooking(bookingRequest);
-      console.log("Booking submitted:", bookingRequest);
       console.log("Booking response:", response);
       setValues(values);
-      console.log("values:", values);
       showSuccessSnackbar("Completed! Thanks for your order!");
       setTimeout(() => {
         navigateToConfirmationPage("/confirmation");

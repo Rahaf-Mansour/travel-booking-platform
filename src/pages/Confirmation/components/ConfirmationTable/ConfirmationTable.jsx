@@ -13,7 +13,7 @@ import styles from "./style.module.css";
 import useCartContext from "../../../../hooks/useCartContext";
 
 const ConfirmationTable = () => {
-  const { searchParams } = useContext(SearchContext);
+  const { searchParams, getNumberOfNights } = useContext(SearchContext);
   const { checkInDate, checkOutDate } = searchParams;
   const { formValues } = useContext(FormContext);
   const { cart } = useCartContext();
@@ -34,7 +34,7 @@ const ConfirmationTable = () => {
     },
     { label: "Room Type", value: cart[0].roomType },
     { label: "Room Number", value: cart[0].roomNumber },
-    { label: "Total cost", value: `$${cart[0].price}` },
+    { label: "Total cost", value: `$${cart[0].price * getNumberOfNights()}` },
   ];
 
   return (
@@ -51,7 +51,7 @@ const ConfirmationTable = () => {
             {fields.map((field, index) => (
               <TableRow
                 key={index}
-                className={index % 2 === 0 ? styles.TableBodyRow : ""}
+                className={index % 2 === 0 && styles.TableBodyRow}
               >
                 <TableCell>{field.label}</TableCell>
                 <TableCell>{field.value}</TableCell>
