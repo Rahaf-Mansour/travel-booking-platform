@@ -6,7 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import FormContext from "../../../../context/CheckoutFormContext ";
+import { FormContext } from "../../../../context/CheckoutFormContext ";
 import { SearchContext } from "../../../../context/searchContext";
 import Container from "@mui/material/Container";
 import styles from "./style.module.css";
