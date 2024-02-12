@@ -18,11 +18,11 @@ import { AuthContext } from "../../../../context/authContext";
 import { ListItemButton } from "@mui/material";
 
 const LeftNavigation = () => {
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [isMobileOpened, setIsMobileOpened] = useState(false);
   const { logoutUser } = useContext(AuthContext);
 
   const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
+    setIsMobileOpened(!isMobileOpened);
   };
 
   const drawerWidth = 240;
@@ -36,7 +36,7 @@ const LeftNavigation = () => {
   const renderDrawer = () => (
     <Drawer
       anchor="left"
-      open={mobileOpen}
+      open={isMobileOpened}
       onClose={handleDrawerToggle}
       sx={{
         width: drawerWidth,
@@ -51,7 +51,9 @@ const LeftNavigation = () => {
         <Typography variant="h6" sx={{ my: 2, textAlign: "center" }}>
           Admin Page
         </Typography>
+
         <Divider />
+
         <List>
           {adminLinks.map((item) => (
             <NavLink
@@ -65,6 +67,7 @@ const LeftNavigation = () => {
               </ListItemButton>
             </NavLink>
           ))}
+
           <ListItemButton onClick={logoutUser}>
             <ListItemIcon>
               <LogoutIcon />
