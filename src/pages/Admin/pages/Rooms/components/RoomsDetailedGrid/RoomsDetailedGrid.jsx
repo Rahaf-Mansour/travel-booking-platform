@@ -16,7 +16,6 @@ import PropTypes from "prop-types";
 const RoomsDetailedGrid = ({
   data,
   columns,
-  onRowClick,
   onUpdate,
   onDelete,
   EntityFormComponent,
@@ -26,7 +25,6 @@ const RoomsDetailedGrid = ({
 
   const handleRowClick = (entity) => {
     setSelectedEntity(entity);
-    onRowClick && onRowClick(entity);
     setIsDrawerOpen(true);
   };
 
@@ -57,6 +55,7 @@ const RoomsDetailedGrid = ({
                 <TableCell>Action</TableCell>
               </TableRow>
             </TableHead>
+
             <TableBody>
               {data.map((row) => (
                 <TableRow
@@ -107,7 +106,6 @@ RoomsDetailedGrid.propTypes = {
       renderAction: PropTypes.func,
     })
   ).isRequired,
-  onRowClick: PropTypes.func,
   onUpdate: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
   EntityFormComponent: PropTypes.elementType,

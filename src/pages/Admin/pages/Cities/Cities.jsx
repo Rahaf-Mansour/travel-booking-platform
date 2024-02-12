@@ -99,6 +99,7 @@ const Cities = () => {
           }}
         >
           <SearchBar onSearch={fetchCities} />
+
           <CreateCityDialog
             addCity={handleAddCity}
             snackbarProps={{
@@ -126,6 +127,7 @@ const Cities = () => {
             setRowsPerPage={setRowsPerPage}
             isLoading={isLoading}
           />
+          
           {isLoading && <CircularProgressIndicator />}
         </Container>
       </Box>

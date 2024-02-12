@@ -48,9 +48,11 @@ const UpdateCityForm = ({ open, onClose, entityData, onUpdate }) => {
         <IconButton onClick={onClose}>
           <ChevronRightIcon />
         </IconButton>
+
         <Typography variant="h6" sx={{ ml: 2 }}>
           Update City
         </Typography>
+
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}

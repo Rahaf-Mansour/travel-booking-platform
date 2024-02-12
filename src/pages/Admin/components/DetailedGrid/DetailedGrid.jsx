@@ -146,7 +146,6 @@ DetailedGrid.propTypes = {
       renderAction: PropTypes.func,
     })
   ).isRequired,
-  onRowClick: PropTypes.func,
   onUpdate: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
   EntityFormComponent: PropTypes.elementType,
@@ -154,6 +153,5 @@ DetailedGrid.propTypes = {
   setPage: PropTypes.func.isRequired,
   rowsPerPage: PropTypes.number.isRequired,
   setRowsPerPage: PropTypes.func.isRequired,
-  totalCount: PropTypes.number.isRequired,
   isLoading: PropTypes.bool.isRequired,
 };

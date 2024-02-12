@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Dialog, DialogTitle } from "@mui/material";
 import { Formik } from "formik";
 import PropTypes from "prop-types";
@@ -6,17 +5,11 @@ import { postNewRoom } from "../../../../../../services/manageRooms";
 import CreateEntityDialog from "../../../../components/CreateEntityDialog";
 import CreateButton from "../../../../components/CreateButton/CreateButton";
 import { fields, initialValues, validationSchema } from "../../roomConfig";
+import useDialogState from "../../../../hooks/useDialogState";
 
 const CreateRoomDialog = ({ addRoom, snackbarProps }) => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-
-  const handleDialogOpen = () => {
-    setIsDialogOpen(true);
-  };
-
-  const handleDialogClose = () => {
-    setIsDialogOpen(false);
-  };
+  const { isDialogOpen, handleDialogOpen, handleDialogClose } =
+    useDialogState();
 
   const handleCreateEntity = async (values, actions) => {
     try {
@@ -41,6 +34,7 @@ const CreateRoomDialog = ({ addRoom, snackbarProps }) => {
       <CreateButton handleDialogOpen={handleDialogOpen} />
       <Dialog open={isDialogOpen} onClose={handleDialogClose}>
         <DialogTitle>Create New Room</DialogTitle>
+
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}

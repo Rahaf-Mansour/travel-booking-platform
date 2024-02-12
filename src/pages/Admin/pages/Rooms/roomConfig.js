@@ -13,11 +13,7 @@ export const initialValues = fields.reduce((values, field) => {
 
 export const validationSchema = Yup.object(
   fields.reduce((schema, field) => {
-    if (field.type === "text") {
-      schema[field.name] = Yup.string().required(`${field.label} is required`);
-    } else if (field.type === "number") {
-      schema[field.name] = Yup.number().required(`${field.label} is required`);
-    }
+    schema[field.name] = Yup.string().required(`${field.label} is required`);
     return schema;
   }, {})
 );
