@@ -17,8 +17,23 @@ const SearchContextProvider = ({ children }) => {
     setSearchParams((prevParams) => ({ ...prevParams, ...newParams }));
   };
 
+  const getNumberOfNights = () => {
+    if (!searchParams.checkInDate || !searchParams.checkOutDate) {
+      return 0;
+    }
+
+    const startDate = new Date(searchParams.checkInDate);
+    const endDate = new Date(searchParams.checkOutDate);
+    const differenceInTime = endDate.getTime() - startDate.getTime();
+    const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+    const nightsLength = Math.round(differenceInDays);
+    return nightsLength;
+  };
+
   return (
-    <SearchContext.Provider value={{ searchParams, updateSearchParams }}>
+    <SearchContext.Provider
+      value={{ searchParams, updateSearchParams, getNumberOfNights }}
+    >
       {children}
     </SearchContext.Provider>
   );
