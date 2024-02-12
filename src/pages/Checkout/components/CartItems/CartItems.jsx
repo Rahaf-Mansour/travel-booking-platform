@@ -12,10 +12,27 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import ShopCartIcon from "@mui/icons-material/ShoppingCart";
 import useCartContext from "../../../../hooks/useCartContext";
+import { SearchContext } from "../../../../context/searchContext";
+import { useContext } from "react";
 
 const CartItems = () => {
   const { cart, removeFromCart, getCartTotalPrice } = useCartContext();
   const { totalCost } = getCartTotalPrice();
+  const { searchParams } = useContext(SearchContext);
+  const { checkInDate, checkOutDate } = searchParams;
+
+  const getNmberOfNights = () => {
+    if (!checkInDate || !checkOutDate) {
+      return 0;
+    }
+    
+    const startDate = new Date(checkInDate);
+    const endDate = new Date(checkOutDate);
+    const differenceInTime = endDate.getTime() - startDate.getTime();
+    const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+    const nightsLength = Math.round(differenceInDays);
+    return nightsLength;
+  };
 
   return (
     <Box sx={{ padding: "1rem" }}>
@@ -72,7 +89,9 @@ const CartItems = () => {
                       Room Number: {item.roomNumber}
                     </Typography>
                     <Typography variant="body1" color="text.secondary">
-                      Price: ${item.price}
+                      {`Price: $${item.price} * ${getNmberOfNights()} ${
+                        getNmberOfNights() > 1 ? "nights" : "night"
+                      } `}
                     </Typography>
                     <Typography
                       variant="body1"
@@ -112,7 +131,7 @@ const CartItems = () => {
       )}
       <Box sx={{ marginTop: 4 }}>
         <Typography variant="h6" component="div">
-          Total cost: ${totalCost}
+          Total cost: ${totalCost * getNmberOfNights()}
         </Typography>
       </Box>
     </Box>
