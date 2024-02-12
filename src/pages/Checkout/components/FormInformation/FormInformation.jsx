@@ -29,9 +29,9 @@ const initialValues = {
 
 const paymentMethods = ["Visa", "MasterCard", "American Express", "Discover"];
 
-const formatCardNumber = (value) => {
+const handleFormatCardNumber = (value) => {
   const noSpacesValue = value.replace(/\s/g, "");
-  return noSpacesValue ? noSpacesValue.match(/.{1,4}/g).join(" ") : "";
+  return noSpacesValue && noSpacesValue.match(/.{1,4}/g).join(" ");
 };
 
 const FormInformation = () => {
@@ -59,10 +59,11 @@ const FormInformation = () => {
       console.log("Booking submitted:", bookingRequest);
       console.log("Booking response:", response);
       setValues(values);
+      console.log("values:", values);
       showSuccessSnackbar("Completed! Thanks for your order!");
       setTimeout(() => {
         navigateToConfirmationPage("/confirmation");
-      }, 2000);
+      }, 600);
     } catch (error) {
       showErrorSnackbar("Sorry, your booking is failed.");
     }
@@ -102,7 +103,7 @@ const FormInformation = () => {
               maxLength: 19,
               onChange: (e) => {
                 const noSpacesValue = e.target.value.replace(/\s/g, "");
-                const formattedValue = formatCardNumber(noSpacesValue);
+                const formattedValue = handleFormatCardNumber(noSpacesValue);
                 e.target.value = formattedValue;
               },
             }}
