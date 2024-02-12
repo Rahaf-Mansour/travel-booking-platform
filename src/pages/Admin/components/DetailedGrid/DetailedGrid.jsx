@@ -17,7 +17,6 @@ import PropTypes from "prop-types";
 const DetailedGrid = ({
   data,
   columns,
-  // onRowClick,
   onUpdate,
   onDelete,
   EntityFormComponent,
@@ -25,7 +24,6 @@ const DetailedGrid = ({
   setPage,
   rowsPerPage,
   setRowsPerPage,
-  totalCount,
   isLoading,
 }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -33,7 +31,6 @@ const DetailedGrid = ({
 
   const handleRowClick = (entity) => {
     setSelectedEntity(entity);
-    // onRowClick && onRowClick(entity);
     setIsDrawerOpen(true);
   };
 
@@ -52,19 +49,12 @@ const DetailedGrid = ({
   };
 
   const handleChangePage = (event, newPage) => {
-    const maxPageIndex = Math.ceil(totalCount / rowsPerPage) - 1;
-    if (newPage < 0) {
-      setPage(0);
-    } else if (newPage > maxPageIndex) {
-      setPage(maxPageIndex);
-    } else {
-      setPage(newPage);
-    }
+    setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0); // Reset to first page when rows per page changes
+    setPage(0);
   };
 
   return (
@@ -122,16 +112,15 @@ const DetailedGrid = ({
           </Table>
         </TableContainer>
 
-        {totalCount > 0 && (
-          <TablePagination
-            component="div"
-            count={totalCount}
-            page={page}
-            onPageChange={handleChangePage}
-            rowsPerPage={rowsPerPage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        )}
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25, 100]}
+          component="div"
+          count={data.length}
+          page={page}
+          rowsPerPage={rowsPerPage}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
       </Container>
 
       {EntityFormComponent && (
