@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 export const FormContext = createContext();
 
-export const FormContextProvider = ({ children }) => {
+const FormContextProvider = ({ children }) => {
   const [formValues, setFormValues] = useState(null);
 
   const setValues = (values) => {
