@@ -51,7 +51,7 @@ const ConfirmationTable = () => {
             {fields.map((field, index) => (
               <TableRow
                 key={index}
-                className={index % 2 === 0 && styles.TableBodyRow}
+                className={index % 2 === 0 ? styles.TableBodyRow : ""}
               >
                 <TableCell>{field.label}</TableCell>
                 <TableCell>{field.value}</TableCell>
