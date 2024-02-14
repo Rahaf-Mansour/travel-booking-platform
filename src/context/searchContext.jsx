@@ -1,12 +1,13 @@
 import { createContext, useState } from "react";
 import PropTypes from "prop-types";
+import dayjs from "dayjs";
 
 export const SearchContext = createContext();
 
 const SearchContextProvider = ({ children }) => {
   const [searchParams, setSearchParams] = useState({
-    checkInDate: null,
-    checkOutDate: null,
+    checkInDate: dayjs().format("YYYY-MM-DD"),
+    checkOutDate: dayjs().add(1, "day").format("YYYY-MM-DD"),
     city: "",
     adults: 1,
     children: 0,
@@ -18,10 +19,6 @@ const SearchContextProvider = ({ children }) => {
   };
 
   const getNumberOfNights = () => {
-    if (!searchParams.checkInDate || !searchParams.checkOutDate) {
-      return 0;
-    }
-
     const startDate = new Date(searchParams.checkInDate);
     const endDate = new Date(searchParams.checkOutDate);
     const differenceInTime = endDate.getTime() - startDate.getTime();
