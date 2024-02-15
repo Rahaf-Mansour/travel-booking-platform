@@ -1,13 +1,13 @@
 import * as Yup from "yup";
 
 export const fields = [
-  { name: "roomNumber", label: "Room Number", type: "text" },
+  { name: "roomNumber", label: "Room Number", type: "number" },
   { name: "cost", label: "Cost", type: "number" },
   { name: "hotelId", label: "Hotel Id", type: "number" },
 ];
 
 export const initialValues = fields.reduce((values, field) => {
-  values[field.name] = field.type === "number" ? 0 : "";
+  values[field.name] = 0;
   return values;
 }, {});
 
