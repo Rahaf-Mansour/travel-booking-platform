@@ -64,9 +64,11 @@ const SearchResultItem = ({ hotel }) => {
             {hotelName}
             <StarRating starsNumber={starRating} />
           </Typography>
+
           <Typography variant="body1" sx={{ marginTop: 1 }}>
             {hotelName} in {cityName} offers {roomType} rooms.
           </Typography>
+
           <Box sx={{ marginTop: "1rem" }}>
             {amenities.map((amenity, index) => (
               <Chip
@@ -77,16 +79,18 @@ const SearchResultItem = ({ hotel }) => {
                   color: "#fff",
                   fontSize: "0.9rem",
                   borderRadius: 5,
-                  marginRight: 2,
+                  mr: 1.5,
                 }}
               />
             ))}
           </Box>
+
           <Box sx={{ m: 2 }}>
             <Typography variant="body1">
               <span style={{ fontWeight: 600 }}>US${roomPrice}/night</span>
             </Typography>
           </Box>
+
           <Box>
             <Button
               variant="contained"
