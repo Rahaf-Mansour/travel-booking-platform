@@ -80,6 +80,7 @@ const SearchResultItem = ({ hotel }) => {
                   fontSize: "0.9rem",
                   borderRadius: 5,
                   mr: 1.5,
+                  mt: { xs: 1, md: 0 },
                 }}
               />
             ))}
