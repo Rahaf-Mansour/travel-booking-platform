@@ -67,11 +67,20 @@ const CartItems = () => {
                       mb: 2,
                     }}
                   >
-                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
                       <Avatar
                         alt={item.roomType}
                         src={item.roomPhotoUrl}
-                        sx={{ width: 80, height: 80, marginRight: 2 }}
+                        sx={{
+                          width: { xs: 60, sm: 80 },
+                          height: { xs: 60, sm: 80 },
+                          marginRight: 2,
+                        }}
                       />
                       <Typography variant="h6" component="div">
                         {item.roomType}
