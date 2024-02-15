@@ -66,7 +66,7 @@ const UpdateHotelForm = ({ open, onClose, entityData, onUpdate }) => {
         display="flex"
         flexDirection="column"
       >
-        <IconButton onClick={onClose}>
+        <IconButton onClick={onClose} sx={{ width: "fit-content" }}>
           <ChevronRightIcon />
         </IconButton>
 
