@@ -10,33 +10,38 @@ import {
   RadioGroup,
   Button,
   Typography,
+  Box,
 } from "@mui/material";
 import styles from "./style.module.css";
-import { useSearchParams } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const initialValues = {
   priceRange: [50, 180],
-  starRating: 3,
+  starRating: null,
   amenities: [],
   roomType: "",
-  sort: "Price",
+  sort: "",
 };
 
-const SearchFilters = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+const SearchFilters = ({ onFilter }) => {
+  const handleFiltration = (values) => {
+    const starRating =
+      values.starRating !== "" ? parseInt(values.starRating) : "";
 
-  const handleFilter = (values) => {
-    const newParams = {
-      ...Object.fromEntries(searchParams.entries()),
-      starRate: values.starRating,
-      sort: values.sort,
-    };
-    setSearchParams(newParams);
+    onFilter({
+      ...values,
+      starRating: starRating,
+    });
+  };
+
+  const handleClearFilters = (resetForm) => {
+    onFilter(initialValues);
+    resetForm();
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleFilter}>
-      {({ values, handleChange, handleSubmit }) => (
+    <Formik initialValues={initialValues} onSubmit={handleFiltration}>
+      {({ values, handleChange, handleSubmit, resetForm }) => (
         <Form style={{ flex: 1.2 }}>
           <div className={styles.filterSide}>
             <FormControl component="fieldset" sx={{ width: "100%", mb: 2 }}>
@@ -83,31 +88,33 @@ const SearchFilters = () => {
             <FormControl component="fieldset" sx={{ display: "block", mb: 2 }}>
               <FormLabel component="legend">Amenities:</FormLabel>
               <FormGroup>
-                {["Wi-Fi", "Parking", "Breakfast"].map((amenity) => (
-                  <FormControlLabel
-                    key={amenity}
-                    control={
-                      <Checkbox
-                        checked={values.amenities.includes(amenity)}
-                        onChange={(e) => {
-                          const isChecked = e.target.checked;
-                          handleChange({
-                            target: {
-                              name: "amenities",
-                              value: isChecked
-                                ? [...values.amenities, amenity]
-                                : values.amenities.filter(
-                                    (item) => item !== amenity
-                                  ),
-                            },
-                          });
-                        }}
-                        name={amenity}
-                      />
-                    }
-                    label={amenity}
-                  />
-                ))}
+                {["Spa Services", "Private Balcony", "Fireplace"].map(
+                  (amenity) => (
+                    <FormControlLabel
+                      key={amenity}
+                      control={
+                        <Checkbox
+                          checked={values.amenities.includes(amenity)}
+                          onChange={(e) => {
+                            const isChecked = e.target.checked;
+                            handleChange({
+                              target: {
+                                name: "amenities",
+                                value: isChecked
+                                  ? [...values.amenities, amenity]
+                                  : values.amenities.filter(
+                                      (item) => item !== amenity
+                                    ),
+                              },
+                            });
+                          }}
+                          name={amenity}
+                        />
+                      }
+                      label={amenity}
+                    />
+                  )
+                )}
               </FormGroup>
             </FormControl>
 
@@ -119,7 +126,7 @@ const SearchFilters = () => {
                 value={values.roomType}
                 onChange={handleChange("roomType")}
               >
-                {["Luxury", "Budget", "Boutique"].map((type) => (
+                {["King Suite", "Standard", "Cabin"].map((type) => (
                   <FormControlLabel
                     key={type}
                     value={type}
@@ -149,14 +156,34 @@ const SearchFilters = () => {
               </RadioGroup>
             </FormControl>
 
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              onClick={handleSubmit}
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                marginBottom: "1rem",
+                gap: 1,
+              }}
             >
-              Filter
-            </Button>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                onClick={handleSubmit}
+                sx={{ width: 150 }}
+              >
+                Filter
+              </Button>
+
+              <Button
+                type="reset"
+                variant="contained"
+                color="error"
+                onClick={() => handleClearFilters(resetForm)}
+                sx={{ width: 150 }}
+              >
+                Clear Filters
+              </Button>
+            </Box>
           </div>
         </Form>
       )}
@@ -165,3 +192,7 @@ const SearchFilters = () => {
 };
 
 export default SearchFilters;
+
+SearchFilters.propTypes = {
+  onFilter: PropTypes.func,
+};
