@@ -11,25 +11,20 @@ import useSnackbar from "../../../../hooks/useSnackbar";
 import GenericSnackbar from "../../../../components/GenericSnackbar";
 import { SearchContext } from "../../../../context/searchContext";
 
-const AvailableRooms = ({ hotelAvailableRooms, isThereDates }) => {
+const AvailableRooms = ({ hotelAvailableRooms }) => {
   const { addToCart, isRoomAlreadyInCart } = useCartContext();
   const { snackbar, showSuccessSnackbar, handleCloseSnackbar, showSnackbar } =
     useSnackbar();
   const { checkInDate, checkOutDate } = useContext(SearchContext);
 
   useEffect(() => {
-    if (!isThereDates) {
-      showSnackbar(
-        "Please select dates from the Search box to see the available rooms.",
-        "warning"
-      );
-    } else if (hotelAvailableRooms && hotelAvailableRooms.length === 0) {
+    hotelAvailableRooms &&
+      hotelAvailableRooms.length === 0 &&
       showSnackbar(
         `There are no available rooms between ${checkInDate} and ${checkOutDate}.`,
         "info"
       );
-    }
-  }, [isThereDates, hotelAvailableRooms, checkInDate, checkOutDate]);
+  }, [hotelAvailableRooms, checkInDate, checkOutDate]);
 
   const handleAddToCart = (room) => {
     if (!isRoomAlreadyInCart(room.roomId)) {
@@ -45,14 +40,12 @@ const AvailableRooms = ({ hotelAvailableRooms, isThereDates }) => {
   return (
     <>
       <h3 className={styles.header}>Available Rooms</h3>
-
-      {(!isThereDates ||
-        (hotelAvailableRooms && hotelAvailableRooms.length === 0)) && (
-        <p className={styles.warningInfoParagraph}>
-          {isThereDates
-            ? `There are no available rooms between ${checkInDate} and ${checkOutDate}.`
-            : "Please select dates from the Search box to see the available rooms."}
-        </p>
+      {hotelAvailableRooms && hotelAvailableRooms.length === 0 && (
+        <>
+          <p className={styles.warningInfoParagraph}>
+            {`There are no available rooms between ${checkInDate} and ${checkOutDate}.`}
+          </p>
+        </>
       )}
 
       <div className={styles.availableRoomsContainer}>
@@ -132,5 +125,4 @@ AvailableRooms.propTypes = {
       ).isRequired,
     })
   ),
-  isThereDates: PropTypes.bool,
 };

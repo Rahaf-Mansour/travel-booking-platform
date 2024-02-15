@@ -8,10 +8,12 @@ import GenericSnackbar from "../../../../components/GenericSnackbar";
 import useSnackbar from "../../../../hooks/useSnackbar";
 import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
 import useLoading from "../../../../hooks/useLoading";
+import PropTypes from "prop-types";
 
-const SearchResult = () => {
+const SearchResult = ({ filters }) => {
   const [searchParams] = useSearchParams();
-  const [results, setResults] = useState([]);
+  const [initialResults, setInitialResults] = useState([]);
+  const [finalResults, setFinalResults] = useState([]);
   const { snackbar, showErrorSnackbar, handleCloseSnackbar } = useSnackbar();
   const [isLoading, startLoading, stopLoading] = useLoading();
 
@@ -20,8 +22,8 @@ const SearchResult = () => {
       const params = Object.fromEntries([...searchParams]);
       startLoading();
       try {
-        const data = await searchAPI(params);
-        setResults(data);
+        const fetchResultsData = await searchAPI(params);
+        setInitialResults(fetchResultsData);
       } catch (error) {
         showErrorSnackbar(
           "Failed to fetch the results. Please try again later."
@@ -36,14 +38,61 @@ const SearchResult = () => {
     }
   }, [searchParams]);
 
-  const hotelData = results;
+  useEffect(() => {
+    const applyFiltersAndSort = () => {
+      const filteredResults = initialResults.filter((item) => {
+        if (
+          filters.starRating &&
+          item.starRating !== parseInt(filters.starRating)
+        ) {
+          return false;
+        }
+
+        if (filters.roomType && item.roomType !== filters.roomType) {
+          return false;
+        }
+
+        if (
+          filters.priceRange &&
+          (item.roomPrice < filters.priceRange[0] ||
+            item.roomPrice > filters.priceRange[1])
+        ) {
+          return false;
+        }
+
+        if (
+          filters.amenities &&
+          filters.amenities.length > 0 &&
+          !filters.amenities.some((filterAmenity) =>
+            item.amenities.some((amenity) => amenity.name === filterAmenity)
+          )
+        ) {
+          return false;
+        }
+
+        return true;
+      });
+
+      if (filters.sort) {
+        filteredResults.sort((a, b) =>
+          filters.sort === "Price"
+            ? a.roomPrice - b.roomPrice
+            : b.starRating - a.starRating
+        );
+      }
+
+      setFinalResults(filteredResults);
+    };
+
+    applyFiltersAndSort();
+  }, [filters, initialResults]);
 
   return (
     <div className={styles.resultList}>
       {isLoading ? (
         <CircularProgressIndicator />
-      ) : hotelData.length > 0 ? (
-        hotelData.map((hotel) => (
+      ) : finalResults.length > 0 ? (
+        finalResults.map((hotel) => (
           <Link
             to={`/hotel/${hotel.hotelId}`}
             key={hotel.hotelId}
@@ -64,3 +113,14 @@ const SearchResult = () => {
 };
 
 export default SearchResult;
+
+SearchResult.propTypes = {
+  filters: PropTypes.shape({
+    starRating: PropTypes.number,
+    roomType: PropTypes.string,
+    roomPrice: PropTypes.number,
+    priceRange: PropTypes.arrayOf(PropTypes.number),
+    sort: PropTypes.string,
+    amenities: PropTypes.arrayOf(PropTypes.string),
+  }),
+};

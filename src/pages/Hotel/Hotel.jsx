@@ -67,10 +67,7 @@ const Hotel = () => {
 
             <div className={styles.galleryAndRoomsContainer}>
               <VisualGallery hotelGallery={hotelGallery} />
-              <AvailableRooms
-                hotelAvailableRooms={hotelAvailableRooms}
-                isThereDates={isThereDates}
-              />
+              <AvailableRooms hotelAvailableRooms={hotelAvailableRooms} />
             </div>
           </div>
           <Footer />
