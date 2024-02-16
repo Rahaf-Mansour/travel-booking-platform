@@ -10,9 +10,7 @@ import { AuthContext } from "../../context/authContext";
 import CustomButton from "../../components/CustomButton";
 
 const loginSchema = Yup.object().shape({
-  username: Yup.string()
-    .required("⚠️ Username is a required field")
-    .oneOf(["user", "admin"], "⚠️ Invalid username"),
+  username: Yup.string().required("⚠️ Username is a required field"),
   password: Yup.string().required("⚠️ Password is a required field"),
 });
 

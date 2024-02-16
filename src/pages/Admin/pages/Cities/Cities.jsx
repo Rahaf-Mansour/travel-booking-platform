@@ -127,11 +127,10 @@ const Cities = () => {
             setRowsPerPage={setRowsPerPage}
             isLoading={isLoading}
           />
-          
-          {isLoading && <CircularProgressIndicator />}
         </Container>
       </Box>
 
+      <CircularProgressIndicator isLoading={isLoading} />
       <GenericSnackbar
         open={snackbar.open}
         message={snackbar.message}

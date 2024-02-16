@@ -89,24 +89,24 @@ const SearchResult = ({ filters }) => {
 
   return (
     <div className={styles.resultList}>
-      {isLoading ? (
-        <CircularProgressIndicator />
-      ) : finalResults.length > 0 ? (
-        finalResults.map((hotel) => (
-          <Link
-            to={`/hotel/${hotel.hotelId}`}
-            key={hotel.hotelId}
-            style={{ textDecoration: "none" }}
-          >
-            <SearchResultItem key={hotel.hotelId} hotel={hotel} />
-          </Link>
-        ))
-      ) : (
-        <p className={styles.noHotelsMessage}>
-          No hotels available for the selected criteria. Please refine your
-          search parameters and try again.
-        </p>
-      )}
+      {finalResults.length > 0
+        ? finalResults.map((hotel) => (
+            <Link
+              to={`/hotel/${hotel.hotelId}`}
+              key={hotel.hotelId}
+              style={{ textDecoration: "none" }}
+            >
+              <SearchResultItem key={hotel.hotelId} hotel={hotel} />
+            </Link>
+          ))
+        : !isLoading && (
+            <p className={styles.noHotelsMessage}>
+              No hotels available for the selected criteria. Please refine your
+              search parameters and try again.
+            </p>
+          )}
+
+      <CircularProgressIndicator isLoading={isLoading} />
       <GenericSnackbar {...snackbar} onClose={handleCloseSnackbar} />
     </div>
   );

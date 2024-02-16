@@ -39,9 +39,7 @@ const Hotel = () => {
   return (
     <>
       <NavBar />
-      {isLoading ? (
-        <CircularProgressIndicator />
-      ) : (
+      {hotelDetails && (
         <div>
           {error && (
             <p className={styles.errorMessage}>
@@ -73,6 +71,8 @@ const Hotel = () => {
           <Footer />
         </div>
       )}
+
+      <CircularProgressIndicator isLoading={isLoading} />
       <GenericSnackbar {...snackbar} onClose={handleCloseSnackbar} />
     </>
   );
