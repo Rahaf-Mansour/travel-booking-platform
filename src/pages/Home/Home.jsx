@@ -4,8 +4,8 @@ import SearchBar from "../SearchPage/components/SearchBar";
 import FeaturedDeals from "./components/FeaturedDeals";
 import styles from "./style.module.css";
 import TrendingDestinations from "./components/TrendingDestinations";
-import RecentlyVisitedHotels from "./components/RecentlyVisitedHotels";
 import Footer from "../../components/Footer";
+import RecentlyVisitedHotelsSection from "./components/RecentlyVisitedHotels/RecentlyVisitedHotelsSection";
 
 const Home = () => {
   return (
@@ -16,7 +16,7 @@ const Home = () => {
       <div className={styles.container}>
         <FeaturedDeals />
         <TrendingDestinations />
-        <RecentlyVisitedHotels />
+        <RecentlyVisitedHotelsSection />
       </div>
       <Footer />
     </>

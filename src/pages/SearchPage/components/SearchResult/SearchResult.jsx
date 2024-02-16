@@ -6,21 +6,19 @@ import { useSearchParams } from "react-router-dom";
 import { searchAPI } from "../../../../services/searchService";
 import GenericSnackbar from "../../../../components/GenericSnackbar";
 import useSnackbar from "../../../../hooks/useSnackbar";
-import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
-import useLoading from "../../../../hooks/useLoading";
 import PropTypes from "prop-types";
+import useComponentLoader from "../../../../hooks/useComponentLoader";
 
 const SearchResult = ({ filters }) => {
   const [searchParams] = useSearchParams();
   const [initialResults, setInitialResults] = useState([]);
   const [finalResults, setFinalResults] = useState([]);
   const { snackbar, showErrorSnackbar, handleCloseSnackbar } = useSnackbar();
-  const [isLoading, startLoading, stopLoading] = useLoading();
+  const { isLoading, stopLoading } = useComponentLoader();
 
   useEffect(() => {
     const fetchResults = async () => {
       const params = Object.fromEntries([...searchParams]);
-      startLoading();
       try {
         const fetchResultsData = await searchAPI(params);
         setInitialResults(fetchResultsData);
@@ -106,8 +104,8 @@ const SearchResult = ({ filters }) => {
             </p>
           )}
 
-      <CircularProgressIndicator isLoading={isLoading} />
       <GenericSnackbar {...snackbar} onClose={handleCloseSnackbar} />
+      {isLoading && <p>loading...</p>}
     </div>
   );
 };

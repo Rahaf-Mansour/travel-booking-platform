@@ -12,13 +12,13 @@ import {
 import CreateHotelDialog from "./components/CreateHotelDialog";
 import DetailedGrid from "../../components/DetailedGrid";
 import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
-import useLoading from "../../../../hooks/useLoading";
+import useComponentLoader from "../../../../hooks/useComponentLoader";
 import axiosInstance from "../../../../Axios/axiosInstance";
 
 const Hotels = () => {
   const [hotels, setHotels] = useState([]);
   const [page, setPage] = useState(0);
-  const [isLoading, startLoading, stopLoading] = useLoading();
+  const { isLoading, stopLoading } = useComponentLoader();
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const {
     snackbar,
@@ -64,7 +64,6 @@ const Hotels = () => {
           searchTerm
         )}&`
       : "";
-    startLoading();
     try {
       const response = await axiosInstance.get(
         `/hotels?${queryParam}pageSize=${pageSize}&pageNumber=${page + 1}`

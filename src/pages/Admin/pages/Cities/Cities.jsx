@@ -9,12 +9,12 @@ import { deleteCity } from "../../../../services/manageCities";
 import CreateCityDialog from "./components/CreateCityDialog";
 import DetailedGrid from "../../components/DetailedGrid";
 import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
-import useLoading from "../../../../hooks/useLoading";
+import useComponentLoader from "../../../../hooks/useComponentLoader";
 import axiosInstance from "../../../../Axios/axiosInstance";
 
 const Cities = () => {
   const [cities, setCities] = useState([]);
-  const [isLoading, startLoading, stopLoading] = useLoading();
+  const { isLoading, stopLoading } = useComponentLoader();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const {
@@ -60,7 +60,6 @@ const Cities = () => {
           searchTerm
         )}&`
       : "";
-    startLoading();
     try {
       const response = await axiosInstance.get(
         `/cities?${queryParam}pageSize=${pageSize}&pageNumber=${page + 1}`

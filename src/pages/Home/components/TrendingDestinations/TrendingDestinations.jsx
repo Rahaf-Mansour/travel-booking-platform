@@ -1,20 +1,19 @@
 import { useState, useEffect } from "react";
 import { trendingDestinationsAPI } from "../../../../services/homePageServices";
 import { Grid, Card, CardContent, Typography, CardMedia } from "@mui/material";
-import useLoading from "../../../../hooks/useLoading";
 import useSnackbar from "../../../../hooks/useSnackbar";
 import GenericSnackbar from "../../../../components/GenericSnackbar";
-import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
+import useComponentLoader from "../../../../hooks/useComponentLoader";
 
 export function TrendingDestinations() {
   const [trendingDestinations, setTrendingDestinations] = useState([]);
-  const [isLoading, startLoading, stopLoading] = useLoading();
+  const { isLoading, stopLoading } = useComponentLoader();
   const { snackbar, showErrorSnackbar, handleCloseSnackbar } = useSnackbar();
 
   useEffect(() => {
     const handleFetchTrendingDestinations = async () => {
-      startLoading();
       try {
         const trendingDestinationsData = await trendingDestinationsAPI();
         setTrendingDestinations(trendingDestinationsData);
@@ -77,7 +76,7 @@ export function TrendingDestinations() {
         ))}
       </Grid>
 
-      <CircularProgressIndicator isLoading={isLoading} />
+      {isLoading && <CircularProgressIndicator />}
       <GenericSnackbar {...snackbar} onClose={handleCloseSnackbar} />
     </>
   );
