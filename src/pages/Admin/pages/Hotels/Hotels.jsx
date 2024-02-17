@@ -10,10 +10,9 @@ import {
   deleteHotel,
 } from "../../../../services/manageHotels";
 import CreateHotelDialog from "./components/CreateHotelDialog";
-import DetailedGrid from "../../components/DetailedGrid";
-import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
 import useComponentLoader from "../../../../hooks/useComponentLoader";
 import axiosInstance from "../../../../Axios/axiosInstance";
+import DetailedGridWithLoading from "../../components/DetailedGrid/DetailedGridWithLoading";
 
 const Hotels = () => {
   const [hotels, setHotels] = useState([]);
@@ -115,7 +114,7 @@ const Hotels = () => {
         </Container>
 
         <Container>
-          <DetailedGrid
+          <DetailedGridWithLoading
             data={hotels}
             columns={[
               { field: "name", headerName: "Name" },
@@ -138,7 +137,6 @@ const Hotels = () => {
         </Container>
       </Box>
 
-      <CircularProgressIndicator isLoading={isLoading} />
       <GenericSnackbar
         open={snackbar.open}
         message={snackbar.message}

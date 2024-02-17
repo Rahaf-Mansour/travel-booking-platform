@@ -7,10 +7,9 @@ import GenericSnackbar from "../../../../components/GenericSnackbar";
 import useSnackbar from "../../../../hooks/useSnackbar";
 import { deleteCity } from "../../../../services/manageCities";
 import CreateCityDialog from "./components/CreateCityDialog";
-import DetailedGrid from "../../components/DetailedGrid";
-import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
 import useComponentLoader from "../../../../hooks/useComponentLoader";
 import axiosInstance from "../../../../Axios/axiosInstance";
+import DetailedGridWithLoading from "../../components/DetailedGrid/DetailedGridWithLoading";
 
 const Cities = () => {
   const [cities, setCities] = useState([]);
@@ -111,7 +110,7 @@ const Cities = () => {
         </Container>
 
         <Container>
-          <DetailedGrid
+          <DetailedGridWithLoading
             data={cities}
             columns={[
               { field: "name", headerName: "Name" },
@@ -129,7 +128,6 @@ const Cities = () => {
         </Container>
       </Box>
 
-      <CircularProgressIndicator isLoading={isLoading} />
       <GenericSnackbar
         open={snackbar.open}
         message={snackbar.message}
