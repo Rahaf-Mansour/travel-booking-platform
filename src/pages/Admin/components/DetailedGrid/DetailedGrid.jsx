@@ -24,7 +24,6 @@ const DetailedGrid = ({
   setPage,
   rowsPerPage,
   setRowsPerPage,
-  isLoading,
 }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedEntity, setSelectedEntity] = useState(null);
@@ -72,11 +71,7 @@ const DetailedGrid = ({
             </TableHead>
 
             <TableBody>
-              {isLoading ? (
-                <TableRow>
-                  <TableCell colSpan={columns.length + 1}>Loading...</TableCell>
-                </TableRow>
-              ) : data.length > 0 ? (
+              {data.length > 0 ? (
                 data
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => (
@@ -153,5 +148,4 @@ DetailedGrid.propTypes = {
   setPage: PropTypes.func.isRequired,
   rowsPerPage: PropTypes.number.isRequired,
   setRowsPerPage: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
 };
