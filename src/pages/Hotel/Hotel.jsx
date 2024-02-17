@@ -1,7 +1,6 @@
 import { useEffect, useContext } from "react";
 import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
-import CircularProgressIndicator from "../../components/CircularProgressIndicator";
 import { useHotelData } from "./hooks/useHotelData";
 import HotelDetails from "./components/HotelDetails";
 import HotelMapLocation from "./components/HotelMapLocation";
@@ -39,9 +38,8 @@ const Hotel = () => {
   return (
     <>
       <NavBar />
-      {isLoading ? (
-        <CircularProgressIndicator />
-      ) : (
+
+      {!isLoading && (
         <div>
           {error && (
             <p className={styles.errorMessage}>
@@ -73,6 +71,7 @@ const Hotel = () => {
           <Footer />
         </div>
       )}
+
       <GenericSnackbar {...snackbar} onClose={handleCloseSnackbar} />
     </>
   );

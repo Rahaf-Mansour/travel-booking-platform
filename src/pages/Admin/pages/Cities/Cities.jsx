@@ -8,7 +8,6 @@ import useSnackbar from "../../../../hooks/useSnackbar";
 import { deleteCity } from "../../../../services/manageCities";
 import CreateCityDialog from "./components/CreateCityDialog";
 import DetailedGrid from "../../components/DetailedGrid";
-import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
 import useLoading from "../../../../hooks/useLoading";
 import axiosInstance from "../../../../Axios/axiosInstance";
 
@@ -127,8 +126,6 @@ const Cities = () => {
             setRowsPerPage={setRowsPerPage}
             isLoading={isLoading}
           />
-          
-          {isLoading && <CircularProgressIndicator />}
         </Container>
       </Box>
 

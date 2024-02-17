@@ -11,7 +11,6 @@ import {
 } from "../../../../services/manageHotels";
 import CreateHotelDialog from "./components/CreateHotelDialog";
 import DetailedGrid from "../../components/DetailedGrid";
-import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
 import useLoading from "../../../../hooks/useLoading";
 import axiosInstance from "../../../../Axios/axiosInstance";
 
@@ -136,8 +135,6 @@ const Hotels = () => {
             totalCount={hotels.length}
             isLoading={isLoading}
           />
-          
-          {isLoading && <CircularProgressIndicator />}
         </Container>
       </Box>
 
