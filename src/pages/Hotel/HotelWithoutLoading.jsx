@@ -62,7 +62,7 @@ HotelWithoutLoading.propTypes = {
   hotelDetails: PropTypes.object,
   hotelGallery: PropTypes.array,
   hotelAvailableRooms: PropTypes.array,
-  hotelGuestReviews: PropTypes.object,
+  hotelGuestReviews: PropTypes.array,
   error: PropTypes.string,
   snackbar: PropTypes.object.isRequired,
   handleCloseSnackbar: PropTypes.func.isRequired,
