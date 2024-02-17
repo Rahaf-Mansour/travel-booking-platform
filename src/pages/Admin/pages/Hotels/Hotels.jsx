@@ -10,15 +10,14 @@ import {
   deleteHotel,
 } from "../../../../services/manageHotels";
 import CreateHotelDialog from "./components/CreateHotelDialog";
-import DetailedGrid from "../../components/DetailedGrid";
-import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
-import useLoading from "../../../../hooks/useLoading";
+import useComponentLoader from "../../../../hooks/useComponentLoader";
 import axiosInstance from "../../../../Axios/axiosInstance";
+import DetailedGridWithLoading from "../../components/DetailedGrid/DetailedGridWithLoading";
 
 const Hotels = () => {
   const [hotels, setHotels] = useState([]);
   const [page, setPage] = useState(0);
-  const [isLoading, startLoading, stopLoading] = useLoading();
+  const { isLoading, stopLoading } = useComponentLoader();
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const {
     snackbar,
@@ -64,7 +63,6 @@ const Hotels = () => {
           searchTerm
         )}&`
       : "";
-    startLoading();
     try {
       const response = await axiosInstance.get(
         `/hotels?${queryParam}pageSize=${pageSize}&pageNumber=${page + 1}`
@@ -116,7 +114,7 @@ const Hotels = () => {
         </Container>
 
         <Container>
-          <DetailedGrid
+          <DetailedGridWithLoading
             data={hotels}
             columns={[
               { field: "name", headerName: "Name" },
@@ -139,7 +137,6 @@ const Hotels = () => {
         </Container>
       </Box>
 
-      <CircularProgressIndicator isLoading={isLoading} />
       <GenericSnackbar
         open={snackbar.open}
         message={snackbar.message}

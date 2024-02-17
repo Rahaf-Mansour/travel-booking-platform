@@ -4,22 +4,21 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styles from "./style.module.css";
 import { featuredDealsAPI } from "../../../../services/homePageServices";
-import useLoading from "../../../../hooks/useLoading";
 import useSnackbar from "../../../../hooks/useSnackbar";
 import GenericSnackbar from "../../../../components/GenericSnackbar";
-import SkeletonDealCard from "./SkeletonDealCard";
 import DealCard from "./DealCard";
+import SkeletonDealCard from "./SkeletonDealCard";
+import useComponentLoader from "../../../../hooks/useComponentLoader";
 
 const FeaturedDeals = () => {
   const [deals, setDeals] = useState([]);
-  const [isLoading, startLoading, stopLoading] = useLoading();
+  const { isLoading, stopLoading } = useComponentLoader();
   const [error, setError] = useState(null);
   const [slidesToShow, setSlidesToShow] = useState(1);
   const { snackbar, showErrorSnackbar, handleCloseSnackbar } = useSnackbar();
 
   useEffect(() => {
     const fetchDeals = async () => {
-      startLoading();
       try {
         const dealsData = await featuredDealsAPI();
         setDeals(dealsData);

@@ -6,12 +6,10 @@ import { BrowserRouter } from "react-router-dom";
 import CartContextProvider from "./context/CartContext.jsx";
 import FormContextProvider from "./context/CheckoutFormContext .jsx";
 import SearchContextProvider from "./context/searchContext.jsx";
-import LoadingContextProvider from "./context/LoadingContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <AuthContextProvider>
-      <LoadingContextProvider>
         <SearchContextProvider>
           <CartContextProvider>
             <FormContextProvider>
@@ -19,7 +17,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             </FormContextProvider>
           </CartContextProvider>
         </SearchContextProvider>
-      </LoadingContextProvider>
     </AuthContextProvider>
   </BrowserRouter>
 );
