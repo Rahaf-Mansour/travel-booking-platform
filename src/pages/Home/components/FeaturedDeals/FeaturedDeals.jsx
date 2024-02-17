@@ -7,7 +7,7 @@ import { featuredDealsAPI } from "../../../../services/homePageServices";
 import useSnackbar from "../../../../hooks/useSnackbar";
 import GenericSnackbar from "../../../../components/GenericSnackbar";
 import DealCard from "./DealCard";
-import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
+import SkeletonDealCard from "./SkeletonDealCard";
 import useComponentLoader from "../../../../hooks/useComponentLoader";
 
 const FeaturedDeals = () => {
@@ -65,14 +65,22 @@ const FeaturedDeals = () => {
       <h2> Featured Deals </h2>
       {error && <p>Something went wrong. Please try again later.</p>}
 
-      <div style={{ marginTop: "2rem", cursor: "pointer" }}>
+      {isLoading ? (
         <Slider {...settings}>
-          {deals.map((deal) => (
-            <DealCard key={deal.hotelId} deal={deal} />
+          {[1, 2, 3].map((_, index) => (
+            <SkeletonDealCard key={index} />
           ))}
         </Slider>
-      </div>
-      {isLoading && <CircularProgressIndicator />}
+      ) : (
+        <div style={{ marginTop: "2rem", cursor: "pointer" }}>
+          <Slider {...settings}>
+            {deals.map((deal) => (
+              <DealCard key={deal.hotelId} deal={deal} />
+            ))}
+          </Slider>
+        </div>
+      )}
+
       <GenericSnackbar {...snackbar} onClose={handleCloseSnackbar} />
     </div>
   );
