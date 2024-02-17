@@ -1,4 +1,4 @@
-import WithLoading from "../../../../components/WithLoading/WithLoading";
+import WithLoading from "../../../../components/WithLoading";
 import TrendingDestinationsWithoutLoading from "./TrendingDestinationsWithoutLoading";
 
 const TrendingDestinationsWithLoading = WithLoading(
