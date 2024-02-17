@@ -2,5 +2,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 2rem;
+    height: 80vh;
+}
+
+@media (max-width: 768px) {
+    .centered {
+        height: 90svh;
+    }
 }
