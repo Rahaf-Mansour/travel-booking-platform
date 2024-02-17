@@ -3,9 +3,9 @@ import HeroSection from "./components/HeroSection";
 import SearchBar from "../SearchPage/components/SearchBar";
 import FeaturedDeals from "./components/FeaturedDeals";
 import styles from "./style.module.css";
-import TrendingDestinations from "./components/TrendingDestinations";
 import Footer from "../../components/Footer";
 import RecentlyVisitedHotelsSection from "./components/RecentlyVisitedHotels/RecentlyVisitedHotelsSection";
+import TrendingDestinationsSection from "./components/TrendingDestinations/TrendingDestinationsSection";
 
 const Home = () => {
   return (
@@ -15,7 +15,7 @@ const Home = () => {
       <SearchBar topXs="30px" topLg="-33px" />
       <div className={styles.container}>
         <FeaturedDeals />
-        <TrendingDestinations />
+        <TrendingDestinationsSection />
         <RecentlyVisitedHotelsSection />
       </div>
       <Footer />
