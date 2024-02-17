@@ -8,6 +8,7 @@ import GenericSnackbar from "../../../../components/GenericSnackbar";
 import useSnackbar from "../../../../hooks/useSnackbar";
 import PropTypes from "prop-types";
 import useComponentLoader from "../../../../hooks/useComponentLoader";
+import CircularProgressIndicator from "../../../../components/CircularProgressIndicator";
 
 const SearchResult = ({ filters }) => {
   const [searchParams] = useSearchParams();
@@ -87,25 +88,28 @@ const SearchResult = ({ filters }) => {
 
   return (
     <div className={styles.resultList}>
-      {finalResults.length > 0
-        ? finalResults.map((hotel) => (
-            <Link
-              to={`/hotel/${hotel.hotelId}`}
-              key={hotel.hotelId}
-              style={{ textDecoration: "none" }}
-            >
-              <SearchResultItem key={hotel.hotelId} hotel={hotel} />
-            </Link>
-          ))
-        : !isLoading && (
-            <p className={styles.noHotelsMessage}>
-              No hotels available for the selected criteria. Please refine your
-              search parameters and try again.
-            </p>
-          )}
+      {isLoading ? (
+        <CircularProgressIndicator />
+      ) : finalResults.length > 0 ? (
+        finalResults.map((hotel) => (
+          <Link
+            to={`/hotel/${hotel.hotelId}`}
+            key={hotel.hotelId}
+            style={{ textDecoration: "none" }}
+          >
+            <SearchResultItem key={hotel.hotelId} hotel={hotel} />
+          </Link>
+        ))
+      ) : (
+        !isLoading && (
+          <p className={styles.noHotelsMessage}>
+            No hotels available for the selected criteria. Please refine your
+            search parameters and try again.
+          </p>
+        )
+      )}
 
       <GenericSnackbar {...snackbar} onClose={handleCloseSnackbar} />
-      {isLoading && <p>loading...</p>}
     </div>
   );
 };
